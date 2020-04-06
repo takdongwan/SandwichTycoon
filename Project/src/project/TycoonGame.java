@@ -49,14 +49,14 @@ public class TycoonGame extends JFrame {
 	private int mouseX, mouseY;
 	
 	
-	private boolean isMainScreen = false;//Ã³À½¿¡´Â ¸ÞÀÎÈ­¸éÀÌ ¾Æ´Ñ ½ÃÀÛÈ­¸é ÀÌ±â ¶§¹®¿¡ false ,  
+	private boolean isMainScreen = false;//Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ false ,  
 	
-	
+	Panel_store storePanel;
 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 	private Image sandwichCase;
 	public TycoonGame() {
-		setUndecorated(true);// ½ÇÇà½Ã ±âº» Á¸Àç ¸Þ´º¹Ù°¡»ç¶óÁü
+		setUndecorated(true);// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½Ù°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		setTitle("tycoon");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -64,7 +64,7 @@ public class TycoonGame extends JFrame {
 		setVisible(true);
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
-	 
+
 		//sandwichList.add(new SandwichMenu("", title, title));
 		
 		exitButton.setBounds(1245, 0,30, 30);
@@ -105,10 +105,10 @@ public class TycoonGame extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-			//// ¾Æ·¡´Â °ÔÀÓ½ÃÀÛÀÌº¥Æ® ³ÖÀ»°÷ /////
+			//// ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ /////
 				startButton.setVisible(false);
 				quitButton.setVisible(false);
-				leftButton.setVisible(true);//¸ÞÀÎÈ­¸é¿¡¼­ ÁÂ¿ì ¹öÆ°ÀÌ º¸¿©¾ßÇÏ±â¶§¹®¿¡ true ·Î ÇØ¾ßÇÔ
+				leftButton.setVisible(true);//ï¿½ï¿½ï¿½ï¿½È­ï¿½é¿¡ï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±â¶§ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½
 				rightButton.setVisible(true);
 				background =  new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
 				isMainScreen = true;
@@ -138,7 +138,7 @@ public class TycoonGame extends JFrame {
 		});
 		add(quitButton);
 		
-		leftButton.setVisible(false);//Ã³À½¿¡´Â ¾Èº¸ÀÌ°í ´­¸®¸é º¸ÀÌ°Ô ÇÏ±âÀ§ÇØ¼­ false ·Î ¼³Á¤ 
+		leftButton.setVisible(false);//Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ false ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		leftButton.setBounds(140, 600, 60, 60);
 		leftButton.setContentAreaFilled(false);
 		leftButton.setFocusPainted(false);
@@ -155,12 +155,12 @@ public class TycoonGame extends JFrame {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//»óÁ¡ or ÆÇ¸Å
+				//ï¿½ï¿½ï¿½ï¿½ or ï¿½Ç¸ï¿½
 			}
 		});
 		add(leftButton);
 		
-		rightButton.setVisible(false);//¸ÇÃ³À½¿£ º¸ÀÌÁö ¾Ê´Ù°¡ .½ÃÀÛÇÏ±â¹öÆ° ´©¸£°í ¸ÞÀÎÈ­¸é ³Ñ¾î¿ÔÀ»¶§ ¸ÞÀÎ½ºÅ©¸°¿¡ µé¾î¿Í¼­ º¸ÀÌ±â½ÃÀÛÇÔ.
+		rightButton.setVisible(false);//ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Ù°ï¿½ .ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		rightButton.setBounds(1080, 600, 60, 60);
 		rightButton.setContentAreaFilled(false);
 		rightButton.setFocusPainted(false);
@@ -178,7 +178,7 @@ public class TycoonGame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				
-				//¿À¸¥ÂÊ ¹öÆ° ÀÌº¥Æ® ,»óÁ¡or ÆÇ¸Å?
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½Ìºï¿½Æ® ,ï¿½ï¿½ï¿½ï¿½or ï¿½Ç¸ï¿½?
 			}
 		});
 		add(rightButton);
@@ -214,13 +214,13 @@ public class TycoonGame extends JFrame {
 
 	private void screenDraw(Graphics g) {
 
-		g.drawImage(background, 0, 0, null);// 0,0 ÁÂÇ¥ , add µÈ°Ô¾Æ´Ï¶ó È­¸é¤· ¤ÄÃâ·ÂÇØÁÖ´Â °ÍÀ» g ¸¦ »ç¿ë  
+		g.drawImage(background, 0, 0, null);// 0,0 ï¿½ï¿½Ç¥ , add ï¿½È°Ô¾Æ´Ï¶ï¿½ È­ï¿½é¤· ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ g ï¿½ï¿½ ï¿½ï¿½ï¿½  
 		if(isMainScreen) {
-		//	g.drawImage( »÷µåÀ§Ä¡ ÀÌ¹ÌÁö ³Ö¾î¾ßÇÔ,340, 100, null); 
+		//	g.drawImage( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½,340, 100, null); 
 		//	g.drawImage(,100,70, null);
 		}
-		paintComponents(g);// ¸Þ´º¹Ù°°Àº °Ç Ç×»ó Á¸ÀçÇÏ±â ¶§¹®¿¡ ÇÑ¹öÆ°ÀÌ³ª °íÁ¤µÈ ¸Þ´º¹Ù¿¡ »ç¿ëÇÔ., addµî Ãß°¡µÈ ¾ÖµéÀ» º¸¿©ÁÖ´Â ºÎºÐÀÌ°í 
-		this.repaint();// ÀüÃ¼È­¸é ÀÌ¹ÌÁö¸¦ ¸Å¼ø°£¸¶´Ù ±×·ÁÁÜ.
+		paintComponents(g);// ï¿½Þ´ï¿½ï¿½Ù°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½Æ°ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½., addï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Îºï¿½ï¿½Ì°ï¿½ 
+		this.repaint();// ï¿½ï¿½Ã¼È­ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½.
 	}
 
 }
