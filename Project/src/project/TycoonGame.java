@@ -90,7 +90,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		sandwichName.setVisible(true);
 		
 		////////////////////////////////////////////////////////////////////////////////////////
-		gameExplain = new JLabel("���Ӽ���  ���� //���� ");
+		gameExplain = new JLabel("게임설명 쓸고 /수정해야됨 ");
 		gameExplain.setBounds(20,20,500,500);
 		gameExplain.setVisible(true);
 		gameExplain.setFont(new Font(gameExplain.getFont().getName(), Font.PLAIN, 30));
@@ -146,7 +146,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 			//// �Ʒ��� ���ӽ����̺�Ʈ ������ /////
 				startButton.setVisible(false);
 				quitButton.setVisible(false);
-				leftButton.setVisible(true);//����ȭ�鿡�� �¿� ��ư�� �������ϱ⶧���� true �� �ؾ���
+				leftButton.setVisible(true);
 				rightButton.setVisible(true);
 				background =  new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
 				gameExplain.setVisible(false);
