@@ -1,9 +1,14 @@
 package project;
 
+import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -15,11 +20,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-public class TycoonGame extends JFrame {
+public class TycoonGame extends JFrame implements ItemListener {
 
 	private Image screenImage;
+	private Component scr;
 	private Graphics screenGraphic;
 	
+	int select;
+	int tickteNum;
 	
 	
 	private ImageIcon exitButtonEnterdImage = new ImageIcon(Main.class.getResource("../images/exitButtonEntered.png"));
@@ -33,10 +41,13 @@ public class TycoonGame extends JFrame {
 	private ImageIcon rightButtonBasicImage =new ImageIcon(Main.class.getResource("../images/rightButtonBasic.png"));
 	private ImageIcon leftButtonEnteredImage =new ImageIcon(Main.class.getResource("../images/leftButtonEntered.png"));
 	private ImageIcon rightButtonEnteredImage =new ImageIcon(Main.class.getResource("../images/rightButtonEntered.png"));
-	
+
 	
 	private Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.jpg")).getImage();
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
+	
+	//private JLabel gameExplain = new JLabel(new ImageIcon(Main.class.getResource("../images/gameExplain.PNG")));
+	
 	//private Image selectedImage = new ImageIcon(Main.class.getResource("../images/.png")).getImage();
 	//private Image titleImage = new ImageIcon(Main.class.getResource("../images/.png")).getImage();
 	
@@ -45,26 +56,51 @@ public class TycoonGame extends JFrame {
 	private JButton quitButton= new JButton(quitButtonBasicImage);
 	private JButton leftButton= new JButton(leftButtonBasicImage);
 	private JButton rightButton= new JButton(rightButtonBasicImage);
-	
 	private int mouseX, mouseY;
 	
 	
+
 	private boolean isMainScreen = false;//ó������ ����ȭ���� �ƴ� ����ȭ�� �̱� ������ false ,  
 	
-	Panel_store storePanel;
-	
+	 JLabel gameExplain,name;
+	Choice sandwichName,selectTime; 
+	 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 	private Image sandwichCase;
+	
 	public TycoonGame() {
 		setUndecorated(true);// ����� �⺻ ���� �޴��ٰ������
-		setTitle("tycoon");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
-
+		///////////////////////////////////////////////////////////////////////////////////
+		
+		sandwichName=new Choice();
+		sandwichName.setVisible(true);
+		sandwichName.add("�ȳ�");     
+		sandwichName.add("������");
+		sandwichName.add("������ġ");
+		sandwichName.add("����");
+		sandwichName.addItemListener(this);
+		sandwichName.setBounds(90,163,150,30);
+		add(sandwichName);
+		sandwichName.setVisible(true);
+		
+		////////////////////////////////////////////////////////////////////////////////////////
+		gameExplain = new JLabel("���Ӽ���  ���� //���� ");
+		gameExplain.setBounds(20,20,500,500);
+		gameExplain.setVisible(true);
+		gameExplain.setFont(new Font(gameExplain.getFont().getName(), Font.PLAIN, 30));
+		gameExplain.setForeground(Color.red);
+		add(gameExplain);
+		
+		//gameExplain.setBounds(500, 150, 329, 360);
+		//add(gameExplain);
+		
+		
 		//sandwichList.add(new SandwichMenu("", title, title));
 		
 		exitButton.setBounds(1245, 0,30, 30);
@@ -97,6 +133,8 @@ public class TycoonGame extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				startButton.setIcon(startButtonEnteredImage);
 				startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			
+				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -111,6 +149,8 @@ public class TycoonGame extends JFrame {
 				leftButton.setVisible(true);//����ȭ�鿡�� �¿� ��ư�� �������ϱ⶧���� true �� �ؾ���
 				rightButton.setVisible(true);
 				background =  new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
+				gameExplain.setVisible(false);
+			
 				isMainScreen = true;
 			}
 		});
@@ -221,6 +261,11 @@ public class TycoonGame extends JFrame {
 		}
 		paintComponents(g);// �޴��ٰ��� �� �׻� �����ϱ� ������ �ѹ�ư�̳� ������ �޴��ٿ� �����., add�� �߰��� �ֵ��� �����ִ� �κ��̰� 
 		this.repaint();// ��üȭ�� �̹����� �ż������� �׷���.
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
+		
 	}
 
 }
