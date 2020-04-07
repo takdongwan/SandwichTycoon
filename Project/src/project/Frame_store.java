@@ -18,6 +18,7 @@ public class Frame_store {
 	
 	JFrame storeFrame;
 	JPanel storePanel;
+	JLabel storeInfo;
 	JLabel explanation;
 	JButton sandwich;
 	JButton init;
@@ -57,9 +58,19 @@ public class Frame_store {
 	}
 	
 	public void setJLabel() {
-		explanation = new JLabel("구매를 원하는 만큼 재료를 클릭해주세요!");
+		storeInfo = new JLabel("재료상점");
+		storeInfo.setVerticalAlignment(SwingConstants.TOP);
+		storeInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		storeInfo.setFont (storeInfo.getFont ().deriveFont (21.0f));
+		storeInfo.setBounds(270, 20, 100, 30);
+		storePanel.add(storeInfo);
+		
+		explanation = new JLabel("구매를 원하는 만큼 각 재료를 클릭해주세요!");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
+		explanation.setFont (explanation.getFont ().deriveFont (12.0f));
+		explanation.setBounds(200, 600, 240, 30);
+		storePanel.add(explanation);
 	}
 	
 	public void setJButton() {
