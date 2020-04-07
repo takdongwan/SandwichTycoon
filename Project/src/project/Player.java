@@ -17,7 +17,5 @@ public class Player {
 	public void sell() {
 		
 	}
-	
-//	public void 
 
 }

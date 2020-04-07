@@ -254,7 +254,6 @@ public class Frame_store implements ActionListener, MouseListener {
 			}
 		}
 	
-		
 		// 초기화하기 버튼 클릭시
 		else if (e.getSource().equals(init)) {
 			amountOfSandwich = 0;
