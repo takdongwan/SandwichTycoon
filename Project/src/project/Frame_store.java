@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -22,10 +23,11 @@ public class Frame_store implements ActionListener, MouseListener {
 
 	JLabel storeInfo;
 	JLabel explanation;
+	JLabel amountOfSandwichInfo;
+	JLabel amountOfHotdogInfo;
+	JLabel amountOfCokeInfo;
 	JLabel currentMoneyInfo;
-	JLabel amountOfSandwich;
-	JLabel amountOfHotdog;
-	JLabel amountOfCoke;
+	JLabel totalAmountInfo;
 
 	JButton buySandwich;
 	JButton buyHotdog;
@@ -37,11 +39,11 @@ public class Frame_store implements ActionListener, MouseListener {
 	int hotdogPrice = 100;
 	int cokePrice = 50;
 	
-	int sandwich = 0;
-	int hotdog = 0;
-	int coke = 0;
+	int amountOfSandwich = 0;
+	int amountOfHotdog = 0;
+	int amountOfCoke = 0;
 	
-	int totalAmount = sandwichPrice * sandwich + hotdogPrice * hotdog + cokePrice + coke;
+	int totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice + amountOfCoke;
 	
 	int imageWidth = 128;
 
@@ -87,49 +89,59 @@ public class Frame_store implements ActionListener, MouseListener {
 		storeInfo.setVerticalAlignment(SwingConstants.TOP);
 		storeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		storeInfo.setFont(storeInfo.getFont().deriveFont(20.0f)); // 폰트 사이즈 20
-		storeInfo.setBounds(0, 50, Main.SCREEN_WIDTH/2, 30); // x좌표, y좌표, 너비, 높이
+		storeInfo.setBounds(0, 40, Main.SCREEN_WIDTH/2, 30); // x좌표, y좌표, 너비, 높이
 		storePanel.add(storeInfo);
 
 		explanation = new JLabel("구매를 원하는 만큼 각 재료를 클릭해주세요!");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		explanation.setBounds(0, 80, Main.SCREEN_WIDTH/2, 30); // x좌표, y좌표, 너비, 높이
+		explanation.setBounds(1, 70, Main.SCREEN_WIDTH/2, 30); // x좌표, y좌표, 너비, 높이
 		storePanel.add(explanation);
+
+		// 샌드위치 개수 표시
+		amountOfSandwichInfo = new JLabel(amountOfSandwich + "개");
+		amountOfSandwichInfo.setVerticalAlignment(SwingConstants.TOP);
+		amountOfSandwichInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		amountOfSandwichInfo.setFont(amountOfSandwichInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
+		amountOfSandwichInfo.setBounds(106, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
+		storePanel.add(amountOfSandwichInfo);
+
+		// 핫도그 개수 표시
+		amountOfHotdogInfo = new JLabel(amountOfHotdog + "개");
+		amountOfHotdogInfo.setVerticalAlignment(SwingConstants.TOP);
+		amountOfHotdogInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		amountOfHotdogInfo.setFont(amountOfHotdogInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
+		amountOfHotdogInfo.setBounds(256, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
+		storePanel.add(amountOfHotdogInfo);
+
+		// 콜라 개수 표시
+		amountOfCokeInfo = new JLabel(amountOfCoke + "개");
+		amountOfCokeInfo.setVerticalAlignment(SwingConstants.TOP);
+		amountOfCokeInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		amountOfCokeInfo.setFont(amountOfCokeInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
+		amountOfCokeInfo.setBounds(406, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
+		storePanel.add(amountOfCokeInfo);
 		
 		currentMoneyInfo = new JLabel("보유 골드: " + Player.currentMoney + "골드");
 		currentMoneyInfo.setVerticalAlignment(SwingConstants.TOP);
-		currentMoneyInfo.setHorizontalAlignment(SwingConstants.LEFT);
-		currentMoneyInfo.setFont(currentMoneyInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		currentMoneyInfo.setBounds(40, 120, 240, 30); // x좌표, y좌표, 너비, 높이
+		currentMoneyInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		currentMoneyInfo.setFont(currentMoneyInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 12
+		currentMoneyInfo.setBounds(1, 420, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(currentMoneyInfo);
-
-		amountOfSandwich = new JLabel("0개");
-		amountOfSandwich.setVerticalAlignment(SwingConstants.TOP);
-		amountOfSandwich.setHorizontalAlignment(SwingConstants.CENTER);
-		amountOfSandwich.setFont(amountOfSandwich.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		amountOfSandwich.setBounds(106, 420, imageWidth, 20); // x좌표, y좌표, 너비, 높이
-		storePanel.add(amountOfSandwich);
-
-		amountOfHotdog = new JLabel("0개");
-		amountOfHotdog.setVerticalAlignment(SwingConstants.TOP);
-		amountOfHotdog.setHorizontalAlignment(SwingConstants.CENTER);
-		amountOfHotdog.setFont(amountOfHotdog.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		amountOfHotdog.setBounds(256, 420, imageWidth, 20); // x좌표, y좌표, 너비, 높이
-		storePanel.add(amountOfHotdog);
-
-		amountOfCoke = new JLabel("0개");
-		amountOfCoke.setVerticalAlignment(SwingConstants.TOP);
-		amountOfCoke.setHorizontalAlignment(SwingConstants.CENTER);
-		amountOfCoke.setFont(amountOfCoke.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		amountOfCoke.setBounds(406, 420, imageWidth, 20); // x좌표, y좌표, 너비, 높이
-		storePanel.add(amountOfCoke);
+		
+		totalAmountInfo = new JLabel("총 가격: " + totalAmount + "골드");
+		totalAmountInfo.setVerticalAlignment(SwingConstants.TOP);
+		totalAmountInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		totalAmountInfo.setFont(totalAmountInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
+		totalAmountInfo.setBounds(1, 440, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
+		storePanel.add(totalAmountInfo);
 	}
 
 	public void setJButton() {
 		// 샌드위치 구매 버튼
 		buySandwich = new JButton("샌드위치 / " + sandwichPrice + "골드", sandwich_128);
-		buySandwich.setBounds(106, 240, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+		buySandwich.setBounds(106, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buySandwich.setHorizontalTextPosition(SwingConstants.CENTER);
 		buySandwich.setVerticalTextPosition(SwingConstants.BOTTOM);
 		buySandwich.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
@@ -139,7 +151,7 @@ public class Frame_store implements ActionListener, MouseListener {
 
 		// 핫도그 구매 버튼
 		buyHotdog = new JButton(" 핫도그 / " + hotdogPrice + "골드", hotdog_128);
-		buyHotdog.setBounds(256, 240, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+		buyHotdog.setBounds(256, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyHotdog.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyHotdog.setVerticalTextPosition(SwingConstants.BOTTOM);
 		buyHotdog.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
@@ -149,7 +161,7 @@ public class Frame_store implements ActionListener, MouseListener {
 
 		// 콜라 구매 버튼
 		buyCoke = new JButton(" 콜라 / " + cokePrice + "골드", coke_128);
-		buyCoke.setBounds(406, 240, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+		buyCoke.setBounds(406, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyCoke.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyCoke.setVerticalTextPosition(SwingConstants.BOTTOM);
 		buyCoke.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
@@ -159,14 +171,14 @@ public class Frame_store implements ActionListener, MouseListener {
 
 		// 구매하기 버튼
 		buy = new JButton("구매하기");
-		buy.setBounds(115, 540, 200, 60); // x좌표, y좌표, 너비, 높이
+		buy.setBounds(115, 570, 200, 60); // x좌표, y좌표, 너비, 높이
 		buy.addMouseListener(this);
 		buy.addActionListener(this);
 		storePanel.add(buy);
 
 		// 구매수량 초기화 버튼
 		init = new JButton("초기화하기");
-		init.setBounds(325, 540, 200, 60); // x좌표, y좌표, 너비, 높이
+		init.setBounds(325, 570, 200, 60); // x좌표, y좌표, 너비, 높이
 		init.addMouseListener(this);
 		init.addActionListener(this);
 		storePanel.add(init);
@@ -174,47 +186,89 @@ public class Frame_store implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// 샌드위치 버튼 클릭시
 		if (e.getSource().equals(buySandwich)) {
-			sandwich += 1; 
-			amountOfSandwich.setText(Integer.toString(sandwich) + "개");
-			System.out.println(sandwich);
+			amountOfSandwich += 1; 
+			amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+			System.out.println(amountOfSandwich);
 		}
-		else if (e.getSource().equals(buyHotdog)) {
-			hotdog += 1; 
-			amountOfHotdog.setText(Integer.toString(hotdog) + "개");
-			System.out.println(hotdog);
-		}
-		else if (e.getSource().equals(buyCoke)) {
-			coke += 1; 
-			amountOfCoke.setText(Integer.toString(coke) + "개");
-			System.out.println(coke);
-		}
-		else if (e.getSource().equals(buy)) {
-			if (Player.currentMoney >= totalAmount) {
-				Player.currentMoney -= totalAmount;
-			}
-			else {
-				sandwich = 0;
-				hotdog = 0;
-				coke = 0;
-				amountOfSandwich.setText(Integer.toString(sandwich) + "개");
-				amountOfHotdog.setText(Integer.toString(hotdog) + "개");
-				amountOfCoke.setText(Integer.toString(coke) + "개");
-				System.out.println("잔액 부족");
-			}
-			System.out.println(Player.currentMoney);
-		}
-		else if (e.getSource().equals(init)) {
-			sandwich = 0;
-			hotdog = 0;
-			coke = 0;
-			amountOfSandwich.setText(Integer.toString(sandwich) + "개");
-			amountOfHotdog.setText(Integer.toString(hotdog) + "개");
-			amountOfCoke.setText(Integer.toString(coke) + "개");
-			System.out.println("선택 초기화");
-		}
-		// TODO Auto-generated method stub
 		
+		// 핫도그 버튼 클릭시
+		else if (e.getSource().equals(buyHotdog)) {
+			amountOfHotdog += 1; 
+			amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+			System.out.println(amountOfHotdog);
+		}
+		
+		// 콜라 버튼 클릭시
+		else if (e.getSource().equals(buyCoke)) {
+			amountOfCoke += 1; 
+			amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+			System.out.println(amountOfCoke);
+		}
+		
+		// 구매하기 버튼 클릭시
+		else if (e.getSource().equals(buy)) {
+			
+			// 선택한 재료가 1개 이상일 경우
+			if (amountOfSandwich + amountOfHotdog + amountOfCoke > 0) {
+				
+				// 플레이어의 현재 보유 금액이 총 가격보다 많을 경우
+				if (Player.currentMoney >= totalAmount) {
+					// 구매 성공 팝업창
+					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
+					
+					// 선택한 수량만큼 각 재료의 수량 +
+					Player.amountOfSandwich += amountOfSandwich;
+					Player.amountOfHotdog += amountOfHotdog;
+					Player.amountOfCoke += amountOfCoke;
+					
+					// 선택한 수량의 총 가격만큼 플레이어의 보유금액 -
+					Player.currentMoney -= totalAmount;
+				}
+				
+				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우
+				else {
+					// 구매 실패 팝업창
+					JOptionPane.showMessageDialog(null, "<html>보유 금액이 부족합니다.<br>다시 선택해주세요.</html>", "구매 실패", JOptionPane.ERROR_MESSAGE);
+					
+					// 선택 초기화
+					amountOfSandwich = 0;
+					amountOfHotdog = 0;
+					amountOfCoke = 0;
+					amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+					amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+					totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+					System.out.println("잔액 부족");
+				}
+				System.out.println(Player.currentMoney);
+			}
+			
+			// 선택한 재료가 0개일 경우
+			else {
+				JOptionPane.showMessageDialog(null, "<html>선택한 재료가 없습니다.<br>구매할 재료를 선택한 후 구매하기 버튼을 눌러주세요.</html>", "구매 실패", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	
+		
+		// 초기화하기 버튼 클릭시
+		else if (e.getSource().equals(init)) {
+			amountOfSandwich = 0;
+			amountOfHotdog = 0;
+			amountOfCoke = 0;
+			amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+			amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+			amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+			System.out.println("선택 초기화");
+		}	
+		else {
+			System.out.println("예외 발생");
+		}
 	}
 	
 	@Override
@@ -237,17 +291,17 @@ public class Frame_store implements ActionListener, MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// MouseListener implements 시 무조건 포함해야하는 부분
+		// MouseListener implements시 무조건 포함해야하는 부분
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// MouseListener implements 시 무조건 포함해야하는 부분
+		// MouseListener implements시 무조건 포함해야하는 부분
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// MouseListener implements 시 무조건 포함해야하는 부분
+		// MouseListener implements시 무조건 포함해야하는 부분
 	}
 
 }
