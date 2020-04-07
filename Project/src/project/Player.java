@@ -14,6 +14,6 @@ public class Player {
 		
 	}
 	
-	public void 
+//	public void 
 
 }
