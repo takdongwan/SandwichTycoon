@@ -2,7 +2,7 @@ package project;
 
 public class Player {
 	
-	int currentMoney;
+	static int currentMoney;
 	int goalMoney;
 	
 	public Player(int currentMoney, int goalMoney) {
