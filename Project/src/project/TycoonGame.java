@@ -73,7 +73,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private boolean isGameScreen =false;
 	private int nowSelected = 0;
 	
-	 JLabel gameExplain,name;
+	 JLabel gameExplain,name,menuLabel,beverageLabel;
 	Choice sandwichName,selectTime; 
 	 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
@@ -107,7 +107,20 @@ public class TycoonGame extends JFrame implements ItemListener {
 		gameExplain.setFont(new Font(gameExplain.getFont().getName(), Font.PLAIN, 30));
 		gameExplain.setForeground(Color.red);
 		add(gameExplain);
+		//SCREEN_WIDTH  SCREEN_HEIGHT
+		menuLabel = new JLabel("샌드위치 메뉴 ");
+		menuLabel.setBounds(1000,-200,1280,720);
+		menuLabel.setVisible(false);
+		menuLabel.setFont(new Font(menuLabel.getFont().getName(), Font.PLAIN, 30));
+		menuLabel.setForeground(Color.black);
+		add(menuLabel);
 		
+		beverageLabel= new JLabel("음료수 메뉴  ");
+		beverageLabel.setBounds(100,-200,1280,720);
+		beverageLabel.setVisible(false);
+		beverageLabel.setFont(new Font(beverageLabel.getFont().getName(), Font.PLAIN, 30));
+		beverageLabel.setForeground(Color.black);
+		add(beverageLabel);
 		//gameExplain.setBounds(500, 150, 329, 360);
 		//add(gameExplain);
 		
@@ -249,7 +262,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		});
 		add(buyButton);
 		
-		sellButton.setVisible(false);//��ó���� ������ �ʴٰ� .�����ϱ��ư ������ �� ��ȭ�� �Ѿ������ ���ν�ũ���� ���ͼ� ���̱������.
+		sellButton.setVisible(false);
 		sellButton.setBounds(655, 580, 250, 67);
 		sellButton.setContentAreaFilled(false);
 		sellButton.setFocusPainted(false);
@@ -272,7 +285,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		});
 		add(sellButton);
 
-		backButton.setVisible(false);//��ó���� ������ �ʴٰ� .�����ϱ��ư ������ ����ȭ�� �Ѿ������ ���ν�ũ���� ���ͼ� ���̱������.
+		backButton.setVisible(false);
 		backButton.setBounds(20, 50, 60, 60);
 		backButton.setContentAreaFilled(false);
 		backButton.setFocusPainted(false);
@@ -344,7 +357,9 @@ public class TycoonGame extends JFrame implements ItemListener {
 		
 		isMainScreen = false;
 		//leftButton.setVisible(false);
-		//rightButton.setVisible(false);
+		//rightButton.setVisible(false);.
+		beverageLabel.setVisible(false);
+		menuLabel.setVisible(false);
 		sellButton.setVisible(false);
 		buyButton.setVisible(false);
 		background =  new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
@@ -368,6 +383,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 		isMainScreen =true;
 		//leftButton.setVisible(true);
 		//rightButton.setVisible(true);
+		beverageLabel.setVisible(true);
+		menuLabel.setVisible(true);
 		sellButton.setVisible(true);
 		buyButton.setVisible(true);
 		background =  new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
@@ -379,6 +396,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 	public void enterMain() {		
 		startButton.setVisible(false);
 		quitButton.setVisible(false);
+		beverageLabel.setVisible(true);
+		menuLabel.setVisible(true);
 		background =  new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
 		isMainScreen = true;
 		//leftButton.setVisible(true);//����ȭ�鿡�� �¿� ��ư�� �������ϱ⶧���� true �� �ؾ���
