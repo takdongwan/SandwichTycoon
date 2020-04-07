@@ -52,6 +52,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	
 	
 	private Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.jpg")).getImage();
+	
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
 	
 	//private JLabel gameExplain = new JLabel(new ImageIcon(Main.class.getResource("../images/gameExplain.PNG")));
@@ -108,7 +109,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		gameExplain.setForeground(Color.red);
 		add(gameExplain);
 		//SCREEN_WIDTH  SCREEN_HEIGHT
-		menuLabel = new JLabel("샌드위치 메뉴 ");
+		menuLabel = new JLabel("샌드위치  메뉴 ");
 		menuLabel.setBounds(1000,-200,1280,720);
 		menuLabel.setVisible(false);
 		menuLabel.setFont(new Font(menuLabel.getFont().getName(), Font.PLAIN, 30));
