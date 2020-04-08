@@ -54,9 +54,6 @@ public class Frame_store implements ActionListener, MouseListener {
 	private ImageIcon hotdog_64 = new ImageIcon(Main.class.getResource("../images/hotdog_64.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
 
-	public static void main(String[] args) {
-		new Frame_store();
-	}
 
 	public Frame_store() {
 		setJFrame();
