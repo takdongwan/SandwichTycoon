@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Frame_sell extends JFrame implements ActionListener, MouseListener {
+public class Frame_sell extends JFrame  {
 	Container contentPane;
 	JPanel panel[];
 	JPanel textview;
@@ -23,10 +23,12 @@ public class Frame_sell extends JFrame implements ActionListener, MouseListener 
 	JPanel selectview;
 	
 	JButton btn[];
-	ImageIcon one;
-	ImageIcon two;
-	ImageIcon three;
-	ImageIcon four;
+
+	private ImageIcon grilImage = new ImageIcon(Main.class.getResource("../images/gril.png"));
+	private ImageIcon breadOnTheGrilImage = new ImageIcon(Main.class.getResource("../images/breadOnTheGril.png"));
+	private ImageIcon vegetableOnBreadImage = new ImageIcon(Main.class.getResource("../images/vegetablesOnBread.png"));
+	private ImageIcon completeSandwichImage = new ImageIcon(Main.class.getResource("../images/completeSandwich.png"));
+	
 	
 	int score = 0;
 	Timer[] timer;
@@ -36,129 +38,13 @@ public class Frame_sell extends JFrame implements ActionListener, MouseListener 
 	JLabel textLabel;
 	JLabel countLabel;
 	
-	class job0 extends TimerTask{
-		public void run(){
-			if(btn[0].getIcon() == two)
-				btn[0].setIcon(three);
-		}
-	}
-	class tjob0 extends TimerTask{
-		public void run(){
-			if(btn[0].getIcon() == three)
-				btn[0].setIcon(four);
-		}
-	}
-	class job1 extends TimerTask{
-		public void run(){
-			if(btn[1].getIcon() == two)
-				btn[1].setIcon(three);
-		}
-	}
-	class tjob1 extends TimerTask{
-		public void run(){
-			if(btn[1].getIcon() == three)
-				btn[1].setIcon(four);
-		}
-	}
-	class job2 extends TimerTask{
-		public void run(){
-			if(btn[2].getIcon() == two)
-				btn[2].setIcon(three);
-		}
-	}
-	class tjob2 extends TimerTask{
-		public void run(){
-			if(btn[2].getIcon() == three)
-				btn[2].setIcon(four);
-		}
-	}
-	class job3 extends TimerTask{
-		public void run(){
-			if(btn[3].getIcon() == two)
-				btn[3].setIcon(three);
-		}
-	}
-	class tjob3 extends TimerTask{
-		public void run(){
-			if(btn[3].getIcon() == three)
-				btn[3].setIcon(four);
-		}
-	}
-	class job4 extends TimerTask{
-		public void run(){
-			if(btn[4].getIcon() == two)
-				btn[4].setIcon(three);
-		}
-	}
-	class tjob4 extends TimerTask{
-		public void run(){
-			if(btn[4].getIcon() == three)
-				btn[4].setIcon(four);
-		}
-	}
-	class job5 extends TimerTask{
-		public void run(){
-			if(btn[5].getIcon() == two)
-				btn[5].setIcon(three);
-		}
-	}
-	class tjob5 extends TimerTask{
-		public void run(){
-			if(btn[5].getIcon() == three)
-				btn[5].setIcon(four);
-		}
-	}
-	class job6 extends TimerTask{
-		public void run(){
-			if(btn[6].getIcon() == two)
-				btn[6].setIcon(three);
-		}
-	}
-	class tjob6 extends TimerTask{
-		public void run(){
-			if(btn[6].getIcon() == three)
-				btn[6].setIcon(four);
-		}
-	}
-	class job7 extends TimerTask{
-		public void run(){
-			if(btn[7].getIcon() == two)
-				btn[7].setIcon(three);
-		}
-	}
-	class tjob7 extends TimerTask{
-		public void run(){
-			if(btn[7].getIcon() == three)
-				btn[7].setIcon(four);
-		}
-	}
-	class job8 extends TimerTask{
-		public void run(){
-			if(btn[8].getIcon() == two)
-				btn[8].setIcon(three);
-		}
-	}
-	class tjob8 extends TimerTask{
-		public void run(){
-			if(btn[8].getIcon() == three)
-				btn[8].setIcon(four);
-		}
-	}
-	class job9 extends TimerTask{
-		public void run(){
-			if(btn[8].getIcon() == two)
-				speed_time -= 100;
-		}
-	}
-	class tjob9 extends TimerTask{
-		public void run(){
-			if(btn[9].getIcon() == three)
-				btn[9].setIcon(four);
-		}
+
+	public Frame_sell(){
+		sellmain();
+		
 	}
 	
-	
-	Frame_sell(){
+	public void sellmain() {
 		timer = new Timer[10];
 		ttimer = new Timer[9];
 		
@@ -175,204 +61,320 @@ public class Frame_sell extends JFrame implements ActionListener, MouseListener 
 			panel[i].setLayout(new FlowLayout());
 		}
 		
-		one = new ImageIcon("images/빵틀.jpg");
-		two = new ImageIcon("images/반죽.jpg");
-		three = new ImageIcon("images/완성.jpg");
-		four = new ImageIcon("images/탄빵.png");
+		class job0 extends TimerTask{
+			public void run(){
+				if(btn[0].getIcon() == breadOnTheGrilImage)
+					btn[0].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob0 extends TimerTask{
+			public void run(){
+				if(btn[0].getIcon() == vegetableOnBreadImage)
+					btn[0].setIcon(completeSandwichImage);
+			}
+		}
+		class job1 extends TimerTask{
+			public void run(){
+				if(btn[1].getIcon() == breadOnTheGrilImage)
+					btn[1].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob1 extends TimerTask{
+			public void run(){
+				if(btn[1].getIcon() == vegetableOnBreadImage)
+					btn[1].setIcon(completeSandwichImage);
+			}
+		}
+		class job2 extends TimerTask{
+			public void run(){
+				if(btn[2].getIcon() == breadOnTheGrilImage)
+					btn[2].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob2 extends TimerTask{
+			public void run(){
+				if(btn[2].getIcon() == vegetableOnBreadImage)
+					btn[2].setIcon(completeSandwichImage);
+			}
+		}
+		class job3 extends TimerTask{
+			public void run(){
+				if(btn[3].getIcon() == breadOnTheGrilImage)
+					btn[3].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob3 extends TimerTask{
+			public void run(){
+				if(btn[3].getIcon() == vegetableOnBreadImage)
+					btn[3].setIcon(completeSandwichImage);
+			}
+		}
+		class job4 extends TimerTask{
+			public void run(){
+				if(btn[4].getIcon() == breadOnTheGrilImage)
+					btn[4].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob4 extends TimerTask{
+			public void run(){
+				if(btn[4].getIcon() == vegetableOnBreadImage)
+					btn[4].setIcon(completeSandwichImage);
+			}
+		}
+		class job5 extends TimerTask{
+			public void run(){
+				if(btn[5].getIcon() == breadOnTheGrilImage)
+					btn[5].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob5 extends TimerTask{
+			public void run(){
+				if(btn[5].getIcon() == vegetableOnBreadImage)
+					btn[5].setIcon(completeSandwichImage);
+			}
+		}
+		class job6 extends TimerTask{
+			public void run(){
+				if(btn[6].getIcon() == breadOnTheGrilImage)
+					btn[6].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob6 extends TimerTask{
+			public void run(){
+				if(btn[6].getIcon() == vegetableOnBreadImage)
+					btn[6].setIcon(completeSandwichImage);
+			}
+		}
+		class job7 extends TimerTask{
+			public void run(){
+				if(btn[7].getIcon() == breadOnTheGrilImage)
+					btn[7].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob7 extends TimerTask{
+			public void run(){
+				if(btn[7].getIcon() == vegetableOnBreadImage)
+					btn[7].setIcon(completeSandwichImage);
+			}
+		}
+		class job8 extends TimerTask{
+			public void run(){
+				if(btn[8].getIcon() == breadOnTheGrilImage)
+					btn[8].setIcon(vegetableOnBreadImage);
+			}
+		}
+		class tjob8 extends TimerTask{
+			public void run(){
+				if(btn[8].getIcon() == vegetableOnBreadImage)
+					btn[8].setIcon(completeSandwichImage);
+			}
+		}
+		class job9 extends TimerTask{
+			public void run(){
+				if(btn[8].getIcon() == breadOnTheGrilImage)
+					speed_time -= 100;
+			}
+		}
+		class tjob9 extends TimerTask{
+			public void run(){
+				if(btn[9].getIcon() == vegetableOnBreadImage)
+					btn[9].setIcon(completeSandwichImage);
+			}
+		}
 		
 		btn = new JButton[10];
 		for ( int i = 0 ; i < 9 ; i++)
-			btn[i] = new JButton("",one);
+			btn[i] = new JButton("",grilImage);
 		
 		timer[9] = new Timer();
 		timer[9].schedule(new job9(), 20000, 20000);
 		
 		btn[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(btn[0].getIcon() == one)
+					if(btn[0].getIcon() == grilImage)
 					{
 						timer[0] = new Timer();
 						ttimer[0] = new Timer();
-						btn[0].setIcon(two);
+						btn[0].setIcon(breadOnTheGrilImage);
 						timer[0].schedule(new job0(), speed_time);
 						ttimer[0].schedule(new tjob0(), speed_time*2);
 					}
 					else 
 					{
-						if(btn[0].getIcon() == two || btn[0].getIcon() == four)
+						if(btn[0].getIcon() == breadOnTheGrilImage || btn[0].getIcon() == completeSandwichImage)
 							score -= 10;
 						else
 							score += 10;
 						textLabel.setText("Score :" +Integer.toString(score));
-						btn[0].setIcon(one);
+						btn[0].setIcon(grilImage);
 					}
 				}
 		});
 		btn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[1].getIcon() == one)
+				if(btn[1].getIcon() == grilImage)
 				{
 					timer[1] = new Timer();
 					ttimer[1] = new Timer();
-					btn[1].setIcon(two);
+					btn[1].setIcon(breadOnTheGrilImage);
 					timer[1].schedule(new job1(), speed_time-3000);
 					ttimer[1].schedule(new tjob1(), (speed_time-3000)*2);
 				}
 				else 
 				{
-					if(btn[1].getIcon() == two || btn[1].getIcon() == four)
+					if(btn[1].getIcon() == breadOnTheGrilImage || btn[1].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[1].setIcon(one);
+					btn[1].setIcon(grilImage);
 				}
 			}
 		});
 		btn[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[2].getIcon() == one)
+				if(btn[2].getIcon() == grilImage)
 				{
 					timer[2] = new Timer();
 					ttimer[2] = new Timer();
-					btn[2].setIcon(two);
+					btn[2].setIcon(breadOnTheGrilImage);
 					timer[2].schedule(new job2(), speed_time);
 					ttimer[2].schedule(new tjob2(), speed_time*2);
 				}
 				else 
 				{
-					if(btn[2].getIcon() == two || btn[2].getIcon() == four)
+					if(btn[2].getIcon() == breadOnTheGrilImage || btn[2].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[2].setIcon(one);
+					btn[2].setIcon(grilImage);
 				}
 			}
 		});
 		btn[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[3].getIcon() == one)
+				if(btn[3].getIcon() == grilImage)
 				{
 					timer[3] = new Timer();
 					ttimer[3] = new Timer();
-					btn[3].setIcon(two);
+					btn[3].setIcon(breadOnTheGrilImage);
 					timer[3].schedule(new job3(), speed_time-3000);
 					ttimer[3].schedule(new tjob3(), (speed_time-3000)*2);
 				}
 				else 
 				{
-					if(btn[3].getIcon() == two || btn[3].getIcon() == four)
+					if(btn[3].getIcon() == breadOnTheGrilImage || btn[3].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[3].setIcon(one);
+					btn[3].setIcon(grilImage);
 				}
 			}
 		});
 		btn[4].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[4].getIcon() == one)
+				if(btn[4].getIcon() == grilImage)
 				{
 					timer[4] = new Timer();
 					ttimer[4] = new Timer();
-					btn[4].setIcon(two);
+					btn[4].setIcon(breadOnTheGrilImage);
 					timer[4].schedule(new job4(), speed_time-5000);
 					ttimer[4].schedule(new tjob4(), (speed_time-5000)*2);
 				}
 				else 
 				{
-					if(btn[4].getIcon() == two || btn[4].getIcon() == four)
+					if(btn[4].getIcon() == breadOnTheGrilImage || btn[4].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[4].setIcon(one);
+					btn[4].setIcon(grilImage);
 				}
 			}
 		});
 		btn[5].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[5].getIcon() == one)
+				if(btn[5].getIcon() == grilImage)
 				{
 					timer[5] = new Timer();
 					ttimer[5] = new Timer();
-					btn[5].setIcon(two);
+					btn[5].setIcon(breadOnTheGrilImage);
 					timer[5].schedule(new job5(), speed_time-3000);
 					ttimer[5].schedule(new tjob5(), (speed_time-3000)*2);
 				}
 				else 
 				{
-					if(btn[5].getIcon() == two || btn[5].getIcon() == four)
+					if(btn[5].getIcon() == breadOnTheGrilImage || btn[5].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[5].setIcon(one);
+					btn[5].setIcon(grilImage);
 				}
 			}
 		});
 		btn[6].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[6].getIcon() == one)
+				if(btn[6].getIcon() == grilImage)
 				{
 					timer[6] = new Timer();
 					ttimer[6] = new Timer();
-					btn[6].setIcon(two);
+					btn[6].setIcon(breadOnTheGrilImage);
 					timer[6].schedule(new job6(), speed_time);
 					ttimer[6].schedule(new tjob6(), speed_time*2);
 				}
 				else 
 				{
-					if(btn[6].getIcon() == two || btn[6].getIcon() == four)
+					if(btn[6].getIcon() == breadOnTheGrilImage || btn[6].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[6].setIcon(one);
+					btn[6].setIcon(grilImage);
 				}
 			}
 		});
 		btn[7].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[7].getIcon() == one)
+				if(btn[7].getIcon() == grilImage)
 				{
 					timer[7] = new Timer();
 					ttimer[7] = new Timer();
-					btn[7].setIcon(two);
+					btn[7].setIcon(breadOnTheGrilImage);
 					timer[7].schedule(new job7(), speed_time-3000);
 					ttimer[7].schedule(new tjob7(), (speed_time-3000)*2);
 				}
 				else 
 				{
-					if(btn[7].getIcon() == two || btn[7].getIcon() == four)
+					if(btn[7].getIcon() == breadOnTheGrilImage || btn[7].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[7].setIcon(one);
+					btn[7].setIcon(grilImage);
 				}
 			}
 		});
 		btn[8].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[8].getIcon() == one)
+				if(btn[8].getIcon() == grilImage)
 				{
 					timer[8] = new Timer();
 					ttimer[8] = new Timer();
-					btn[8].setIcon(two);
+					btn[8].setIcon(breadOnTheGrilImage);
 					timer[8].schedule(new job8(), speed_time);
 					ttimer[8].schedule(new tjob8(), speed_time*2);
 				}
 				else 
 				{
-					if(btn[8].getIcon() == two || btn[8].getIcon() == four)
+					if(btn[8].getIcon() == breadOnTheGrilImage || btn[8].getIcon() == completeSandwichImage)
 						score -= 10;
 					else
 						score += 10;
 					textLabel.setText("Score :" +Integer.toString(score));
-					btn[8].setIcon(one);
+					btn[8].setIcon(grilImage);
 				}
 			}
 		});
@@ -394,56 +396,13 @@ public class Frame_sell extends JFrame implements ActionListener, MouseListener 
 		for(int k = 0 ; k < 9 ; k++)
 			contentPane.add(btn[k]);
 	
-		setSize(600, 600);
+		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
+		System.out.println("error check 1");
 		setVisible(true);
-
 		textLabel = new JLabel("Score :" + score);
 		panel[4].add(textLabel);
 		contentPane.add(panel[4]);
 		
 	}
 
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }
