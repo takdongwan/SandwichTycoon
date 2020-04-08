@@ -2,8 +2,12 @@ package project;
 
 public class Player {
 	
-	int currentMoney;
-	int goalMoney;
+	static int currentMoney;
+	static int goalMoney;
+
+	static int amountOfSandwich;
+	static int amountOfHotdog;
+	static int amountOfCoke;
 	
 	public Player(int currentMoney, int goalMoney) {
 		this.currentMoney = currentMoney;
