@@ -261,6 +261,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 				gameStart(nowSelected,"buy");
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
+				
+				System.out.println("재료상점 입장");
 			}
 		});
 		add(buyButton);
@@ -379,6 +381,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	
 	public void selectBuy() {
 		//물품구매 버튼 누를시
+		
 	}
 	
 	
