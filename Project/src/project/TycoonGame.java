@@ -73,7 +73,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private boolean isGameScreen =false;
 	private int nowSelected = 0;
 	
-	 JLabel gameExplain,name,menuLabel,beverageLabel;
+	Frame_store storeFrame;
+	JLabel gameExplain,name,menuLabel,beverageLabel;
 	Choice sandwichName,selectTime; 
 	 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
@@ -258,6 +259,9 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected,"buy");
+				storeFrame = new Frame_store();
+				storeFrame.setVisible(true);
+				System.out.println("재료상점 입장");
 			}
 		});
 		add(buyButton);
@@ -376,6 +380,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	
 	public void selectBuy() {
 		//물품구매 버튼 누를시
+		
 	}
 	
 	
