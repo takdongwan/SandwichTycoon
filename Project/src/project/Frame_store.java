@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Frame_store implements ActionListener, MouseListener {
+public class Frame_store extends JFrame implements ActionListener, MouseListener {
 
 	JFrame storeFrame;
 	JPanel storePanel;
@@ -54,9 +54,9 @@ public class Frame_store implements ActionListener, MouseListener {
 	private ImageIcon hotdog_64 = new ImageIcon(Main.class.getResource("../images/hotdog_64.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
 
-	public static void main(String[] args) {
-		new Frame_store();
-	}
+//	public static void main(String[] args) {
+//		new Frame_store();
+//	}
 
 	public Frame_store() {
 		setJFrame();
@@ -66,14 +66,15 @@ public class Frame_store implements ActionListener, MouseListener {
 	}
 
 	public void setJFrame() {
-		storeFrame = new JFrame();
-		storeFrame.setTitle("재료상점");
-		storeFrame.setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
-		storeFrame.setResizable(false);
-		storeFrame.setLocationRelativeTo(null);
-		storeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		storeFrame.setLayout(null);
-		storeFrame.setVisible(true);
+//		storeFrame = new JFrame();
+		setTitle("재료상점");
+		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setLayout(null);
+		getContentPane().setLayout(null);;
+		setVisible(true);
 	}
 
 	public void setJPanel() {
@@ -81,7 +82,7 @@ public class Frame_store implements ActionListener, MouseListener {
 		storePanel.setLayout(null);
 		storePanel.setBounds(0, 0, Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
 		storePanel.setBackground(new Color(255, 230, 0));
-		storeFrame.add(storePanel);
+		getContentPane().add(storePanel);
 	}
 
 	public void setJLabel() {
@@ -128,7 +129,7 @@ public class Frame_store implements ActionListener, MouseListener {
 		currentMoneyInfo.setVerticalAlignment(SwingConstants.TOP);
 		currentMoneyInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMoneyInfo.setFont(currentMoneyInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 12
-		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
+		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(currentMoneyInfo);
 		
 		// 선택한 재료의 총 가격 표시
@@ -136,7 +137,7 @@ public class Frame_store implements ActionListener, MouseListener {
 		totalAmountInfo.setVerticalAlignment(SwingConstants.TOP);
 		totalAmountInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		totalAmountInfo.setFont(totalAmountInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		totalAmountInfo.setBounds(0, 490, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
+		totalAmountInfo.setBounds(0, 500, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(totalAmountInfo);
 	}
 
