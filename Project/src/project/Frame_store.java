@@ -43,7 +43,7 @@ public class Frame_store implements ActionListener, MouseListener {
 	int amountOfHotdog = 0;
 	int amountOfCoke = 0;
 	
-	int totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice + amountOfCoke;
+	int totalAmount;
 	
 	int imageWidth = 128;
 
@@ -123,18 +123,20 @@ public class Frame_store implements ActionListener, MouseListener {
 		amountOfCokeInfo.setBounds(406, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(amountOfCokeInfo);
 		
+		// 플레이어 보유 골드 표시
 		currentMoneyInfo = new JLabel("보유 골드: " + Player.currentMoney + "골드");
 		currentMoneyInfo.setVerticalAlignment(SwingConstants.TOP);
 		currentMoneyInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMoneyInfo.setFont(currentMoneyInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 12
-		currentMoneyInfo.setBounds(1, 420, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
+		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(currentMoneyInfo);
 		
+		// 선택한 재료의 총 가격 표시
 		totalAmountInfo = new JLabel("총 가격: " + totalAmount + "골드");
 		totalAmountInfo.setVerticalAlignment(SwingConstants.TOP);
 		totalAmountInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		totalAmountInfo.setFont(totalAmountInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		totalAmountInfo.setBounds(1, 440, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
+		totalAmountInfo.setBounds(0, 490, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(totalAmountInfo);
 	}
 
@@ -190,24 +192,27 @@ public class Frame_store implements ActionListener, MouseListener {
 		if (e.getSource().equals(buySandwich)) {
 			amountOfSandwich += 1; 
 			amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+			
+			totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
 			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
-			System.out.println(amountOfSandwich);
 		}
 		
 		// 핫도그 버튼 클릭시
 		else if (e.getSource().equals(buyHotdog)) {
 			amountOfHotdog += 1; 
 			amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+
+			totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
 			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
-			System.out.println(amountOfHotdog);
 		}
 		
 		// 콜라 버튼 클릭시
 		else if (e.getSource().equals(buyCoke)) {
 			amountOfCoke += 1; 
 			amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+
+			totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
 			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
-			System.out.println(amountOfCoke);
 		}
 		
 		// 구매하기 버튼 클릭시
@@ -242,10 +247,14 @@ public class Frame_store implements ActionListener, MouseListener {
 					amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
 					amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
 					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+
+					totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
 					totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
-					System.out.println("잔액 부족");
 				}
+				
 				System.out.println(Player.currentMoney);
+				System.out.println(totalAmount);
+
 			}
 			
 			// 선택한 재료가 0개일 경우
@@ -262,8 +271,13 @@ public class Frame_store implements ActionListener, MouseListener {
 			amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
 			amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
 			amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+
+			totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
 			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+			
 			System.out.println("선택 초기화");
+			System.out.println(totalAmount);
+
 		}	
 		else {
 			System.out.println("예외 발생");

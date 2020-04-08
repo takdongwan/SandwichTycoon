@@ -3,8 +3,8 @@ package project;
 public class Player {
 	
 	static int currentMoney;
-	int goalMoney;
-	
+	static int goalMoney;
+
 	static int amountOfSandwich;
 	static int amountOfHotdog;
 	static int amountOfCoke;
