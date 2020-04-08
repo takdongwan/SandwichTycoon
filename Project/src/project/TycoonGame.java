@@ -159,7 +159,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 				startButton.setIcon(startButtonEnteredImage);
 				startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			
-				
+			
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
