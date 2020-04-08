@@ -159,7 +159,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 				startButton.setIcon(startButtonEnteredImage);
 				startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			
-				
+			
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -261,7 +261,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 				gameStart(nowSelected,"buy");
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
-				System.out.println("재료상점 입장");
+
+        System.out.println("재료상점 입장");
 			}
 		});
 		add(buyButton);

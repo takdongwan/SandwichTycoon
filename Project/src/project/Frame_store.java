@@ -147,7 +147,9 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buySandwich.setBounds(106, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buySandwich.setHorizontalTextPosition(SwingConstants.CENTER);
 		buySandwich.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buySandwich.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
+		buySandwich.setBorderPainted(false); // 버튼 외곽선 제거
+		buySandwich.setFocusPainted(false); // 버튼 칠 제거
+		buySandwich.setContentAreaFilled(false); // 버튼 칠 제거
 		buySandwich.addMouseListener(this);
 		buySandwich.addActionListener(this);
 		storePanel.add(buySandwich);
@@ -157,7 +159,9 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buyHotdog.setBounds(256, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyHotdog.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyHotdog.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buyHotdog.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
+		buyHotdog.setBorderPainted(false); // 버튼 외곽선 제거
+		buyHotdog.setFocusPainted(false); // 버튼 칠 제거
+		buyHotdog.setContentAreaFilled(false); // 버튼 칠 제거
 		buyHotdog.addMouseListener(this);
 		buyHotdog.addActionListener(this);
 		storePanel.add(buyHotdog);
@@ -167,7 +171,9 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buyCoke.setBounds(406, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyCoke.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyCoke.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buyCoke.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
+		buyCoke.setBorderPainted(false); // 버튼 외곽선 제거
+		buyCoke.setFocusPainted(false); // 버튼 칠 제거
+		buyCoke.setContentAreaFilled(false); // 버튼 칠 제거
 		buyCoke.addMouseListener(this);
 		buyCoke.addActionListener(this);
 		storePanel.add(buyCoke);
@@ -235,7 +241,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					
 					// 구매 성공 팝업창
 					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 재료상점 창이 닫히고, 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
-					System.exit(0);
+					dispose (); 
 				}
 				
 				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우
