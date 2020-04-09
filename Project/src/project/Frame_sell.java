@@ -35,7 +35,7 @@ public class Frame_sell extends JFrame  {
 	Timer[] ttimer;
 	
 	int speed_time = 10000;
-	JLabel textLabel;
+	JLabel textLabel; // 샌드위치의 갯수?? 로 변경예
 	JLabel countLabel;
 	
 
@@ -52,7 +52,8 @@ public class Frame_sell extends JFrame  {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		contentPane = getContentPane();
-		contentPane.setLayout(new GridLayout(6,1));
+		contentPane.setLayout(new GridLayout(6,1));//행과열  상하 간격 .: 2차원 그리드로서 n x n 으로 설정해주며 왼쪽에서 오른쪽, 위에서 아래 순으로 배치​GridLayout(4,3,5,50);     // 4 X 3 그리드에 좌우간격 5, 상하간격5
+
 		panel = new JPanel[6];
 		
 		for(int i = 0 ; i < 6 ; i++)
