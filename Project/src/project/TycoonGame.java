@@ -267,8 +267,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 				gameStart(nowSelected,"buy");
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
-				
-				System.out.println("재료상점 입장");
+
+        System.out.println("재료상점 입장");
 			}
 		});
 		add(buyButton);
