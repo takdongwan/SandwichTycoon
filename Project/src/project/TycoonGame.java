@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -74,11 +75,16 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private int nowSelected = 0;
 	
 	Frame_store storeFrame;
+	Frame_mission missionFrame;
 	JLabel gameExplain,name,menuLabel,beverageLabel;
 	Choice sandwichName,selectTime; 
 	 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 	private Image sandwichCase;
+	
+	Random random = new Random();
+	long missionTime = 0;
+	int missionNumber;
 	
 	public TycoonGame() {
 		setUndecorated(true);// ����� �⺻ ���� �޴��ٰ������
@@ -412,7 +418,17 @@ public class TycoonGame extends JFrame implements ItemListener {
 		buyButton.setVisible(true);
 		isMainScreen = true;
 		gameExplain.setVisible(false);
-
+		
+	}
+	
+	public void generateMissions() {
+		if(missionTime < System.currentTimeMillis()) {
+			missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
+			missionNumber = random.nextInt(5);
+			missionFrame = new Frame_mission(missionNumber);
+			missionFrame.setVisible(true);
+			
+		}
 	}
 
 }
