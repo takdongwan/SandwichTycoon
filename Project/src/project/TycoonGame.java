@@ -267,8 +267,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 				gameStart(nowSelected,"buy");
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
-
-        System.out.println("재료상점 입장");
+				
+				System.out.println("재료상점 입장");
 			}
 		});
 		add(buyButton);
@@ -291,6 +291,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected,"sell");
+				generateMission();
 				
 			}
 		});
@@ -421,10 +422,10 @@ public class TycoonGame extends JFrame implements ItemListener {
 		
 	}
 	
-	public void generateMissions() {
+	public void generateMission() {
 		if(missionTime < System.currentTimeMillis()) {
 			missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
-			missionNumber = random.nextInt(5);
+			missionNumber = random.nextInt(3);
 			missionFrame = new Frame_mission(missionNumber);
 			missionFrame.setVisible(true);
 			

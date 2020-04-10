@@ -21,30 +21,32 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 
 	int missionNumber;
 	
-	private ImageIcon sandwich_64 = new ImageIcon(Main.class.getResource("../images/sandwich_64.png"));
+	private ImageIcon sponge_64 = new ImageIcon(Main.class.getResource("../images/sponge_64.png"));
 
+//	public static void main(String[] args) {
+//	new Frame_mission();
+//}
+	
 	public Frame_mission(int missionNumber) {
 		setFrame();
 		setPanel();
+		setLabel();
 
 		if (missionNumber == 0) {
 			situation.setText("손님이 실수로 콜라를 바닥에 쏟았습니다");
 			explanation.setText("키보드의 좌우 방향키를 이용해서 바닥을 10번 닦아주세요!");
+			mission_coke();
 		}
 		else if (missionNumber == 1) {
 			situation.setText("매장에 벌레가 나타났습니다");
 			explanation.setText("벌레를 모두 눌러 쫒아주세요!");
+			mission_bug();
 		} 
 		else if (missionNumber == 2) {
 			situation.setText("매장에서 손님이 우산을 분실했습니다");
-			explanation.setText("물건들 틈에서 우산을 찾아주세요!");
+			explanation.setText("물건들을 드래그해서 우산을 찾아주세요!");
+			mission_umbrella();
 		} 
-		else if (missionNumber == 3) {
-
-		}
-		else if (missionNumber == 4) {
-
-		}
 		else {
 			System.out.println("예외 발생");
 		}
@@ -70,7 +72,7 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 		getContentPane().add(missionPanel);
 	}
 
-	public void setLabel(int missionNumber) {
+	public void setLabel() {
 		missionInfo = new JLabel("돌발 상황 발생");
 		missionInfo.setVerticalAlignment(SwingConstants.TOP);
 		missionInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -89,20 +91,20 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(situation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		explanation.setBounds(1, 70, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
+		explanation.setBounds(1, 630, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
 		missionPanel.add(explanation);
 	}
 
-	public void mission_spoiled() {
+	public void mission_coke() {
 		
 	}
-
-	public void setButton() {
-
+	
+	public void mission_bug() {
+		
 	}
-
-	public void setTextField() {
-
+	
+	public void mission_umbrella() {
+		
 	}
 
 	@Override
