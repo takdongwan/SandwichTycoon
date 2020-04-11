@@ -291,7 +291,11 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected,"sell");
-				generateMission();
+				
+				if(missionTime < System.currentTimeMillis()) {
+					missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
+					generateMission();
+				}
 				
 			}
 		});
@@ -423,13 +427,9 @@ public class TycoonGame extends JFrame implements ItemListener {
 	}
 	
 	public void generateMission() {
-		if(missionTime < System.currentTimeMillis()) {
-			missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
 			missionNumber = random.nextInt(3);
-			missionFrame = new Frame_mission(missionNumber);
+			missionFrame = new Frame_mission(0);
 			missionFrame.setVisible(true);
-			
-		}
 	}
 
 }
