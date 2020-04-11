@@ -4,18 +4,21 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -43,6 +46,8 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 	int broom_ySpeed = 12;
 	int leaf_xPosition;
 	int leaf_yPosition;
+	int leafRemoveCount;
+	int leafNumber;
 	private ImageIcon broom_128 = new ImageIcon(Main.class.getResource("../images/broom_128.png"));
 	private ImageIcon leaf_64 = new ImageIcon(Main.class.getResource("../images/leaf_64.png"));
 
@@ -71,8 +76,8 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 		}
 
 		else if (missionNumber == 1) {
-			situation.setText("매장에 벌레가 나타났습니다!!!");
-			explanation.setText("벌레를 모두 눌러 쫒아주세요!");
+			situation.setText("매장에 벌이 나타났습니다!!!");
+			explanation.setText("벌을 클릭해서 모두 쫒아주세요!");
 			mission_bug();
 		}
 
@@ -134,30 +139,53 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 	}
 
 	public void mission_leaf() {
+		// 빗자루 이미지라벨 생성
 		broom = new JLabel(broom_128);
 		broom.setBounds(256, 260, 128, 128); // x좌표, y좌표, 너비, 높이
 		broom.addKeyListener(this);
 		missionPanel.add(broom);
 
-		for (int i = 0; i < leafList.length; i++) {
+		// 랜덤위치에 leafList 초기화
+		for (leafNumber = 0; leafNumber < leafList.length; leafNumber++) {
 			leaf_xPosition = random.nextInt(448) + 64;
 			leaf_yPosition = random.nextInt(448) + 200;
 
-			leafList[i] = new JLabel(leaf_64);
-			leafList[i].setBounds(leaf_xPosition, leaf_yPosition, 64, 64);
-			missionPanel.add(leafList[i]);
-			
-			if ((leaf_xPosition < broom.getX() + 50) && (broom.getX() + 50 < leaf_xPosition + 64) && (leaf_yPosition < broom.getY() + 78) && (broom.getY() + 78 < leaf_yPosition + 64)) {
-				missionPanel.remove(leafList[i]);
-				System.out.println(leafList[i] + "제거됨");
+			leafList[leafNumber] = new JLabel(leaf_64);
+			leafList[leafNumber].setBounds(leaf_xPosition, leaf_yPosition, 64, 64);
+			missionPanel.add(leafList[leafNumber]);
+
+//			if ((leaf_xPosition < broom.getX()) && (broom.getX() + 50 < leaf_xPosition + 64)
+//					&& (leaf_yPosition < broom.getY() + 78) && (broom.getY() + 78 < leaf_yPosition + 64)) {
+//				missionPanel.remove(leafList[i]);
+//				System.out.println(leafList[i] + "제거됨");
+//			}
+
+		}
+
+		// 빗자루 이미지와 나뭇잎 이미지 충돌체크
+	}
+
+	public void checkCollision() {
+		
+		for (leafNumber = 0; leafNumber < leafList.length; leafNumber++) {
+			Rectangle2D rectangleBroom = new Rectangle2D.Float(broom.getX() + 30, broom.getY() + 78, 20, 20);
+			Rectangle2D rectangleLeaf = new Rectangle2D.Float(leafList[leafNumber].getX(), leafList[leafNumber].getY(),
+					64, 64);
+
+			if (rectangleBroom.intersects(rectangleLeaf)) {
+				leafRemoveCount += 1;
+				leafList[leafNumber].setLocation(-100, -100);
+				
+				System.out.println(leafNumber + " 제거됨");
+				System.out.println("leafRemoveCount: " + leafRemoveCount);
+
+				if (leafRemoveCount == 13) {
+					JOptionPane.showMessageDialog(null, "<html>모든 나뭇잎들을 치웠습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "처리 완료", JOptionPane.INFORMATION_MESSAGE);
+					dispose (); 
+				}
 			}
 			repaint();
 		}
-
-	}
-	
-	public void checkCollision() {
-		
 	}
 
 	public void mission_bug() {
@@ -232,9 +260,11 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 			System.out.println(broom.getX());
 			System.out.println(broom.getY());
 		}
-		
+		checkCollision();
 		repaint();
-		System.out.println("repaint 메소드 실행");
+
+		System.out.println("빗자루 x위치: " + broom.getX());
+		System.out.println("빗자루 y위치: " + broom.getY());
 
 	}
 
