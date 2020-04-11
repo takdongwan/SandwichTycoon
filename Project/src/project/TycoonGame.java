@@ -76,6 +76,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
+	Frame_sell  sellFrame;
 	JLabel gameExplain,name,menuLabel,beverageLabel;
 	Choice sandwichName,selectTime; 
 	 	
@@ -96,7 +97,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		setLayout(null);
 		///////////////////////////////////////////////////////////////////////////////////
 		
-		sandwichName=new Choice();
+	/*	sandwichName=new Choice();
 		sandwichName.setVisible(true);
 		sandwichName.add("종류");     
 		sandwichName.add("�ㅈㅇ");
@@ -105,7 +106,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		sandwichName.addItemListener(this);
 		sandwichName.setBounds(90,163,150,30);
 		add(sandwichName);
-		sandwichName.setVisible(true);
+		sandwichName.setVisible(true);*/
 		
 		////////////////////////////////////////////////////////////////////////////////////////
 		gameExplain = new JLabel("게임설명 쓸고 /수정해야됨 ");
@@ -287,16 +288,18 @@ public class TycoonGame extends JFrame implements ItemListener {
 			public void mouseExited(MouseEvent e) {
 				sellButton.setIcon(sellButtonBasicImage);
 				sellButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				
+				
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected,"sell");
-				
 				if(missionTime < System.currentTimeMillis()) {
 					missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
 					generateMission();
 				}
-				
+				sellFrame = new Frame_sell();
+			     System.out.println("판매상점  입장");
 			}
 		});
 		add(sellButton);
