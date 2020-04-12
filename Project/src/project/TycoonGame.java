@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -74,13 +75,17 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private int nowSelected = 0;
 	
 	Frame_store storeFrame;
+	Frame_mission missionFrame;
 	Frame_sell  sellFrame;
-	
 	JLabel gameExplain,name,menuLabel,beverageLabel;
 	Choice sandwichName,selectTime; 
 	 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 	private Image sandwichCase;
+	
+	Random random = new Random();
+	long missionTime = 0;
+	int missionNumber;
 	
 	public TycoonGame() {
 		setUndecorated(true);// ����� �⺻ ���� �޴��ٰ������
@@ -263,8 +268,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 				gameStart(nowSelected,"buy");
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
-
-        System.out.println("재료상점 입장");
+				
+				System.out.println("재료상점 입장");
 			}
 		});
 		add(buyButton);
@@ -289,6 +294,10 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected,"sell");
+				if(missionTime < System.currentTimeMillis()) {
+					missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
+					generateMission();
+				}
 				sellFrame = new Frame_sell();
 			     System.out.println("판매상점  입장");
 			}
@@ -417,7 +426,13 @@ public class TycoonGame extends JFrame implements ItemListener {
 		buyButton.setVisible(true);
 		isMainScreen = true;
 		gameExplain.setVisible(false);
-
+		
+	}
+	
+	public void generateMission() {
+			missionNumber = random.nextInt(3);
+			missionFrame = new Frame_mission(0);
+			missionFrame.setVisible(true);
 	}
 
 }
