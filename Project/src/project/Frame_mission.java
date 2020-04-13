@@ -8,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
@@ -21,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Frame_mission extends JFrame implements ActionListener, KeyListener, MouseListener {
+public class Frame_mission extends JFrame {
 
 	// 공통
 	JPanel missionPanel;
@@ -33,7 +35,6 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 	boolean isMissionLeaf = false;
 	boolean isMissionBug = false;
 	boolean isMissionUmbrella = false;
-			
 
 	// mission_leaf
 	JLabel broom;
@@ -50,19 +51,24 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 	int bug_xPosition;
 	int bug_yPosition;
 	int clickCount;
-	private ImageIcon bug_64 = new ImageIcon(Main.class.getResource("../images/bee_64.png"));
 	JButton[] bugList = new JButton[13];
-	
+	private ImageIcon bug_64 = new ImageIcon(Main.class.getResource("../images/bee_64.png"));
+
 	// mission_umbrella
+	int mouseStart_xPosition;
+	int mouseStart_yPosition;
+	int mouseEnd_xPosition;
+	int mouseEnd_yPosition;
 	int stuffNumber;
 	int stuff_xPosition;
-	int stuff_yPosition;	
-	JLabel[] stuffList = new JLabel[200];
-
-	
+	int stuff_yPosition;
+	boolean isPressed;
+	JButton umbrella;
+	JLabel[] stuffList = new JLabel[100];
+	private ImageIcon umbrella_64 = new ImageIcon(Main.class.getResource("../images/umbrella_64.png"));
 
 	public static void main(String[] args) {
-		new Frame_mission(2);
+		new Frame_mission(0);
 	}
 
 	public Frame_mission(int missionNumber) {
@@ -87,7 +93,7 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 
 		else if (missionNumber == 2) {
 			situation.setText("매장에서 손님이 우산을 분실했습니다!!!");
-			explanation.setText("물건들을 드래그해서 우산을 찾아주세요!");
+			explanation.setText("물건들을 드래그해서 우산을 찾은 후 클릭해주세요!");
 			mission_umbrella();
 			repaint();
 
@@ -117,7 +123,54 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 		missionPanel.setBackground(new Color(255, 230, 0));
 		missionPanel.setFocusable(true);
 		missionPanel.requestFocus();
-		missionPanel.addKeyListener(this);
+		missionPanel.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (isMissionLeaf == true) {
+					int broom_xSpeed = 12;
+					int broom_ySpeed = 12;
+
+					if (e.getKeyCode() == e.VK_LEFT) {
+						broom.setLocation(broom.getX() - broom_xSpeed, broom.getY());
+						System.out.println("왼쪽으로 " + broom_xSpeed + "이동");
+					}
+
+					else if (e.getKeyCode() == e.VK_RIGHT) {
+						broom.setLocation(broom.getX() + broom_xSpeed, broom.getY());
+						System.out.println("오른쪽으로 " + broom_xSpeed + "이동");
+					}
+
+					else if (e.getKeyCode() == e.VK_UP) {
+						broom.setLocation(broom.getX(), broom.getY() - broom_ySpeed);
+						System.out.println("위쪽으로 " + broom_ySpeed + "이동");
+					}
+
+					else if (e.getKeyCode() == e.VK_DOWN) {
+						broom.setLocation(broom.getX(), broom.getY() + broom_ySpeed);
+						System.out.println("아래쪽으로 " + broom_ySpeed + "이동");
+					}
+
+					else {
+						System.out.println("예외 발생");
+						System.out.println(broom.getX());
+						System.out.println(broom.getY());
+					}
+
+					checkCollision();
+					repaint();
+
+					System.out.println("빗자루 x위치: " + broom.getX());
+					System.out.println("빗자루 y위치: " + broom.getY());
+				}				
+			}
+			@Override
+			public void keyTyped(KeyEvent e) {				
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {				
+			}
+		});
 		getContentPane().add(missionPanel);
 	}
 
@@ -149,11 +202,10 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 		isMissionLeaf = true; // 현재 보여지는 미션 정보
 		isMissionBug = false;
 		isMissionUmbrella = false;
-		
+
 		// 빗자루 이미지라벨 생성
 		broom = new JLabel(broom_128);
 		broom.setBounds(256, 260, 128, 128); // x좌표, y좌표, 너비, 높이
-		broom.addKeyListener(this);
 		missionPanel.add(broom);
 
 		// 랜덤위치에 leafList 초기화
@@ -165,7 +217,6 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 			leafList[leafNumber].setBounds(leaf_xPosition, leaf_yPosition, 64, 64);
 			missionPanel.add(leafList[leafNumber]);
 		}
-
 	}
 
 	public void checkCollision() {
@@ -194,11 +245,11 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 	}
 
 	public void mission_bug() {
-		
+
 		isMissionLeaf = false;
 		isMissionBug = true; // 현재 보여지는 미션 정보
 		isMissionUmbrella = false;
-		
+
 		for (bugNumber = 0; bugNumber < bugList.length; bugNumber++) {
 			bug_xPosition = random.nextInt(448) + 64;
 			bug_yPosition = random.nextInt(448) + 120;
@@ -208,126 +259,103 @@ public class Frame_mission extends JFrame implements ActionListener, KeyListener
 			bugList[bugNumber].setBorderPainted(false); // 버튼 외곽선 제거
 			bugList[bugNumber].setFocusPainted(false); // 버튼 칠 제거
 			bugList[bugNumber].setContentAreaFilled(false); // 버튼 칠 제거
-			bugList[bugNumber].addActionListener(this);
+			bugList[bugNumber].addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					clickCount += 1;
+					if (clickCount > 2) {
+						missionPanel.remove(bugList[bugNumber]);
+					}
+					System.out.println(clickCount);					
+				}
+				
+			});
 			missionPanel.add(bugList[bugNumber]);
 		}
 	}
 
 	public void mission_umbrella() {
-		
+
 		isMissionLeaf = false;
 		isMissionBug = false;
 		isMissionUmbrella = true; // 현재 보여지는 미션 정보
-		
+
+		// 드래그할 이미지 생성
 		for (stuffNumber = 0; stuffNumber < stuffList.length; stuffNumber++) {
 			stuff_xPosition = random.nextInt(448) + 64;
 			stuff_yPosition = random.nextInt(448) + 120;
 
+			// 인덱스가 짝수인 경우엔 나뭇잎 이미지,
 			if (stuffNumber % 2 == 0) {
 				stuffList[stuffNumber] = new JLabel(leaf_64);
 			}
+			// 인덱스가 홀수인 경우엔 벌레 이미지가 보여짐
 			else {
 				stuffList[stuffNumber] = new JLabel(bug_64);
 			}
-			stuffList[stuffNumber].setBounds(stuff_xPosition, stuff_yPosition, 64, 64);
+			stuffList[stuffNumber].setBounds(stuff_xPosition, stuff_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+			stuffList[stuffNumber].addMouseListener(new MouseListener() {
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if (e.getSource() == stuffList[stuffNumber]) {
+						isPressed = true;
+						mouseStart_xPosition = e.getX();
+						mouseStart_yPosition = e.getY();
+						System.out.println(stuffList[stuffNumber] + "눌림");
+					}
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {	
+					isPressed = false;
+				}
+				@Override
+				public void mouseClicked(MouseEvent e) {					
+				}
+				@Override
+				public void mouseEntered(MouseEvent e) {					
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {					
+				}				
+			});
+			stuffList[stuffNumber].addMouseMotionListener(new MouseMotionListener() {
+
+				@Override
+				public void mouseDragged(MouseEvent e) {
+					if (isPressed == true) {
+						mouseEnd_xPosition = e.getX();
+						mouseEnd_yPosition = e.getY();
+						stuffList[stuffNumber].setLocation(stuff_xPosition - mouseStart_xPosition - mouseEnd_xPosition, stuff_yPosition - mouseStart_yPosition - mouseEnd_yPosition);
+						System.out.println("드래그됨");
+					}					
+				}
+				@Override
+				public void mouseMoved(MouseEvent e) {					
+				}
+				
+			});
 			missionPanel.add(stuffList[stuffNumber]);
 		}
-	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	//	for (bugNumber = 0; bugNumber < bugList.length; bugNumber++) {
-			clickCount += 1;
-			if (clickCount > 2) {
-				missionPanel.remove(bugList[bugNumber - 1]);
+		// 우산 버튼 생성
+		umbrella = new JButton(umbrella_64);
+		umbrella.setBounds(stuff_xPosition, stuff_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+		umbrella.setBorderPainted(false); // 버튼 외곽선 제거
+		umbrella.setFocusPainted(false); // 버튼 칠 제거
+		umbrella.setContentAreaFilled(false); // 버튼 칠 제거
+		umbrella.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "<html>손님의 우산을 찾았습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>",
+						"처리 완료", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
 			}
-			System.out.println(clickCount);
-	//	}
+			
+		});
+		missionPanel.add(umbrella);
 
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (isMissionLeaf == true) {
-			int broom_xSpeed = 12;
-			int broom_ySpeed = 12;
-
-			if (e.getKeyCode() == e.VK_LEFT) {
-				broom.setLocation(broom.getX() - broom_xSpeed, broom.getY());
-				System.out.println("왼쪽으로 " + broom_xSpeed + "이동");
-			}
-
-			else if (e.getKeyCode() == e.VK_RIGHT) {
-				broom.setLocation(broom.getX() + broom_xSpeed, broom.getY());
-				System.out.println("오른쪽으로 " + broom_xSpeed + "이동");
-			}
-
-			else if (e.getKeyCode() == e.VK_UP) {
-				broom.setLocation(broom.getX(), broom.getY() - broom_ySpeed);
-				System.out.println("위쪽으로 " + broom_ySpeed + "이동");
-			}
-
-			else if (e.getKeyCode() == e.VK_DOWN) {
-				broom.setLocation(broom.getX(), broom.getY() + broom_ySpeed);
-				System.out.println("아래쪽으로 " + broom_ySpeed + "이동");
-			}
-
-			else {
-				System.out.println("예외 발생");
-				System.out.println(broom.getX());
-				System.out.println(broom.getY());
-			}
-
-			checkCollision();
-			repaint();
-
-			System.out.println("빗자루 x위치: " + broom.getX());
-			System.out.println("빗자루 y위치: " + broom.getY());
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		for (bugNumber = 0; bugNumber < bugList.length; bugNumber++) {
-			bugList[bugNumber].setCursor(new Cursor(Cursor.HAND_CURSOR));
-		}
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		for (bugNumber = 0; bugNumber < bugList.length; bugNumber++) {
-			bugList[bugNumber].setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-		}
 	}
 }
