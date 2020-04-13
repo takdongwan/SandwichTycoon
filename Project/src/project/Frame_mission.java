@@ -323,6 +323,8 @@ public class Frame_mission extends JFrame {
 			bee.setBounds(component_xPosition, component_yPosition, 64, 64);
 			missionPanel.add(bee);
 		}
+		
+		DragImage drag = new DragImage(missionPanel.getComponents());
 
 		// 우산 버튼 생성
 		umbrella = new JButton(umbrella_64);
