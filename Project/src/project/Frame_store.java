@@ -53,9 +53,6 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	private ImageIcon hotdog_64 = new ImageIcon(Main.class.getResource("../images/hotdog_64.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
 
-//	public static void main(String[] args) {
-//		new Frame_store();
-//	}
 
 	public Frame_store() {
 		setJFrame();
@@ -136,7 +133,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		totalAmountInfo.setVerticalAlignment(SwingConstants.TOP);
 		totalAmountInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		totalAmountInfo.setFont(totalAmountInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		totalAmountInfo.setBounds(0, 500, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
+		totalAmountInfo.setBounds(0, 490, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(totalAmountInfo);
 	}
 
@@ -146,9 +143,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buySandwich.setBounds(106, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buySandwich.setHorizontalTextPosition(SwingConstants.CENTER);
 		buySandwich.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buySandwich.setBorderPainted(false); // 버튼 외곽선 제거
-		buySandwich.setFocusPainted(false); // 버튼 칠 제거
-		buySandwich.setContentAreaFilled(false); // 버튼 칠 제거
+		buySandwich.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
 		buySandwich.addMouseListener(this);
 		buySandwich.addActionListener(this);
 		storePanel.add(buySandwich);
@@ -240,7 +235,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					
 					// 구매 성공 팝업창
 					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 재료상점 창이 닫히고, 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
-					dispose (); 
+					System.exit(0);
 				}
 				
 				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우
