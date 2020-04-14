@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Frame_store implements ActionListener, MouseListener {
+public class Frame_store extends JFrame implements ActionListener, MouseListener {
 
 	JFrame storeFrame;
 	JPanel storePanel;
@@ -63,14 +63,15 @@ public class Frame_store implements ActionListener, MouseListener {
 	}
 
 	public void setJFrame() {
-		storeFrame = new JFrame();
-		storeFrame.setTitle("재료상점");
-		storeFrame.setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
-		storeFrame.setResizable(false);
-		storeFrame.setLocationRelativeTo(null);
-		storeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		storeFrame.setLayout(null);
-		storeFrame.setVisible(true);
+//		storeFrame = new JFrame();
+		setTitle("재료상점");
+		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setLayout(null);
+		getContentPane().setLayout(null);;
+		setVisible(true);
 	}
 
 	public void setJPanel() {
@@ -78,7 +79,7 @@ public class Frame_store implements ActionListener, MouseListener {
 		storePanel.setLayout(null);
 		storePanel.setBounds(0, 0, Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
 		storePanel.setBackground(new Color(255, 230, 0));
-		storeFrame.add(storePanel);
+		getContentPane().add(storePanel);
 	}
 
 	public void setJLabel() {
@@ -125,7 +126,7 @@ public class Frame_store implements ActionListener, MouseListener {
 		currentMoneyInfo.setVerticalAlignment(SwingConstants.TOP);
 		currentMoneyInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMoneyInfo.setFont(currentMoneyInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 12
-		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
+		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(currentMoneyInfo);
 		
 		// 선택한 재료의 총 가격 표시
@@ -153,7 +154,9 @@ public class Frame_store implements ActionListener, MouseListener {
 		buyHotdog.setBounds(256, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyHotdog.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyHotdog.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buyHotdog.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
+		buyHotdog.setBorderPainted(false); // 버튼 외곽선 제거
+		buyHotdog.setFocusPainted(false); // 버튼 칠 제거
+		buyHotdog.setContentAreaFilled(false); // 버튼 칠 제거
 		buyHotdog.addMouseListener(this);
 		buyHotdog.addActionListener(this);
 		storePanel.add(buyHotdog);
@@ -163,7 +166,9 @@ public class Frame_store implements ActionListener, MouseListener {
 		buyCoke.setBounds(406, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyCoke.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyCoke.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buyCoke.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
+		buyCoke.setBorderPainted(false); // 버튼 외곽선 제거
+		buyCoke.setFocusPainted(false); // 버튼 칠 제거
+		buyCoke.setContentAreaFilled(false); // 버튼 칠 제거
 		buyCoke.addMouseListener(this);
 		buyCoke.addActionListener(this);
 		storePanel.add(buyCoke);

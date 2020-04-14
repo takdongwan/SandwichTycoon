@@ -2,8 +2,8 @@ package project;
 
 public class Player {
 	
-	static int currentMoney;
-	static int goalMoney;
+	static int currentMoney = 5000;
+	static int goalMoney=100000;
 
 	static int amountOfSandwich;
 	static int amountOfHotdog;
