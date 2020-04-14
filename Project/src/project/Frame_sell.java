@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -405,5 +406,23 @@ public class Frame_sell extends JFrame  {
 		contentPane.add(panel[4]);
 		
 	}
+
+	JLabel storeInfo;
+	JLabel explanation;
+	JLabel amountOfSandwichInfo;
+	JLabel amountOfHotdogInfo;
+	JLabel amountOfCokeInfo;
+	JLabel currentMoneyInfo;
+	JLabel totalAmountInfo;
+	
+	
+	public void setJLabel() {
+		currentMoneyInfo = new JLabel("보유 골드: " + Player.currentMoney + "골드");
+		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
+		contentPane.add(currentMoneyInfo);	
+
+		
+	}
+
 
 }
