@@ -65,7 +65,6 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	}
 
 	public void setJFrame() {
-//		storeFrame = new JFrame();
 		setTitle("재료상점");
 		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -194,6 +193,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		// 샌드위치 버튼 클릭시
 		if (e.getSource().equals(buySandwich)) {
 			amountOfSandwich += 1; 
@@ -273,6 +273,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	
 		// 초기화하기 버튼 클릭시
 		else if (e.getSource().equals(init)) {
+			// 선택 초기화
 			amountOfSandwich = 0;
 			amountOfHotdog = 0;
 			amountOfCoke = 0;
