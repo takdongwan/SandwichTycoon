@@ -41,7 +41,7 @@ public class Frame_sell extends JFrame  {
 
 	public Frame_sell(){
 		sellmain();
-		
+		new GenerateMission().run();
 	}
 	
 	public void sellmain() {

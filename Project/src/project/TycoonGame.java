@@ -82,10 +82,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	 	
 	ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 	private Image sandwichCase;
-	
-	Random random = new Random();
-	long missionTime = 0;
-	int missionNumber;
+
 	
 	public TycoonGame() {
 		setUndecorated(true);// ����� �⺻ ���� �޴��ٰ������
@@ -294,10 +291,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected,"sell");
-				if(missionTime < System.currentTimeMillis()) {
-					missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
-					generateMission();
-				}
+				
 				sellFrame = new Frame_sell();
 			     System.out.println("판매상점  입장");
 			}
@@ -429,10 +423,6 @@ public class TycoonGame extends JFrame implements ItemListener {
 		
 	}
 	
-	public void generateMission() {
-			missionNumber = random.nextInt(3);
-			missionFrame = new Frame_mission(0);
-			missionFrame.setVisible(true);
-	}
+	
 
 }

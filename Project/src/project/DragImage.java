@@ -8,11 +8,11 @@ import java.awt.event.MouseMotionListener;
 
 public class DragImage implements MouseListener, MouseMotionListener {
 
-	int x;
-	int y;
+	int press_xPosition;
+	int press_yPosition;
 	
-	public DragImage(Component... pns) {
-		for (Component image : pns) {
+	public DragImage(Component[] component) {
+		for (Component image : component) {
 			image.addMouseListener(this);
 			image.addMouseMotionListener(this);
 		}
@@ -20,7 +20,7 @@ public class DragImage implements MouseListener, MouseMotionListener {
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		e.getComponent().setLocation(e.getX() + e.getComponent().getX() - x, e.getY() + e.getComponent().getY() - y);
+		e.getComponent().setLocation(e.getX() + e.getComponent().getX() - press_xPosition, e.getY() + e.getComponent().getY() - press_yPosition);
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class DragImage implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		x = e.getX();
-		y = e.getY();
+		press_xPosition = e.getX();
+		press_yPosition = e.getY();
 	}
 
 	@Override
