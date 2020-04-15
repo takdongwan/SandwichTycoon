@@ -234,8 +234,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					Player.currentMoney -= totalAmount;
 					
 					// 구매 성공 팝업창
-					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 재료상점 창이 닫히고, 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
-					System.exit(0);
+					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 				
 				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우

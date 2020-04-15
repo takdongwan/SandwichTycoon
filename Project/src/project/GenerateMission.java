@@ -26,7 +26,7 @@ public class GenerateMission extends TimerTask {
 	@Override
 	public void run() {
 		
-		delayTime = (random.nextInt(4) * 10000) + 30000; // 30초 ~ 1분에 한번 미션 창 생성
+		delayTime = (random.nextInt(3) * 10000) + 20000; // 20초 ~ 40초에 한번 미션 창 생성
 		missionNumber = random.nextInt(3);
 
         timer.schedule(new GenerateMission(), delayTime);

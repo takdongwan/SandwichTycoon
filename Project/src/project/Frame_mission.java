@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class Frame_mission extends JFrame {
@@ -49,7 +48,7 @@ public class Frame_mission extends JFrame {
 	JLabel leaf;
 	JLabel broom;
 	JLabel bee;
-	JLabel[] leafList = new JLabel[13];
+	JLabel[] leafList = new JLabel[10];
 	JButton umbrella;
 
 	private ImageIcon broom_128 = new ImageIcon(Main.class.getResource("../images/broom_128.png"));
@@ -57,11 +56,9 @@ public class Frame_mission extends JFrame {
 	private ImageIcon bee_64 = new ImageIcon(Main.class.getResource("../images/bee_64.png"));
 	private ImageIcon umbrella_64 = new ImageIcon(Main.class.getResource("../images/umbrella_64.png"));
 
-	public static void main(String[] args) {
-
-		new Frame_mission(1);
-
-	}
+//	public static void main(String[] args) {
+//		new Frame_mission(1);
+//	}
 
 	// 생성자
 	public Frame_mission(int missionNumber) {
@@ -243,7 +240,7 @@ public class Frame_mission extends JFrame {
 				System.out.println(componentNumber + " 제거됨 / leafRemovalCount: " + missionCount);
 
 				// 모든 나뭇잎 이미지와 충돌했을 경우
-				if (missionCount == 13) {
+				if (missionCount == leafList.length) {
 					
 					isMissionClear = true;
 					
