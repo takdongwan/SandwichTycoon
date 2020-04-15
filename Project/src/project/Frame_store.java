@@ -46,11 +46,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	
 	int imageWidth = 128;
 
-	private ImageIcon sandwich_64 = new ImageIcon(Main.class.getResource("../images/sandwich_64.png"));
 	private ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
-	private ImageIcon coke_64 = new ImageIcon(Main.class.getResource("../images/coke_64.png"));
 	private ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
-	private ImageIcon hotdog_64 = new ImageIcon(Main.class.getResource("../images/hotdog_64.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
 
 
