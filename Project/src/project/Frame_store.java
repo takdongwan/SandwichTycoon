@@ -38,9 +38,9 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	int hotdogPrice = 100;
 	int cokePrice = 50;
 	
-	int amountOfSandwich = 0;
-	int amountOfHotdog = 0;
-	int amountOfCoke = 0;
+	static int amountOfSandwich = 0;
+	static int amountOfHotdog = 0;
+	static int amountOfCoke = 0;
 	
 	int totalAmount;
 	
@@ -139,52 +139,54 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 	public void setJButton() {
 		// 샌드위치 구매 버튼
-		buySandwich = new JButton("샌드위치 / " + sandwichPrice + "골드", sandwich_128);
-		buySandwich.setBounds(106, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
-		buySandwich.setHorizontalTextPosition(SwingConstants.CENTER);
-		buySandwich.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buySandwich.setBorderPainted(false); // 버튼 외곽선 및 칠 제거
-		buySandwich.addMouseListener(this);
-		buySandwich.addActionListener(this);
-		storePanel.add(buySandwich);
+				buySandwich = new JButton("샌드위치 / " + sandwichPrice + "골드", sandwich_128);
+				buySandwich.setBounds(106, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+				buySandwich.setHorizontalTextPosition(SwingConstants.CENTER);
+				buySandwich.setVerticalTextPosition(SwingConstants.BOTTOM);
+				buySandwich.setBorderPainted(false); // 버튼 외곽선 제거
+				buySandwich.setFocusPainted(false); // 버튼 칠 제거
+				buySandwich.setContentAreaFilled(false); // 버튼 칠 제거
+				buySandwich.addMouseListener(this);
+				buySandwich.addActionListener(this);
+				storePanel.add(buySandwich);
 
-		// 핫도그 구매 버튼
-		buyHotdog = new JButton(" 핫도그 / " + hotdogPrice + "골드", hotdog_128);
-		buyHotdog.setBounds(256, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
-		buyHotdog.setHorizontalTextPosition(SwingConstants.CENTER);
-		buyHotdog.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buyHotdog.setBorderPainted(false); // 버튼 외곽선 제거
-		buyHotdog.setFocusPainted(false); // 버튼 칠 제거
-		buyHotdog.setContentAreaFilled(false); // 버튼 칠 제거
-		buyHotdog.addMouseListener(this);
-		buyHotdog.addActionListener(this);
-		storePanel.add(buyHotdog);
+				// 핫도그 구매 버튼
+				buyHotdog = new JButton(" 핫도그 / " + hotdogPrice + "골드", hotdog_128);
+				buyHotdog.setBounds(256, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+				buyHotdog.setHorizontalTextPosition(SwingConstants.CENTER);
+				buyHotdog.setVerticalTextPosition(SwingConstants.BOTTOM);
+				buyHotdog.setBorderPainted(false); // 버튼 외곽선 제거
+				buyHotdog.setFocusPainted(false); // 버튼 칠 제거
+				buyHotdog.setContentAreaFilled(false); // 버튼 칠 제거
+				buyHotdog.addMouseListener(this);
+				buyHotdog.addActionListener(this);
+				storePanel.add(buyHotdog);
 
-		// 콜라 구매 버튼
-		buyCoke = new JButton(" 콜라 / " + cokePrice + "골드", coke_128);
-		buyCoke.setBounds(406, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
-		buyCoke.setHorizontalTextPosition(SwingConstants.CENTER);
-		buyCoke.setVerticalTextPosition(SwingConstants.BOTTOM);
-		buyCoke.setBorderPainted(false); // 버튼 외곽선 제거
-		buyCoke.setFocusPainted(false); // 버튼 칠 제거
-		buyCoke.setContentAreaFilled(false); // 버튼 칠 제거
-		buyCoke.addMouseListener(this);
-		buyCoke.addActionListener(this);
-		storePanel.add(buyCoke);
+				// 콜라 구매 버튼
+				buyCoke = new JButton(" 콜라 / " + cokePrice + "골드", coke_128);
+				buyCoke.setBounds(406, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+				buyCoke.setHorizontalTextPosition(SwingConstants.CENTER);
+				buyCoke.setVerticalTextPosition(SwingConstants.BOTTOM);
+				buyCoke.setBorderPainted(false); // 버튼 외곽선 제거
+				buyCoke.setFocusPainted(false); // 버튼 칠 제거
+				buyCoke.setContentAreaFilled(false); // 버튼 칠 제거
+				buyCoke.addMouseListener(this);
+				buyCoke.addActionListener(this);
+				storePanel.add(buyCoke);
 
-		// 구매하기 버튼
-		buy = new JButton("구매하기");
-		buy.setBounds(115, 570, 200, 60); // x좌표, y좌표, 너비, 높이
-		buy.addMouseListener(this);
-		buy.addActionListener(this);
-		storePanel.add(buy);
+				// 구매하기 버튼
+				buy = new JButton("구매하기");
+				buy.setBounds(115, 570, 200, 60); // x좌표, y좌표, 너비, 높이
+				buy.addMouseListener(this);
+				buy.addActionListener(this);
+				storePanel.add(buy);
 
-		// 구매수량 초기화 버튼
-		init = new JButton("초기화하기");
-		init.setBounds(325, 570, 200, 60); // x좌표, y좌표, 너비, 높이
-		init.addMouseListener(this);
-		init.addActionListener(this);
-		storePanel.add(init);
+				// 구매수량 초기화 버튼
+				init = new JButton("초기화하기");
+				init.setBounds(325, 570, 200, 60); // x좌표, y좌표, 너비, 높이
+				init.addMouseListener(this);
+				init.addActionListener(this);
+				storePanel.add(init);
 	}
 
 	@Override
@@ -236,6 +238,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					// 구매 성공 팝업창
 					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+
 				}
 				
 				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우
