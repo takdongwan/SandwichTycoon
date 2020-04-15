@@ -445,7 +445,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void run() {
 				System.out.println("TimerTask 생성");		
-				delayTime = (random.nextInt(3) * 10000) + 10000; // 10초 ~ 30초에 한번 미션 창 생성
+				delayTime = (random.nextInt(2) * 10000) + 20000; // 20초 ~ 30초에 한번 미션 창 생성
 		        timer.schedule(timerTaskMaker(), delayTime);
 		        
 				missionNumber = random.nextInt(3);
