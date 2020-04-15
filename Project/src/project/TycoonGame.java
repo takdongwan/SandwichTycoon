@@ -72,6 +72,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	
 	private boolean isMainScreen = false;
 	private boolean isGameScreen =false;
+	private boolean isSellMain = false;
 	private int nowSelected = 0;
 	
 	Frame_store storeFrame;
@@ -79,7 +80,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	Frame_sell  sellFrame;
 	JLabel gameExplain,name,menuLabel,beverageLabel;
 	Choice sandwichName,selectTime; 
-	 	
+	 
 	//ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 	private Image sandwichCase;
 	
@@ -109,11 +110,11 @@ public class TycoonGame extends JFrame implements ItemListener {
 		sandwichName.setVisible(true);*/
 		
 		////////////////////////////////////////////////////////////////////////////////////////
-		gameExplain = new JLabel("게임설명 쓸고 /수정해야됨 ");
-		gameExplain.setBounds(20,20,500,500);
+		gameExplain = new JLabel("물건 구매 후 6000원을  벌기");
+		gameExplain.setBounds(40,150,500,500);
 		gameExplain.setVisible(true);
 		gameExplain.setFont(new Font(gameExplain.getFont().getName(), Font.PLAIN, 30));
-		gameExplain.setForeground(Color.red);
+		gameExplain.setForeground(Color.black);
 		add(gameExplain);
 		//SCREEN_WIDTH  SCREEN_HEIGHT
 		menuLabel = new JLabel("샌드위치 메뉴 ");
@@ -294,6 +295,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 					missionTime = System.currentTimeMillis() + random.nextInt(10000) + 5000;
 				}
 				sellFrame = new Frame_sell();
+				isSellMain= true;
+			
 			     System.out.println("판매상점  입장");
 			}
 		});
@@ -317,6 +320,11 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				backMain();
+				if(isSellMain==true) {
+					sellFrame.dispose();;
+				}else {
+					System.out.println("background 화면전환");
+				}
 			}
 		});
 		add(backButton);
