@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -15,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+//
 public class Frame_sell extends JFrame  {
 	Container contentPane;
 	JPanel panel[];
@@ -24,25 +25,37 @@ public class Frame_sell extends JFrame  {
 	JPanel selectview;
 	
 	JButton btn[];
-
+	int imageWidth = 128;
+	//초기 이미지 셋팅 
 	private ImageIcon grilImage = new ImageIcon(Main.class.getResource("../images/gril.png"));
+	private ImageIcon cokeBackgroundImage = new ImageIcon(Main.class.getResource("../images/cokeBackground.png"));
+	//샌드위치 이미지 
 	private ImageIcon breadOnTheGrilImage = new ImageIcon(Main.class.getResource("../images/breadOnTheGril.png"));
 	private ImageIcon vegetableOnBreadImage = new ImageIcon(Main.class.getResource("../images/vegetablesOnBread.png"));
 	private ImageIcon completeSandwichImage = new ImageIcon(Main.class.getResource("../images/completeSandwich.png"));
-	
-	
-	int score = 0;
+	//핫도그 이미지
+	private ImageIcon hotdogBreadOnTheGrilImage = new ImageIcon(Main.class.getResource("../images/hotdogBreadOnTheGril.png"));
+	private ImageIcon completeHotdogImage= new ImageIcon(Main.class.getResource("../images/completeHotdog.png"));
+	private ImageIcon sausageInBreadImage= new ImageIcon(Main.class.getResource("../images/sausageInBread.png"));
+	//콜라이미지
+	private ImageIcon cupOfCokeImage= new ImageIcon(Main.class.getResource("../images/cupOfCoke.png"));
+	private ImageIcon cokeIntoTheCupImage= new ImageIcon(Main.class.getResource("../images/cokeIntoTheCup.png"));
+	private ImageIcon completeCokeImage= new ImageIcon(Main.class.getResource("../images/completeCoke.png"));
+
 	Timer[] timer;
 	Timer[] ttimer;
 	
 	int speed_time = 10000;
-	JLabel textLabel; // 샌드위치의 갯수?? 로 변경예
-	JLabel countLabel;
+	JLabel totalAmountLabel; // 샌드위치의 갯수?? 로 변경예
+	JLabel sellListLabel;
+	JLabel cokeAmountLabel;
+	JLabel hotdogAmountLabel;
+	
 	
 
 	public Frame_sell(){
 		sellmain();
-		new GenerateMission().run();
+		
 	}
 	
 	public void sellmain() {
@@ -53,50 +66,48 @@ public class Frame_sell extends JFrame  {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		contentPane = getContentPane();
-		contentPane.setLayout(new GridLayout(6,1));//행과열  상하 간격 .: 2차원 그리드로서 n x n 으로 설정해주며 왼쪽에서 오른쪽, 위에서 아래 순으로 배치​GridLayout(4,3,5,50);     // 4 X 3 그리드에 좌우간격 5, 상하간격5
-
-		panel = new JPanel[6];
-		
-		for(int i = 0 ; i < 6 ; i++)
+		contentPane.setLayout(new GridLayout(6,1));
+		panel = new JPanel[9];
+		for(int i = 0 ; i < 9 ; i++)
 		{
-			panel[i] = new JPanel();
+			panel[i] = new  JPanel();
 			panel[i].setLayout(new FlowLayout());
 		}
 		
 		class job0 extends TimerTask{
 			public void run(){
-				if(btn[0].getIcon() == breadOnTheGrilImage)
-					btn[0].setIcon(vegetableOnBreadImage);
+				if(btn[0].getIcon() == hotdogBreadOnTheGrilImage)
+					btn[0].setIcon(sausageInBreadImage);
 			}
 		}
-		class tjob0 extends TimerTask{
+		class tjob0 extends TimerTask{	
 			public void run(){
-				if(btn[0].getIcon() == vegetableOnBreadImage)
-					btn[0].setIcon(completeSandwichImage);
+				if(btn[0].getIcon() == sausageInBreadImage)
+					btn[0].setIcon(completeHotdogImage);
 			}
 		}
 		class job1 extends TimerTask{
 			public void run(){
-				if(btn[1].getIcon() == breadOnTheGrilImage)
-					btn[1].setIcon(vegetableOnBreadImage);
+				if(btn[1].getIcon() == hotdogBreadOnTheGrilImage)
+					btn[1].setIcon(sausageInBreadImage);
 			}
 		}
 		class tjob1 extends TimerTask{
 			public void run(){
-				if(btn[1].getIcon() == vegetableOnBreadImage)
-					btn[1].setIcon(completeSandwichImage);
+				if(btn[1].getIcon() == sausageInBreadImage)
+					btn[1].setIcon(completeHotdogImage);
 			}
 		}
 		class job2 extends TimerTask{
 			public void run(){
-				if(btn[2].getIcon() == breadOnTheGrilImage)
-					btn[2].setIcon(vegetableOnBreadImage);
+				if(btn[2].getIcon() == hotdogBreadOnTheGrilImage)
+					btn[2].setIcon(sausageInBreadImage);
 			}
 		}
 		class tjob2 extends TimerTask{
 			public void run(){
-				if(btn[2].getIcon() == vegetableOnBreadImage)
-					btn[2].setIcon(completeSandwichImage);
+				if(btn[2].getIcon() == sausageInBreadImage)
+					btn[2].setIcon(completeHotdogImage);
 			}
 		}
 		class job3 extends TimerTask{
@@ -161,19 +172,19 @@ public class Frame_sell extends JFrame  {
 		}
 		class job8 extends TimerTask{
 			public void run(){
-				if(btn[8].getIcon() == breadOnTheGrilImage)
-					btn[8].setIcon(vegetableOnBreadImage);
+				if(btn[8].getIcon() == cupOfCokeImage)
+					btn[8].setIcon(cokeIntoTheCupImage);
 			}
 		}
 		class tjob8 extends TimerTask{
 			public void run(){
-				if(btn[8].getIcon() == vegetableOnBreadImage)
-					btn[8].setIcon(completeSandwichImage);
+				if(btn[8].getIcon() == cokeIntoTheCupImage)
+					btn[8].setIcon(completeCokeImage);
 			}
 		}
 		class job9 extends TimerTask{
 			public void run(){
-				if(btn[8].getIcon() == breadOnTheGrilImage)
+				if(btn[8].getIcon() == cokeIntoTheCupImage)
 					speed_time -= 100;
 			}
 		}
@@ -184,78 +195,148 @@ public class Frame_sell extends JFrame  {
 			}
 		}
 		
-		btn = new JButton[10];
-		for ( int i = 0 ; i < 9 ; i++)
+		
+		btn = new JButton[9];
+		for ( int i = 0; i < 8; i++)
 			btn[i] = new JButton("",grilImage);
+
+		btn[8]= new JButton("",cokeBackgroundImage);
 		
 		timer[9] = new Timer();
-		timer[9].schedule(new job9(), 20000, 20000);
+		timer[9].schedule(new job9(), 10000, 10000);
 		
 		btn[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if( Frame_store.amountOfHotdog>0){
+						
 					if(btn[0].getIcon() == grilImage)
 					{
+					
 						timer[0] = new Timer();
 						ttimer[0] = new Timer();
-						btn[0].setIcon(breadOnTheGrilImage);
+						btn[0].setIcon(hotdogBreadOnTheGrilImage);
 						timer[0].schedule(new job0(), speed_time);
 						ttimer[0].schedule(new tjob0(), speed_time*2);
+						System.out.println("error check 2");
 					}
 					else 
 					{
-						if(btn[0].getIcon() == breadOnTheGrilImage || btn[0].getIcon() == completeSandwichImage)
-							score -= 10;
-						else
-							score += 10;
-						textLabel.setText("Score :" +Integer.toString(score));
+						if(btn[0].getIcon()  == hotdogBreadOnTheGrilImage ) {
+							Player.currentMoney -= 100;
+						}
+						else if ( btn[0].getIcon() == completeHotdogImage) {
+							if(Player.currentMoney>=6000) {
+								JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+										JOptionPane.INFORMATION_MESSAGE);
+								System.exit(0);
+							}
+							Player.currentMoney += 100;
+							Frame_store.amountOfHotdog -=1;
+						}else {
+							//
+						}//
+						
+						
+						totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+						sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+						cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
+			
 						btn[0].setIcon(grilImage);
 					}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
+					}
 		});
 		btn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Frame_store.amountOfHotdog>0){
 				if(btn[1].getIcon() == grilImage)
 				{
 					timer[1] = new Timer();
 					ttimer[1] = new Timer();
-					btn[1].setIcon(breadOnTheGrilImage);
+					btn[1].setIcon(hotdogBreadOnTheGrilImage);
 					timer[1].schedule(new job1(), speed_time-3000);
 					ttimer[1].schedule(new tjob1(), (speed_time-3000)*2);
+					System.out.println("error check 3");
 				}
 				else 
 				{
-					if(btn[1].getIcon() == breadOnTheGrilImage || btn[1].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[1].getIcon() == hotdogBreadOnTheGrilImage) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[1].getIcon() == completeHotdogImage) {
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+						Player.currentMoney += 100;
+						Frame_store.amountOfHotdog -=1;
+					}else {
+						//
+					}
+					
+					
+
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
 					btn[1].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Frame_store.amountOfHotdog>0){
 				if(btn[2].getIcon() == grilImage)
 				{
 					timer[2] = new Timer();
 					ttimer[2] = new Timer();
-					btn[2].setIcon(breadOnTheGrilImage);
+					btn[2].setIcon(hotdogBreadOnTheGrilImage);
 					timer[2].schedule(new job2(), speed_time);
 					ttimer[2].schedule(new tjob2(), speed_time*2);
+					System.out.println("error check 4");
 				}
 				else 
 				{
-					if(btn[2].getIcon() == breadOnTheGrilImage || btn[2].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[2].getIcon()  == hotdogBreadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[2].getIcon() == completeHotdogImage) {
+						Player.currentMoney += 100;
+						Frame_store.amountOfHotdog -=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+					}else {
+						//
+					}
+
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
 					btn[2].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Frame_store.amountOfSandwich>0){
 				if(btn[3].getIcon() == grilImage)
 				{
 					timer[3] = new Timer();
@@ -263,20 +344,42 @@ public class Frame_sell extends JFrame  {
 					btn[3].setIcon(breadOnTheGrilImage);
 					timer[3].schedule(new job3(), speed_time-3000);
 					ttimer[3].schedule(new tjob3(), (speed_time-3000)*2);
+					System.out.println("error check 5");
 				}
 				else 
 				{
-					if(btn[3].getIcon() == breadOnTheGrilImage || btn[3].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[3].getIcon()  == breadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[3].getIcon() == completeSandwichImage) {
+						Player.currentMoney += 100;
+						Frame_store.amountOfSandwich-=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+					}else {
+						//
+					}
+					
+					
+
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
 					btn[3].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[4].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Frame_store.amountOfSandwich>0){
 				if(btn[4].getIcon() == grilImage)
 				{
 					timer[4] = new Timer();
@@ -284,20 +387,47 @@ public class Frame_sell extends JFrame  {
 					btn[4].setIcon(breadOnTheGrilImage);
 					timer[4].schedule(new job4(), speed_time-5000);
 					ttimer[4].schedule(new tjob4(), (speed_time-5000)*2);
+					System.out.println("error check6");
 				}
 				else 
 				{
-					if(btn[4].getIcon() == breadOnTheGrilImage || btn[4].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[4].getIcon() == breadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[4].getIcon() == completeSandwichImage) {
+						if(Frame_store.amountOfSandwich>0) {
+						Player.currentMoney += 100;
+						Frame_store.amountOfSandwich-=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+						}else if(Frame_store.amountOfSandwich==0) {
+							JOptionPane.showMessageDialog(null, "<html>선택한 재료가 없습니다.<br>구매할 재료를 선택한 후 다시판매하세요 .</html>", "판매 실패", JOptionPane.ERROR_MESSAGE);
+							dispose (); 
+						}
+					}else {
+						//
+					}
+					
+					
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					
 					btn[4].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[5].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Frame_store.amountOfSandwich>0){
 				if(btn[5].getIcon() == grilImage)
 				{
 					timer[5] = new Timer();
@@ -305,20 +435,43 @@ public class Frame_sell extends JFrame  {
 					btn[5].setIcon(breadOnTheGrilImage);
 					timer[5].schedule(new job5(), speed_time-3000);
 					ttimer[5].schedule(new tjob5(), (speed_time-3000)*2);
+					System.out.println("error check 6");
 				}
 				else 
 				{
-					if(btn[5].getIcon() == breadOnTheGrilImage || btn[5].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[5].getIcon() == breadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[5].getIcon() == completeSandwichImage) {
+						Player.currentMoney += 100;
+						Frame_store.amountOfSandwich-=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+					}else {
+						//
+					}
+					
+					
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
+		
+		
 					btn[5].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[6].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Player.amountOfSandwich>0){
 				if(btn[6].getIcon() == grilImage)
 				{
 					timer[6] = new Timer();
@@ -326,20 +479,43 @@ public class Frame_sell extends JFrame  {
 					btn[6].setIcon(breadOnTheGrilImage);
 					timer[6].schedule(new job6(), speed_time);
 					ttimer[6].schedule(new tjob6(), speed_time*2);
+					System.out.println("error check 7");
 				}
 				else 
 				{
-					if(btn[6].getIcon() == breadOnTheGrilImage || btn[6].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[6].getIcon() == breadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[6].getIcon() == completeSandwichImage) {
+						Player.currentMoney += 100;
+						Frame_store.amountOfSandwich-=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+					}else {
+						//
+					}
+					
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
+		
+		
+					
 					btn[6].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[7].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if( Frame_store.amountOfSandwich>0){
 				if(btn[7].getIcon() == grilImage)
 				{
 					timer[7] = new Timer();
@@ -347,46 +523,88 @@ public class Frame_sell extends JFrame  {
 					btn[7].setIcon(breadOnTheGrilImage);
 					timer[7].schedule(new job7(), speed_time-3000);
 					ttimer[7].schedule(new tjob7(), (speed_time-3000)*2);
+					System.out.println("error check8");
 				}
 				else 
 				{
-					if(btn[7].getIcon() == breadOnTheGrilImage || btn[7].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
+					if(btn[7].getIcon()  == breadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[7].getIcon() == completeSandwichImage) {
+						Player.currentMoney += 100;
+						Frame_store.amountOfSandwich-=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+					}else {
+						//
+					}
+					
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+		
 					btn[7].setIcon(grilImage);
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 		});
 		btn[8].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(btn[8].getIcon() == grilImage)
+				if(Frame_store.amountOfCoke>0){
+				if(btn[8].getIcon() == cokeBackgroundImage)
 				{
 					timer[8] = new Timer();
 					ttimer[8] = new Timer();
-					btn[8].setIcon(breadOnTheGrilImage);
+					btn[8].setIcon(cupOfCokeImage);
 					timer[8].schedule(new job8(), speed_time);
 					ttimer[8].schedule(new tjob8(), speed_time*2);
+					System.out.println("error check 9");
 				}
 				else 
 				{
-					if(btn[8].getIcon() == breadOnTheGrilImage || btn[8].getIcon() == completeSandwichImage)
-						score -= 10;
-					else
-						score += 10;
-					textLabel.setText("Score :" +Integer.toString(score));
-					btn[8].setIcon(grilImage);
+					if(btn[8].getIcon() == cupOfCokeImage ) {
+						Player.currentMoney -= 50;
+					}
+					else if ( btn[8].getIcon() == completeCokeImage) {
+						Player.currentMoney += 50;
+						Frame_store.amountOfCoke-=1;
+						if(Player.currentMoney>=6000) {
+							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
+									JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+					}else {
+						//
+					}
+					
+					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Frame_store.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Frame_store.amountOfCoke));
+		
+		
+					btn[8].setIcon(cokeBackgroundImage);
 				}
+			}else {
+				JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+						JOptionPane.INFORMATION_MESSAGE);
+				dispose();
+			}
 			}
 		});
 
-//		contentPane.add(panel[0]);
+		//contentPane.add(panel[0]);
 		panel[1].add(btn[0]);
 		panel[1].add(btn[1]);
 		panel[1].add(btn[2]);
 		contentPane.add(panel[1]);
-		panel[2].add(btn[3]);
+		panel[2].add(btn[3]); 
 		panel[2].add(btn[4]);
 		panel[2].add(btn[5]);
 		contentPane.add(panel[2]);
@@ -395,34 +613,27 @@ public class Frame_sell extends JFrame  {
 		panel[3].add(btn[8]);
 		contentPane.add(panel[3]);
 		
-		for(int k = 0 ; k < 9 ; k++)
+		
+	
+		for(int k = 0 ; k < 9 ; k++)   
 			contentPane.add(btn[k]);
 	
 		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
-		System.out.println("error check 1");
 		setVisible(true);
-		textLabel = new JLabel("Score :" + score);
-		panel[4].add(textLabel);
+		 
+		totalAmountLabel = new JLabel("보유금액:" + Player.currentMoney );
+		sellListLabel= new JLabel("샌드위치 갯수 : "+ Frame_store.amountOfSandwich+" 핫도그갯수 : "+ Frame_store.amountOfHotdog );
+		cokeAmountLabel= new JLabel("콜라 갯수 "+ Frame_store.amountOfCoke);
+		
+		panel[5].add(sellListLabel);
+		panel[4].add(totalAmountLabel);
+		panel[6].add(cokeAmountLabel);
 		contentPane.add(panel[4]);
+		contentPane.add(panel[5]);
+		contentPane.add(panel[6]);
 		
 	}
 
-	JLabel storeInfo;
-	JLabel explanation;
-	JLabel amountOfSandwichInfo;
-	JLabel amountOfHotdogInfo;
-	JLabel amountOfCokeInfo;
-	JLabel currentMoneyInfo;
-	JLabel totalAmountInfo;
-	
-	
-	public void setJLabel() {
-		currentMoneyInfo = new JLabel("보유 골드: " + Player.currentMoney + "골드");
-		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH/2, 20); // x좌표, y좌표, 너비, 높이
-		contentPane.add(currentMoneyInfo);	
-
-		
-	}
 
 
 }

@@ -16,14 +16,8 @@ public class Main {
 			public void run() {
 				new TycoonGame();				
 			}
-			
-
 		});
-	//dongwan workspace 2
-		//dongwan workspace 2
-
 	}
-
 }
 
  
