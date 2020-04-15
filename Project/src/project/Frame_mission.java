@@ -74,7 +74,8 @@ public class Frame_mission extends JFrame {
 		setPanel();
 		setLabel();
 
-		if (missionNumber == 0) {
+		// TycoonGame 클레스에서 생성되는 랜덤난수에 따라 미션 내용 할당	
+		if (missionNumber == 0) { // mission_leaf
 			situation.setText("밖에서 나뭇잎이 들어와 바닥이 더러워졌습니다!!!");
 			explanation.setText("키보드의 방향키를 이용해서 바닥의 나뭇잎들을 쓸어주세요!");
 			mission_leaf();
@@ -114,7 +115,7 @@ public class Frame_mission extends JFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setLayout(null);
 		getContentPane().setLayout(null);
-		setUndecorated(true);
+		setUndecorated(true); // 임의로 미션 창을 종료할 수 없도록 undecorated 설정
 		setVisible(true);
 	}
 
@@ -130,26 +131,27 @@ public class Frame_mission extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+				
 				if (isMissionLeaf == true) {
 					int broom_xSpeed = 12;
 					int broom_ySpeed = 12;
 
-					if (e.getKeyCode() == e.VK_LEFT) {
+					if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 						broom.setLocation(broom.getX() - broom_xSpeed, broom.getY());
 						System.out.println("왼쪽으로 " + broom_xSpeed + "이동");
 					}
 
-					else if (e.getKeyCode() == e.VK_RIGHT) {
+					else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 						broom.setLocation(broom.getX() + broom_xSpeed, broom.getY());
 						System.out.println("오른쪽으로 " + broom_xSpeed + "이동");
 					}
 
-					else if (e.getKeyCode() == e.VK_UP) {
+					else if (e.getKeyCode() == KeyEvent.VK_UP) {
 						broom.setLocation(broom.getX(), broom.getY() - broom_ySpeed);
 						System.out.println("위쪽으로 " + broom_ySpeed + "이동");
 					}
 
-					else if (e.getKeyCode() == e.VK_DOWN) {
+					else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 						broom.setLocation(broom.getX(), broom.getY() + broom_ySpeed);
 						System.out.println("아래쪽으로 " + broom_ySpeed + "이동");
 					}
@@ -192,7 +194,7 @@ public class Frame_mission extends JFrame {
 		situation.setVerticalAlignment(SwingConstants.TOP);
 		situation.setHorizontalAlignment(SwingConstants.CENTER);
 		situation.setFont(situation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		situation.setBounds(1, 70, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
+		situation.setBounds(0, 70, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
 		missionPanel.add(situation);
 
 		leftedTimeInfo = new JLabel("- 제한시간 -");
@@ -246,8 +248,7 @@ public class Frame_mission extends JFrame {
 				missionCount += 1;
 				leafList[componentNumber].setLocation(-100, -100); // 충돌체크 중복을 막기 위해 rectangleLeaf 위치 변경
 
-				System.out.println(componentNumber + " 제거됨 ---------------");
-				System.out.println("leafRemoveCount: " + missionCount);
+				System.out.println(componentNumber + " 제거됨 --- leafRemoveCount: " + missionCount);
 
 				// 모든 나뭇잎 이미지와 충돌했을 경우
 				if (missionCount == leafList.length) {
@@ -283,9 +284,9 @@ public class Frame_mission extends JFrame {
 		isMissionbee = true; // 현재 보여지는 미션 정보
 		isMissionUmbrella = false;
 
+		// 생성할 버튼 컴포넌트 개수	
 		amountOfComponent = 20;
-
-		for (int i = 0; i < amountOfComponent; i++) {
+		for (componentNumber = 0; componentNumber < amountOfComponent; componentNumber++) {
 			component_xPosition = random.nextInt(448) + 64;
 			component_yPosition = random.nextInt(448) + 110;
 
@@ -361,12 +362,14 @@ public class Frame_mission extends JFrame {
 
 	public void mission_umbrella() {
 
+		isTimerStarted = true; // 타이머 시작	
+		
 		isMissionLeaf = false;
 		isMissionbee = false;
 		isMissionUmbrella = true; // 현재 보여지는 미션 정보
 
 		// 드래그용 이미지 20개씩 생성 (나뭇잎)
-		amountOfComponent = 30;
+		amountOfComponent = 20;
 		
 		for (componentNumber = 0; componentNumber < amountOfComponent; componentNumber++) {
 			component_xPosition = random.nextInt(448) + 64;
