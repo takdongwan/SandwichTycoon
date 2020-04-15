@@ -19,11 +19,12 @@ import java.awt.event.MouseListener;
 //
 public class Frame_sell extends JFrame  {
 	Container contentPane;
+	
+	
 	JPanel panel[];
 	JPanel textview;
 	JPanel imageview;
 	JPanel selectview;
-	
 	JButton btn[];
 	int imageWidth = 128;
 	//초기 이미지 셋팅 
@@ -42,12 +43,12 @@ public class Frame_sell extends JFrame  {
 	private ImageIcon cokeIntoTheCupImage= new ImageIcon(Main.class.getResource("../images/cokeIntoTheCup.png"));
 	private ImageIcon completeCokeImage= new ImageIcon(Main.class.getResource("../images/completeCoke.png"));
 
-	Timer[] timer;
-	Timer[] ttimer;
+	Timer[] firstImageChangeTimer;
+	Timer[] imageChangeTimer;
 	
-	int speed_time = 10000;
-	JLabel totalAmountLabel; // 샌드위치의 갯수?? 로 변경예
-	JLabel sellListLabel;
+	int speed_time = 7000; //이미지 전환을 7초 마다 나타냄.
+	JLabel totalAmountLabel; // 총 금액 
+	JLabel sellListLabel;// 판매 목록 리스트 라벨
 	JLabel cokeAmountLabel;
 	JLabel hotdogAmountLabel;
 	
@@ -58,136 +59,137 @@ public class Frame_sell extends JFrame  {
 	}
 	
 	public void sellmain() {
-		timer = new Timer[10];
-		ttimer = new Timer[9];
+		firstImageChangeTimer = new Timer[10];
+		imageChangeTimer = new Timer[9];
 		
 		setTitle("tycoon");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		contentPane = getContentPane();
-		contentPane.setLayout(new GridLayout(6,1));
+		contentPane.setLayout(new GridLayout(6,1));//nxn으로 레이아웃생성
 		panel = new JPanel[9];
+		
 		for(int i = 0 ; i < 9 ; i++)
 		{
 			panel[i] = new  JPanel();
 			panel[i].setLayout(new FlowLayout());
 		}
 		
-		class job0 extends TimerTask{
+		class firstImageChangeIndex0 extends TimerTask{//timer 클래스가 실제 타이마의 기능을 수행하는 클래스이며 timer task 는 timer 클래스가 수행되야할 내용을 작성하는 클래스이다.
 			public void run(){
 				if(btn[0].getIcon() == hotdogBreadOnTheGrilImage)
 					btn[0].setIcon(sausageInBreadImage);
 			}
 		}
-		class tjob0 extends TimerTask{	
+		class imageChangeIndex0 extends TimerTask{	
 			public void run(){
 				if(btn[0].getIcon() == sausageInBreadImage)
 					btn[0].setIcon(completeHotdogImage);
 			}
 		}
-		class job1 extends TimerTask{
+		class firstImageChangeIndex1 extends TimerTask{
 			public void run(){
 				if(btn[1].getIcon() == hotdogBreadOnTheGrilImage)
 					btn[1].setIcon(sausageInBreadImage);
 			}
 		}
-		class tjob1 extends TimerTask{
+		class imageChangeIndex1 extends TimerTask{
 			public void run(){
 				if(btn[1].getIcon() == sausageInBreadImage)
 					btn[1].setIcon(completeHotdogImage);
 			}
 		}
-		class job2 extends TimerTask{
+		class firstImageChangeIndex2 extends TimerTask{
 			public void run(){
 				if(btn[2].getIcon() == hotdogBreadOnTheGrilImage)
 					btn[2].setIcon(sausageInBreadImage);
 			}
 		}
-		class tjob2 extends TimerTask{
+		class imageChangeIndex2 extends TimerTask{
 			public void run(){
 				if(btn[2].getIcon() == sausageInBreadImage)
 					btn[2].setIcon(completeHotdogImage);
 			}
 		}
-		class job3 extends TimerTask{
+		class firstImageChangeIndex3 extends TimerTask{
 			public void run(){
 				if(btn[3].getIcon() == breadOnTheGrilImage)
 					btn[3].setIcon(vegetableOnBreadImage);
 			}
 		}
-		class tjob3 extends TimerTask{
+		class imageChangeIndex3 extends TimerTask{
 			public void run(){
 				if(btn[3].getIcon() == vegetableOnBreadImage)
 					btn[3].setIcon(completeSandwichImage);
 			}
 		}
-		class job4 extends TimerTask{
+		class firstImageChangeIndex4 extends TimerTask{
 			public void run(){
 				if(btn[4].getIcon() == breadOnTheGrilImage)
 					btn[4].setIcon(vegetableOnBreadImage);
 			}
 		}
-		class tjob4 extends TimerTask{
+		class imageChangeIndex4 extends TimerTask{
 			public void run(){
 				if(btn[4].getIcon() == vegetableOnBreadImage)
 					btn[4].setIcon(completeSandwichImage);
 			}
 		}
-		class job5 extends TimerTask{
+		class firstImageChangeIndex5 extends TimerTask{
 			public void run(){
 				if(btn[5].getIcon() == breadOnTheGrilImage)
 					btn[5].setIcon(vegetableOnBreadImage);
 			}
 		}
-		class tjob5 extends TimerTask{
+		class imageChangeIndex5 extends TimerTask{
 			public void run(){
 				if(btn[5].getIcon() == vegetableOnBreadImage)
 					btn[5].setIcon(completeSandwichImage);
 			}
 		}
-		class job6 extends TimerTask{
+		class firstImageChangeIndex6 extends TimerTask{
 			public void run(){
 				if(btn[6].getIcon() == breadOnTheGrilImage)
 					btn[6].setIcon(vegetableOnBreadImage);
 			}
 		}
-		class tjob6 extends TimerTask{
+		class imageChangeIndex6 extends TimerTask{
 			public void run(){
 				if(btn[6].getIcon() == vegetableOnBreadImage)
 					btn[6].setIcon(completeSandwichImage);
 			}
 		}
-		class job7 extends TimerTask{
+		class firstImageChangeIndex7 extends TimerTask{
 			public void run(){
 				if(btn[7].getIcon() == breadOnTheGrilImage)
 					btn[7].setIcon(vegetableOnBreadImage);
 			}
 		}
-		class tjob7 extends TimerTask{
+		class imageChangeIndex7 extends TimerTask{
 			public void run(){
 				if(btn[7].getIcon() == vegetableOnBreadImage)
 					btn[7].setIcon(completeSandwichImage);
 			}
 		}
-		class job8 extends TimerTask{
+		class firstImageChangeIndex8 extends TimerTask{
 			public void run(){
 				if(btn[8].getIcon() == cupOfCokeImage)
 					btn[8].setIcon(cokeIntoTheCupImage);
 			}
 		}
-		class tjob8 extends TimerTask{
+		class imageChangeIndex8 extends TimerTask{
 			public void run(){
 				if(btn[8].getIcon() == cokeIntoTheCupImage)
 					btn[8].setIcon(completeCokeImage);
 			}
 		}
-		class job9 extends TimerTask{
+		class firstImageChangeIndex9 extends TimerTask{
 			public void run(){
 				if(btn[8].getIcon() == cokeIntoTheCupImage)
 					speed_time -= 100;
 			}
 		}
-		class tjob9 extends TimerTask{
+		class imageChangeIndex9 extends TimerTask{
 			public void run(){
 				if(btn[9].getIcon() == vegetableOnBreadImage)
 					btn[9].setIcon(completeSandwichImage);
@@ -201,21 +203,23 @@ public class Frame_sell extends JFrame  {
 
 		btn[8]= new JButton("",cokeBackgroundImage);
 		
-		timer[9] = new Timer();
-		timer[9].schedule(new job9(), 10000, 10000);
+		firstImageChangeTimer[9] = new Timer();
+		firstImageChangeTimer[9].schedule(new firstImageChangeIndex9(), 7000, 7000);//7초후에 이미지를 출력시키고  7초  간격마다  이미지 전환 .
 		
 		btn[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if( Player.amountOfHotdog>0){
+
+          if( Player.amountOfHotdog>0){
+
 						
 					if(btn[0].getIcon() == grilImage)
 					{
 					
-						timer[0] = new Timer();
-						ttimer[0] = new Timer();
+						firstImageChangeTimer[0] = new Timer();
+						imageChangeTimer[0] = new Timer();
 						btn[0].setIcon(hotdogBreadOnTheGrilImage);
-						timer[0].schedule(new job0(), speed_time);
-						ttimer[0].schedule(new tjob0(), speed_time*2);
+						firstImageChangeTimer[0].schedule(new firstImageChangeIndex0(), speed_time);
+						imageChangeTimer[0].schedule(new imageChangeIndex0(), speed_time*2);
 						System.out.println("error check 2");
 					}
 					else 
@@ -251,14 +255,16 @@ public class Frame_sell extends JFrame  {
 		});
 		btn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if( Player.amountOfHotdog>0){
+
+        if( Player.amountOfHotdog>0){
+
 				if(btn[1].getIcon() == grilImage)
 				{
-					timer[1] = new Timer();
-					ttimer[1] = new Timer();
+					firstImageChangeTimer[1] = new Timer();
+					imageChangeTimer[1] = new Timer();
 					btn[1].setIcon(hotdogBreadOnTheGrilImage);
-					timer[1].schedule(new job1(), speed_time-3000);
-					ttimer[1].schedule(new tjob1(), (speed_time-3000)*2);
+					firstImageChangeTimer[1].schedule(new firstImageChangeIndex1(), speed_time-3000);
+					imageChangeTimer[1].schedule(new imageChangeIndex1(), (speed_time-3000)*2);
 					System.out.println("error check 3");
 				}
 				else 
@@ -283,7 +289,8 @@ public class Frame_sell extends JFrame  {
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					btn[1].setIcon(grilImage);
+		
+          btn[1].setIcon(grilImage);
 				}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
@@ -294,14 +301,16 @@ public class Frame_sell extends JFrame  {
 		});
 		btn[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if( Player.amountOfHotdog>0){
+
+        if( Player.amountOfHotdog>0){
+
 				if(btn[2].getIcon() == grilImage)
 				{
-					timer[2] = new Timer();
-					ttimer[2] = new Timer();
+					firstImageChangeTimer[2] = new Timer();
+					imageChangeTimer[2] = new Timer();
 					btn[2].setIcon(hotdogBreadOnTheGrilImage);
-					timer[2].schedule(new job2(), speed_time);
-					ttimer[2].schedule(new tjob2(), speed_time*2);
+					firstImageChangeTimer[2].schedule(new firstImageChangeIndex2(), speed_time);
+					imageChangeTimer[2].schedule(new imageChangeIndex2(), speed_time*2);
 					System.out.println("error check 4");
 				}
 				else 
@@ -322,9 +331,10 @@ public class Frame_sell extends JFrame  {
 					}
 
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
+          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					btn[2].setIcon(grilImage);
+			
+          btn[2].setIcon(grilImage);
 				}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
@@ -338,11 +348,11 @@ public class Frame_sell extends JFrame  {
 				if( Player.amountOfSandwich>0){
 				if(btn[3].getIcon() == grilImage)
 				{
-					timer[3] = new Timer();
-					ttimer[3] = new Timer();
+					firstImageChangeTimer[3] = new Timer();
+					imageChangeTimer[3] = new Timer();
 					btn[3].setIcon(breadOnTheGrilImage);
-					timer[3].schedule(new job3(), speed_time-3000);
-					ttimer[3].schedule(new tjob3(), (speed_time-3000)*2);
+					firstImageChangeTimer[3].schedule(new firstImageChangeIndex3(), speed_time-3000);
+					imageChangeTimer[3].schedule(new imageChangeIndex3(), (speed_time-3000)*2);
 					System.out.println("error check 5");
 				}
 				else 
@@ -365,9 +375,10 @@ public class Frame_sell extends JFrame  {
 					
 
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
+          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					btn[3].setIcon(grilImage);
+		
+          btn[3].setIcon(grilImage);
 				}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
@@ -381,11 +392,11 @@ public class Frame_sell extends JFrame  {
 				if( Player.amountOfSandwich>0){
 				if(btn[4].getIcon() == grilImage)
 				{
-					timer[4] = new Timer();
-					ttimer[4] = new Timer();
+					firstImageChangeTimer[4] = new Timer();
+					imageChangeTimer[4] = new Timer();
 					btn[4].setIcon(breadOnTheGrilImage);
-					timer[4].schedule(new job4(), speed_time-5000);
-					ttimer[4].schedule(new tjob4(), (speed_time-5000)*2);
+					firstImageChangeTimer[4].schedule(new firstImageChangeIndex4(), speed_time-5000);
+					imageChangeTimer[4].schedule(new imageChangeIndex4(), (speed_time-5000)*2);
 					System.out.println("error check6");
 				}
 				else 
@@ -413,7 +424,7 @@ public class Frame_sell extends JFrame  {
 					
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
+          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					
 					btn[4].setIcon(grilImage);
 				}
@@ -429,11 +440,11 @@ public class Frame_sell extends JFrame  {
 				if( Player.amountOfSandwich>0){
 				if(btn[5].getIcon() == grilImage)
 				{
-					timer[5] = new Timer();
-					ttimer[5] = new Timer();
+					firstImageChangeTimer[5] = new Timer();
+					imageChangeTimer[5] = new Timer();
 					btn[5].setIcon(breadOnTheGrilImage);
-					timer[5].schedule(new job5(), speed_time-3000);
-					ttimer[5].schedule(new tjob5(), (speed_time-3000)*2);
+					firstImageChangeTimer[5].schedule(new firstImageChangeIndex5(), speed_time-3000);
+					imageChangeTimer[5].schedule(new imageChangeIndex5(), (speed_time-3000)*2);
 					System.out.println("error check 6");
 				}
 				else 
@@ -458,7 +469,6 @@ public class Frame_sell extends JFrame  {
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 		
-		
 					btn[5].setIcon(grilImage);
 				}
 				}else {
@@ -473,11 +483,11 @@ public class Frame_sell extends JFrame  {
 				if( Player.amountOfSandwich>0){
 				if(btn[6].getIcon() == grilImage)
 				{
-					timer[6] = new Timer();
-					ttimer[6] = new Timer();
+					firstImageChangeTimer[6] = new Timer();
+					imageChangeTimer[6] = new Timer();
 					btn[6].setIcon(breadOnTheGrilImage);
-					timer[6].schedule(new job6(), speed_time);
-					ttimer[6].schedule(new tjob6(), speed_time*2);
+					firstImageChangeTimer[6].schedule(new firstImageChangeIndex6(), speed_time);
+					imageChangeTimer[6].schedule(new imageChangeIndex6(), speed_time*2);
 					System.out.println("error check 7");
 				}
 				else 
@@ -500,9 +510,7 @@ public class Frame_sell extends JFrame  {
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-		
-		
-					
+
 					btn[6].setIcon(grilImage);
 				}
 				}else {
@@ -517,11 +525,11 @@ public class Frame_sell extends JFrame  {
 				if( Player.amountOfSandwich>0){
 				if(btn[7].getIcon() == grilImage)
 				{
-					timer[7] = new Timer();
-					ttimer[7] = new Timer();
+					firstImageChangeTimer[7] = new Timer();
+					imageChangeTimer[7] = new Timer();
 					btn[7].setIcon(breadOnTheGrilImage);
-					timer[7].schedule(new job7(), speed_time-3000);
-					ttimer[7].schedule(new tjob7(), (speed_time-3000)*2);
+					firstImageChangeTimer[7].schedule(new firstImageChangeIndex7(), speed_time-3000);
+					imageChangeTimer[7].schedule(new imageChangeIndex7(), (speed_time-3000)*2);
 					System.out.println("error check8");
 				}
 				else 
@@ -559,11 +567,11 @@ public class Frame_sell extends JFrame  {
 				if(Player.amountOfCoke>0){
 				if(btn[8].getIcon() == cokeBackgroundImage)
 				{
-					timer[8] = new Timer();
-					ttimer[8] = new Timer();
+					firstImageChangeTimer[8] = new Timer();
+					imageChangeTimer[8] = new Timer();
 					btn[8].setIcon(cupOfCokeImage);
-					timer[8].schedule(new job8(), speed_time);
-					ttimer[8].schedule(new tjob8(), speed_time*2);
+					firstImageChangeTimer[8].schedule(new firstImageChangeIndex8(), speed_time);
+					imageChangeTimer[8].schedule(new imageChangeIndex8(), speed_time*2);
 					System.out.println("error check 9");
 				}
 				else 
@@ -586,7 +594,6 @@ public class Frame_sell extends JFrame  {
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-		
 		
 					btn[8].setIcon(cokeBackgroundImage);
 				}
