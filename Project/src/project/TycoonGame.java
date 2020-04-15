@@ -429,20 +429,6 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 	}
 	
-//	public void missionGenerator() {
-//		timerTask = new TimerTask() {
-//
-//			@Override
-//			public void run() {
-//				
-//				System.out.println("TimerTask 생성");		
-//				missionNumber = random.nextInt(3);
-//				missionFrame = new Frame_mission(missionNumber);
-//				System.out.println("미션" + missionNumber + " 생성");
-//			}
-//		};
-//	}
-//	
 	public TimerTask timerTaskMaker() {
 		
 		TimerTask timerTask = new TimerTask() {
