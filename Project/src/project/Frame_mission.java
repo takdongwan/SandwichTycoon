@@ -61,16 +61,16 @@ public class Frame_mission extends JFrame {
 	private ImageIcon umbrella_64 = new ImageIcon(Main.class.getResource("../images/umbrella_64.png"));
 
 	
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				new Frame_mission(2);				
-//			}
-//			
-//		});
-//	}
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				new Frame_mission(2);				
+			}
+			
+		});
+	}
 
 	// 생성자
 	public Frame_mission(int missionNumber) {
@@ -198,19 +198,20 @@ public class Frame_mission extends JFrame {
 		situation.setBounds(0, 70, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
 		missionPanel.add(situation);
 
+		leftedTimeInfo = new JLabel("- 제한시간 -");
+		leftedTimeInfo.setVerticalAlignment(SwingConstants.TOP);
+		leftedTimeInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		leftedTimeInfo.setFont(situation.getFont().deriveFont(20.0f)); // 폰트 사이즈 12
+		leftedTimeInfo.setBounds(0, 620, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
+		missionPanel.add(leftedTimeInfo);
+		
 		explanation = new JLabel("- 플레이어가 해야할 미션 행동 설명 -");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(situation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		explanation.setBounds(0, 660, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
+		explanation.setBounds(0, 650, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
 		missionPanel.add(explanation);
 		
-		leftedTimeInfo = new JLabel("- 제한시간 -");
-		leftedTimeInfo.setVerticalAlignment(SwingConstants.TOP);
-		leftedTimeInfo.setHorizontalAlignment(SwingConstants.LEFT);
-		leftedTimeInfo.setFont(situation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		leftedTimeInfo.setBounds(50, 100, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
-		missionPanel.add(leftedTimeInfo);
 	}
 
 	
@@ -449,6 +450,7 @@ public class Frame_mission extends JFrame {
 	
 	public void timer() {
 		System.out.println("타이머 실행됨");
+
 		
 		SwingWorker<Boolean, Void> timer = new SwingWorker<Boolean, Void>() {
 
