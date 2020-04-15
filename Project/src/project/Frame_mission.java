@@ -2,22 +2,17 @@ package project;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -132,6 +127,7 @@ public class Frame_mission extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
+				// missionLeaf에서 빗자루 이미지를 움직이는 키리스너 설정
 				if (isMissionLeaf == true) {
 					int broom_xSpeed = 12;
 					int broom_ySpeed = 12;
@@ -305,6 +301,7 @@ public class Frame_mission extends JFrame {
 						System.out.println(missionCount);
 						repaint();
 
+						// 모든 버튼 클릭했을 경우
 						if (missionCount == amountOfComponent) {
 							
 							isMissionClear = true;

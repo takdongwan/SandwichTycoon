@@ -46,11 +46,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	
 	int imageWidth = 128;
 
-	private ImageIcon sandwich_64 = new ImageIcon(Main.class.getResource("../images/sandwich_64.png"));
 	private ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
-	private ImageIcon coke_64 = new ImageIcon(Main.class.getResource("../images/coke_64.png"));
 	private ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
-	private ImageIcon hotdog_64 = new ImageIcon(Main.class.getResource("../images/hotdog_64.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
 
 
@@ -62,7 +59,6 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	}
 
 	public void setJFrame() {
-//		storeFrame = new JFrame();
 		setTitle("재료상점");
 		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -237,6 +233,15 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					
 					// 구매 성공 팝업창
 					JOptionPane.showMessageDialog(null, "<html>구매가 완료되었습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "구매 완료", JOptionPane.INFORMATION_MESSAGE);
+					
+					// 선택 초기화
+					amountOfSandwich = 0;
+					amountOfHotdog = 0;
+					amountOfCoke = 0;
+					amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+					amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+					
 					dispose();
 
 				}

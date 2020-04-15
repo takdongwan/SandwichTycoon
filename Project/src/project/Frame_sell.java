@@ -56,7 +56,6 @@ public class Frame_sell extends JFrame  {
 
 	public Frame_sell(){
 		sellmain();
-		new GenerateMission().run();
 	}
 	
 	public void sellmain() {
@@ -209,7 +208,9 @@ public class Frame_sell extends JFrame  {
 		
 		btn[0].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(Player.amountOfHotdog>0){
+
+          if( Player.amountOfHotdog>0){
+
 						
 					if(btn[0].getIcon() == grilImage)
 					{
@@ -233,7 +234,7 @@ public class Frame_sell extends JFrame  {
 								System.exit(0);
 							}
 							Player.currentMoney += 100;
-							Frame_store.amountOfHotdog -=1;
+							Player.amountOfHotdog -=1;
 						}else {
 							//
 						}//
@@ -254,7 +255,9 @@ public class Frame_sell extends JFrame  {
 		});
 		btn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Player.amountOfHotdog>0){
+
+        if( Player.amountOfHotdog>0){
+
 				if(btn[1].getIcon() == grilImage)
 				{
 					firstImageChangeTimer[1] = new Timer();
@@ -276,7 +279,7 @@ public class Frame_sell extends JFrame  {
 							System.exit(0);
 						}
 						Player.currentMoney += 100;
-						Frame_store.amountOfHotdog -=1;
+						Player.amountOfHotdog -=1;
 					}else {
 						//
 					}
@@ -284,9 +287,10 @@ public class Frame_sell extends JFrame  {
 					
 
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					btn[1].setIcon(grilImage);
+		
+          btn[1].setIcon(grilImage);
 				}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
@@ -297,7 +301,9 @@ public class Frame_sell extends JFrame  {
 		});
 		btn[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Player.amountOfHotdog>0){
+
+        if( Player.amountOfHotdog>0){
+
 				if(btn[2].getIcon() == grilImage)
 				{
 					firstImageChangeTimer[2] = new Timer();
@@ -314,7 +320,7 @@ public class Frame_sell extends JFrame  {
 					}
 					else if ( btn[2].getIcon() == completeHotdogImage) {
 						Player.currentMoney += 100;
-						Frame_store.amountOfHotdog -=1;
+						Player.amountOfHotdog -=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
@@ -325,9 +331,10 @@ public class Frame_sell extends JFrame  {
 					}
 
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					btn[2].setIcon(grilImage);
+			
+          btn[2].setIcon(grilImage);
 				}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
@@ -368,9 +375,10 @@ public class Frame_sell extends JFrame  {
 					
 
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					btn[3].setIcon(grilImage);
+		
+          btn[3].setIcon(grilImage);
 				}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
@@ -416,7 +424,7 @@ public class Frame_sell extends JFrame  {
 					
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					
 					btn[4].setIcon(grilImage);
 				}
@@ -458,9 +466,8 @@ public class Frame_sell extends JFrame  {
 					
 					
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-		
 		
 					btn[5].setIcon(grilImage);
 				}
@@ -501,11 +508,9 @@ public class Frame_sell extends JFrame  {
 					}
 					
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-		
-		
-					
+
 					btn[6].setIcon(grilImage);
 				}
 				}else {
@@ -546,7 +551,7 @@ public class Frame_sell extends JFrame  {
 					
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 		
 					btn[7].setIcon(grilImage);
 				}
@@ -590,11 +595,10 @@ public class Frame_sell extends JFrame  {
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 		
-		
 					btn[8].setIcon(cokeBackgroundImage);
 				}
 			}else {
-				JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
+				JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "재고 부족",
 						JOptionPane.INFORMATION_MESSAGE);
 				dispose();
 			}
@@ -624,7 +628,7 @@ public class Frame_sell extends JFrame  {
 		setVisible(true);
 		 
 		totalAmountLabel = new JLabel("보유금액:" + Player.currentMoney );
-		sellListLabel= new JLabel("샌드위치 갯수 : "+ Player.amountOfSandwich+" 핫도그갯수 : "+Player.amountOfHotdog );
+		sellListLabel= new JLabel("샌드위치 갯수 : "+ Player.amountOfSandwich+" 핫도그갯수 : "+ Player.amountOfHotdog );
 		cokeAmountLabel= new JLabel("콜라 갯수 "+ Player.amountOfCoke);
 		
 		panel[5].add(sellListLabel);
