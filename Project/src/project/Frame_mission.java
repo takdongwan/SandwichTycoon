@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -75,6 +74,7 @@ public class Frame_mission extends JFrame {
 
 	// 생성자
 	public Frame_mission(int missionNumber) {
+		
 		// 공통되는 프레임, 패널, 라벨 설정
 		setFrame();
 		setPanel();
@@ -106,7 +106,9 @@ public class Frame_mission extends JFrame {
 		repaint();
 	}
 
+	
 	public void setFrame() {
+		
 		setTitle("돌발 상황 발생");
 		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -118,7 +120,9 @@ public class Frame_mission extends JFrame {
 		setVisible(true);
 	}
 
+	
 	public void setPanel() {
+		
 		missionPanel = new JPanel();
 		missionPanel.setLayout(null);
 		missionPanel.setBounds(0, 0, Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
@@ -177,7 +181,9 @@ public class Frame_mission extends JFrame {
 		getContentPane().add(missionPanel);
 	}
 
+	
 	public void setLabel() {
+		
 		missionInfo = new JLabel("돌발 상황 발생");
 		missionInfo.setVerticalAlignment(SwingConstants.TOP);
 		missionInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -207,6 +213,7 @@ public class Frame_mission extends JFrame {
 		missionPanel.add(leftedTimeInfo);
 	}
 
+	
 	public void mission_leaf() {
 
 		isTimerStarted = true; // 타이머 시작
@@ -239,15 +246,20 @@ public class Frame_mission extends JFrame {
 			Rectangle2D rectangleLeaf = new Rectangle2D.Float(leafList[componentNumber].getX(),
 					leafList[componentNumber].getY(), 64, 64);
 
+			// 빗자루 이미지와 나뭇잎 이미지가 충돌했을 경우
 			if (rectangleBroom.intersects(rectangleLeaf)) {
 				missionCount += 1;
 				leafList[componentNumber].setLocation(-100, -100); // 충돌체크 중복을 막기 위해 rectangleLeaf 위치 변경
 
 				System.out.println(componentNumber + " 제거됨 / leafRemovalCount: " + missionCount);
 
+				// 모든 나뭇잎 이미지와 충돌했을 경우
 				if (missionCount == 13) {
+					// 미션 완료 팝업창 생성
 					JOptionPane.showMessageDialog(null, "<html>모든 나뭇잎들을 치웠습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>",
 							"미션 완료", JOptionPane.INFORMATION_MESSAGE);
+					Player.currentMoney += 100;
+					// 현재 미션 창 종료
 					dispose();
 				}
 				else {
@@ -293,8 +305,11 @@ public class Frame_mission extends JFrame {
 
 						// 모든 버튼 클릭했을 경우
 						if (missionCount == amountOfComponent) {
+							// 미션 완료 팝업창 생성
 							JOptionPane.showMessageDialog(null, "<html>모든 벌을 쫒았습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>",
 									"미션 완료", JOptionPane.INFORMATION_MESSAGE);
+							Player.currentMoney += 100;
+							// 현재 미션 창 종료
 							dispose();
 							
 						} else {
@@ -392,8 +407,11 @@ public class Frame_mission extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// 미션 완료 팝업창 생성
 				JOptionPane.showMessageDialog(null, "<html>손님의 우산을 찾았습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "미션 완료",
 						JOptionPane.INFORMATION_MESSAGE);
+				Player.currentMoney += 100;
+				// 현재 미션 창 종료
 				dispose();
 			}
 
@@ -447,15 +465,22 @@ public class Frame_mission extends JFrame {
 			protected void done() {
 				Boolean status;
 				
+				// 제한시간이 0이 되었을 경우
 				if (status = true) {
+					// 미션 실패 팝업창 생성
 					JOptionPane.showMessageDialog(null, "<html>미션을 완료하지 못했습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "미션 실패",
 							JOptionPane.ERROR_MESSAGE);
+					Player.currentMoney -= 50;
+					// 현재 미션창 종료
 					dispose();
 					
+					// 제한시간 초기화
 					leftedTime = limitTime;
 					leftedTimeInfo.setText(Integer.toString(leftedTime) + "초");
 				}
+			
 				else {
+					// 제한시간 초기화
 					System.out.println("미션 강제종료");
 					leftedTime = limitTime;
 					leftedTimeInfo.setText(Integer.toString(leftedTime) + "초");

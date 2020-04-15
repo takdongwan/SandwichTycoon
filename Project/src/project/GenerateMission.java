@@ -32,18 +32,7 @@ public class GenerateMission extends TimerTask {
         timer.schedule(new GenerateMission(), delayTime);
 		missionFrame = new Frame_mission(missionNumber);
 		System.out.println("미션 생성");
-        
-        
-//		if(missionTime < System.currentTimeMillis()) {
-//			missionNumber = random.nextInt(3);
-//			missionFrame = new Frame_mission(missionNumber);
-//			missionFrame.setVisible(true);
-//			
-//			missionTime = System.currentTimeMillis() + random.nextInt(5000) + 5000;
-//		}
-//		else {
-//			System.out.println("generateMission - 예외 발생");
-//		}		
+	
 	}
 
 }
