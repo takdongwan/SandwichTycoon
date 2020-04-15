@@ -12,6 +12,7 @@ public class DragImage implements MouseListener, MouseMotionListener {
 	int press_yPosition;
 	
 	public DragImage(Component[] component) {
+		
 		for (Component image : component) {
 			image.addMouseListener(this);
 			image.addMouseMotionListener(this);
