@@ -127,6 +127,7 @@ public class Frame_mission extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
+				// missionLeaf에서 빗자루 이미지를 움직이는 키리스너 설정
 				if (isMissionLeaf == true) {
 					int broom_xSpeed = 12;
 					int broom_ySpeed = 12;
@@ -300,6 +301,7 @@ public class Frame_mission extends JFrame {
 						System.out.println(missionCount);
 						repaint();
 
+						// 모든 버튼 클릭했을 경우
 						if (missionCount == amountOfComponent) {
 							
 							isMissionClear = true;
