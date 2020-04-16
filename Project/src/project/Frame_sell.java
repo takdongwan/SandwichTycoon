@@ -241,7 +241,7 @@ public class Frame_sell extends JFrame  {
 						
 						
 						totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-						sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+						sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 						cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 			
 						btn[0].setIcon(grilImage);
@@ -592,7 +592,7 @@ public class Frame_sell extends JFrame  {
 					}
 					
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Frame_store.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 		
 					btn[8].setIcon(cokeBackgroundImage);

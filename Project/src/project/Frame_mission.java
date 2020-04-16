@@ -1,6 +1,7 @@
 package project;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,7 +83,6 @@ public class Frame_mission extends JFrame {
 			explanation.setText("벌을 클릭해서 모두 쫒아주세요!");
 			mission_bee();
 			repaint();
-
 		}
 
 		else if (missionNumber == 2) { // mission_umbrella
@@ -90,7 +90,6 @@ public class Frame_mission extends JFrame {
 			explanation.setText("물건들을 드래그해서 우산을 찾아주세요!");
 			mission_umbrella();
 			repaint();
-
 		}
 
 		else {
@@ -226,7 +225,7 @@ public class Frame_mission extends JFrame {
 			component_yPosition = random.nextInt(448) + 110;
 
 			leafList[componentNumber] = new JLabel(leaf_64);
-			leafList[componentNumber].setBounds(component_xPosition, component_yPosition, 64, 64);
+			leafList[componentNumber].setBounds(component_xPosition, component_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 			missionPanel.add(leafList[componentNumber]);
 		}
 	}
@@ -235,9 +234,9 @@ public class Frame_mission extends JFrame {
 
 		// 빗자루 이미지와 나뭇잎 이미지 충돌체크
 		for (componentNumber = 0; componentNumber < leafList.length; componentNumber++) {
-			Rectangle2D rectangleBroom = new Rectangle2D.Float(broom.getX() + 30, broom.getY() + 78, 20, 20);
+			Rectangle2D rectangleBroom = new Rectangle2D.Float(broom.getX() + 30, broom.getY() + 78, 20, 20); // x좌표, y좌표, 너비, 높이
 			Rectangle2D rectangleLeaf = new Rectangle2D.Float(leafList[componentNumber].getX(),
-					leafList[componentNumber].getY(), 64, 64);
+					leafList[componentNumber].getY(), 64, 64); // x좌표, y좌표, 너비, 높이
 
 			// 빗자루 이미지와 나뭇잎 이미지가 충돌했을 경우
 			if (rectangleBroom.intersects(rectangleLeaf)) {
@@ -253,7 +252,7 @@ public class Frame_mission extends JFrame {
 					
 					// 미션 완료 팝업창 생성
 					JOptionPane.showMessageDialog(null, "<html>모든 나뭇잎들을 치웠습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>",
-							"미션 완료", JOptionPane.INFORMATION_MESSAGE);
+							"미션 완료", JOptionPane.INFORMATION_MESSAGE); // Component parentComponent, Object message, String title, int messageType
 					
 					// 현재 미션 창 종료
 					dispose();
@@ -308,7 +307,7 @@ public class Frame_mission extends JFrame {
 							
 							// 미션 완료 팝업창 생성
 							JOptionPane.showMessageDialog(null, "<html>모든 벌을 쫒았습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>",
-									"미션 완료", JOptionPane.INFORMATION_MESSAGE);
+									"미션 완료", JOptionPane.INFORMATION_MESSAGE); // Component parentComponent, Object message, String title, int messageType
 							
 							// 현재 미션 창 종료
 							dispose();
@@ -365,7 +364,7 @@ public class Frame_mission extends JFrame {
 		isMissionbee = false;
 		isMissionUmbrella = true; // 현재 보여지는 미션 정보
 
-		// 드래그용 이미지 20개씩 생성 (나뭇잎)
+		// 드래그용 이미지 (amountOfComponent)개씩 생성 (나뭇잎)
 		amountOfComponent = 20;
 		
 		for (componentNumber = 0; componentNumber < amountOfComponent; componentNumber++) {
@@ -378,25 +377,25 @@ public class Frame_mission extends JFrame {
 			missionPanel.add(leaf);
 		}
 
-		// 드래그용 이미지 20개씩 생성 (빗자루)
+		// 드래그용 이미지 (amountOfComponent)개씩 생성 (빗자루)
 		for (componentNumber = 0; componentNumber < amountOfComponent; componentNumber++) {
 			component_xPosition = random.nextInt(448) + 64;
 			component_yPosition = random.nextInt(448) + 110;
 
 			broom = new JLabel(broom_128);
 			broom.setName("broom" + componentNumber);
-			broom.setBounds(component_xPosition, component_yPosition, 128, 128);
+			broom.setBounds(component_xPosition, component_yPosition, 128, 128); // x좌표, y좌표, 너비, 높이
 			missionPanel.add(broom);
 		}
 
-		// 드래그용 이미지 20개씩 생성 (벌)
+		// 드래그용 이미지 (amountOfComponent)개씩 생성 (벌)
 		for (componentNumber = 0; componentNumber < amountOfComponent; componentNumber++) {
 			component_xPosition = random.nextInt(448) + 64;
 			component_yPosition = random.nextInt(448) + 110;
 
 			bee = new JLabel(bee_64);
 			bee.setName("bee" + componentNumber);
-			bee.setBounds(component_xPosition, component_yPosition, 64, 64);
+			bee.setBounds(component_xPosition, component_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 			missionPanel.add(bee);
 		}
 		
@@ -417,7 +416,7 @@ public class Frame_mission extends JFrame {
 				
 				// 미션 완료 팝업창 생성
 				JOptionPane.showMessageDialog(null, "<html>손님의 우산을 찾았습니다.<br>OK 버튼을 누르면 게임으로 돌아갑니다.</html>", "미션 완료",
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.INFORMATION_MESSAGE); // Component parentComponent, Object message, String title, int messageType
 				
 				// 현재 미션 창 종료
 				dispose();
