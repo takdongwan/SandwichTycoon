@@ -93,7 +93,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	int missionNumber;
 	
 	static TimerTask timerTask;
-	Timer timer = new Timer();
+	Timer timer;
 
 
 	public TycoonGame() {
@@ -295,7 +295,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected, "sell");
-        isSellMain= true;
+				isSellMain= true;
 				sellFrame = new Frame_sell();
 				
 				delayTime = 40000;
