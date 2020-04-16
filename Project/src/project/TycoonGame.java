@@ -73,8 +73,9 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private JButton backButton = new JButton(backButtonBasicImage);
 	private int mouseX, mouseY;
 
+	private boolean isTimerRun = false;
 	private boolean isMainScreen = false;
-  private boolean isGameScreen =false;
+	private boolean isGameScreen =false;
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
 
@@ -298,6 +299,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 				isSellMain= true;
 				sellFrame = new Frame_sell();
 				
+				isTimerRun = true;
 				delayTime = 40000;
 				timer = new Timer();
 				timer.schedule(timerTaskMaker(), delayTime);
@@ -328,7 +330,13 @@ public class TycoonGame extends JFrame implements ItemListener {
 			public void mousePressed(MouseEvent e) {
 				backMain();
 				
-				timer.cancel();		
+				// 타이머가 실행되고 있을 경우
+				if(isTimerRun == true) {
+					timer.cancel();		
+				}
+				else {
+					
+				}
 
         if(isSellMain==true) {
 					sellFrame.dispose();;
