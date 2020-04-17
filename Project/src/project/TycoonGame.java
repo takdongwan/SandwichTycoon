@@ -132,7 +132,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		add(beverageLabel);
 
 		
-		exitButton.setBounds(1245, 0,30, 30);
+		exitButton.setBounds(1245, 0,30, 30);//종료버튼  위치설정 
 		exitButton.setContentAreaFilled(false);
 		exitButton.setFocusPainted(false);
 		exitButton.addMouseListener(new MouseAdapter() {
@@ -172,7 +172,6 @@ public class TycoonGame extends JFrame implements ItemListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-			//// �Ʒ��� ���ӽ����̺�Ʈ ������ /////
 				enterMain();
 			}
 		});
