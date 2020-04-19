@@ -41,10 +41,10 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private ImageIcon quitButtonBasicImage = new ImageIcon(Main.class.getResource("../images/quitButtonBasic.png"));
 
 	private ImageIcon leftButtonBasicImage = new ImageIcon(Main.class.getResource("../images/leftButtonBasic.png"));
-	private ImageIcon rightButtonBasicImage = new ImageIcon(Main.class.getResource("../images/rightButtonBasic.png"));
+//	private ImageIcon rightButtonBasicImage = new ImageIcon(Main.class.getResource("../images/rightButtonBasic.png"));
 	private ImageIcon leftButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/leftButtonEntered.png"));
-	private ImageIcon rightButtonEnteredImage = new ImageIcon(
-			Main.class.getResource("../images/rightButtonEntered.png"));
+	//private ImageIcon rightButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/rightButtonEntered.png"));
+	
 	private ImageIcon buyButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/buyButtonEntered.png"));
 	private ImageIcon sellButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/sellButtonEntered.png"));
 	private ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
@@ -52,7 +52,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
-	private Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.jpg")).getImage();
+	private Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.png")).getImage();
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
 
 	// private JLabel gameExplain = new JLabel(new
@@ -66,7 +66,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private JButton exitButton = new JButton(exitButtonBasicImage);
 	private JButton startButton = new JButton(startButtonBasicImage);
 	private JButton quitButton = new JButton(quitButtonBasicImage);
-//	private JButton leftButton= new JButton(leftButtonBasicImage);
+	private JButton leftButton= new JButton(leftButtonBasicImage);
 	// private JButton rightButton= new JButton(rightButtonBasicImage);
 	private JButton buyButton = new JButton(buyButtonBasicImage);
 	private JButton sellButton = new JButton(sellButtonBasicImage);
@@ -79,6 +79,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
 
+	Frame_order orderFrame;
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
   Frame_sell  sellFrame;
@@ -137,12 +138,10 @@ public class TycoonGame extends JFrame implements ItemListener {
 		beverageLabel.setForeground(Color.black);
 		add(beverageLabel);
 
-<<<<<<< HEAD
+
 		
 		exitButton.setBounds(1245, 0,30, 30);//종료버튼  위치설정 
-=======
-		exitButton.setBounds(1245, 0, 30, 30);
->>>>>>> branch 'master' of https://github.com/takdongwan/sandwichTycoon.git
+
 		exitButton.setContentAreaFilled(false);
 		exitButton.setFocusPainted(false);
 		exitButton.addMouseListener(new MouseAdapter() {
@@ -185,10 +184,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
-=======
-				//// �Ʒ��� ���ӽ����̺�Ʈ ������ /////
->>>>>>> branch 'master' of https://github.com/takdongwan/sandwichTycoon.git
+
 				enterMain();
 			}
 		});
@@ -217,42 +213,46 @@ public class TycoonGame extends JFrame implements ItemListener {
 			}
 		});
 		add(quitButton);
-		/*
-		 * leftButton.setVisible(false);//ó������ �Ⱥ��̰� ������ ���̰� �ϱ����ؼ� false ��
-		 * ���� leftButton.setBounds(140, 600, 60, 60);
-		 * leftButton.setContentAreaFilled(false); leftButton.setFocusPainted(false);
-		 * leftButton.addMouseListener(new MouseAdapter() {
-		 * 
-		 * @Override public void mouseEntered(MouseEvent e) {
-		 * leftButton.setIcon(leftButtonEnteredImage); leftButton.setCursor(new
-		 * Cursor(Cursor.HAND_CURSOR)); }
-		 * 
-		 * @Override public void mouseExited(MouseEvent e) {
-		 * leftButton.setIcon(leftButtonBasicImage); leftButton.setCursor(new
-		 * Cursor(Cursor.DEFAULT_CURSOR)); }
-		 * 
-		 * @Override public void mousePressed(MouseEvent e) { //���� or �Ǹ� } });
-		 * add(leftButton);
-		 * 
-		 * rightButton.setVisible(false);//��ó���� ������ �ʴٰ� .�����ϱ��ư ������ ����ȭ��
-		 * �Ѿ������ ���ν�ũ���� ���ͼ� ���̱������. rightButton.setBounds(1080, 600, 60,
-		 * 60); rightButton.setContentAreaFilled(false);
-		 * rightButton.setFocusPainted(false); rightButton.addMouseListener(new
-		 * MouseAdapter() {
-		 * 
-		 * @Override public void mouseEntered(MouseEvent e) {
-		 * rightButton.setIcon(rightButtonEnteredImage); rightButton.setCursor(new
-		 * Cursor(Cursor.HAND_CURSOR)); }
-		 * 
-		 * @Override public void mouseExited(MouseEvent e) {
-		 * rightButton.setIcon(rightButtonBasicImage); rightButton.setCursor(new
-		 * Cursor(Cursor.DEFAULT_CURSOR)); }
-		 * 
-		 * @Override public void mousePressed(MouseEvent e) {
-		 * 
-		 * 
-		 * } }); add(rightButton);
-		 */
+		
+		 leftButton.setVisible(false);//ó�����
+		 leftButton.setBounds(110, 580, 250, 67);
+		 leftButton.setContentAreaFilled(false); leftButton.setFocusPainted(false);
+		 leftButton.addMouseListener(new MouseAdapter() {
+		  
+		  @Override public void mouseEntered(MouseEvent e) {
+		  leftButton.setIcon(leftButtonEnteredImage); leftButton.setCursor(new
+		  Cursor(Cursor.HAND_CURSOR)); }
+		  
+		  @Override public void mouseExited(MouseEvent e) {
+		  leftButton.setIcon(leftButtonBasicImage); leftButton.setCursor(new
+		  Cursor(Cursor.DEFAULT_CURSOR)); }
+		  
+		  @Override public void mousePressed(MouseEvent e) { 
+			  
+				orderFrame = new Frame_order();
+				orderFrame.Frame_order();
+		  } 
+		  });
+		  add(leftButton);
+		 
+	/*	  rightButton.setVisible(false);//��ó���� ������ �ʴٰ� .�����ϱ��ư ������ ����ȭ�� �Ѿ������ ���ν�ũ���� ���ͼ� ���̱������. 
+		  rightButton.setBounds(1080, 600, 60,60); rightButton.setContentAreaFilled(false);
+		  rightButton.setFocusPainted(false); rightButton.addMouseListener(new
+		  MouseAdapter() {
+		  
+		  @Override public void mouseEntered(MouseEvent e) {
+		  rightButton.setIcon(rightButtonEnteredImage); rightButton.setCursor(new
+		  Cursor(Cursor.HAND_CURSOR)); }
+		  
+		  @Override public void mouseExited(MouseEvent e) {
+		  rightButton.setIcon(rightButtonBasicImage); rightButton.setCursor(new
+		  Cursor(Cursor.DEFAULT_CURSOR)); }
+		  
+		  @Override public void mousePressed(MouseEvent e) {
+		 
+		 
+		  } }); add(rightButton);*/
+		 
 
 		buyButton.setVisible(false);
 		buyButton.setBounds(375, 580, 250, 67);
@@ -410,7 +410,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		menuLabel.setVisible(false);
 		sellButton.setVisible(false);
 		buyButton.setVisible(false);
-		background = new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
+		background = new ImageIcon(Main.class.getResource("../images/mainBackground.png")).getImage();
 		backButton.setVisible(true);
 
 		isGameScreen = true;
@@ -432,7 +432,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 		menuLabel.setVisible(true);
 		sellButton.setVisible(true);
 		buyButton.setVisible(true);
-		background = new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
+		leftButton.setVisible(true);
+		background = new ImageIcon(Main.class.getResource("../images/mainBackground.png")).getImage();
 		backButton.setVisible(false);
 		isMainScreen = false;
 		gameExplain.setVisible(false);
@@ -440,11 +441,12 @@ public class TycoonGame extends JFrame implements ItemListener {
 	}
 
 	public void enterMain() {
+		 leftButton.setVisible(true);
 		startButton.setVisible(false);
 		quitButton.setVisible(false);
 		beverageLabel.setVisible(true);
 		menuLabel.setVisible(true);
-		background = new ImageIcon(Main.class.getResource("../images/mainBackground.jpg")).getImage();
+		background = new ImageIcon(Main.class.getResource("../images/mainBackground.png")).getImage();
 		isMainScreen = true;
 
 		sellButton.setVisible(true);//
