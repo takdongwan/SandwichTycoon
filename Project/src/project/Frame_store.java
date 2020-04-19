@@ -33,6 +33,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	JButton buyCoke;
 	JButton buy;
 	JButton init;
+	JButton backButton;
 
 	int totalAmount;
 	int imageWidth = 128;
@@ -43,11 +44,14 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	static int amountOfSandwich = 0;
 	static int amountOfHotdog = 0;
 	static int amountOfCoke = 0;
-	
+
 	private ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
 	private ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
+	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
+	
 	public Frame_store() {
 		setJFrame();
 		setJPanel();
@@ -65,7 +69,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		getContentPane().setLayout(null);
 		setUndecorated(true); // 임의로 상점 창을 종료할 수 없도록 undecorated 설정
 		setVisible(true);
-		
+
 	}
 
 	public void setJPanel() {
@@ -182,6 +186,15 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		init.addMouseListener(this);
 		init.addActionListener(this);
 		storePanel.add(init);
+
+		// 되돌아가기 버튼
+		backButton = new JButton(backButtonBasicImage);
+		backButton.setBounds(20, 50, 60, 60);
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.addMouseListener(this);
+		backButton.addActionListener(this);
+		add(backButton);
 	}
 
 	@Override
@@ -243,7 +256,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
 
 					dispose();
-					
+
 					TycoonGame.backMain();
 
 				}
@@ -281,6 +294,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 초기화하기 버튼 클릭시
 		else if (e.getSource().equals(init)) {
+			
 			// 선택 초기화
 			amountOfSandwich = 0;
 			amountOfHotdog = 0;
@@ -295,7 +309,27 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 			System.out.println("선택 초기화");
 			System.out.println(totalAmount);
 
-		} else {
+		}
+
+		// 되돌아가기 버튼 클릭시
+		else if (e.getSource().equals(backButtonBasicImage)) {
+			
+			// 선택 초기화
+			amountOfSandwich = 0;
+			amountOfHotdog = 0;
+			amountOfCoke = 0;
+			amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+			amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+			amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+
+			totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
+			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+
+			dispose();
+			TycoonGame.backMain();
+		}
+
+		else {
 			System.out.println("예외 발생");
 		}
 	}
@@ -307,6 +341,10 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buyCoke.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buy.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		init.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+		backButton.setIcon(backButtonEnteredImage);
+
 	}
 
 	@Override
@@ -316,6 +354,10 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buyCoke.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		buy.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		init.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+		backButton.setIcon(backButtonBasicImage);
+
 	}
 
 	@Override

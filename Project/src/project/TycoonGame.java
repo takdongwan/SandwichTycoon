@@ -46,10 +46,13 @@ public class TycoonGame extends JFrame implements ItemListener {
 			Main.class.getResource("../images/rightButtonEntered.png"));
 	private ImageIcon buyButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/buyButtonEntered.png"));
 	private ImageIcon sellButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/sellButtonEntered.png"));
-	private static ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
-	private static ImageIcon buyButtonBasicImage = new ImageIcon(Main.class.getResource("../images/buyButtonBasic.png"));
+	private static ImageIcon sellButtonBasicImage = new ImageIcon(
+			Main.class.getResource("../images/sellButtonBasic.png"));
+	private static ImageIcon buyButtonBasicImage = new ImageIcon(
+			Main.class.getResource("../images/buyButtonBasic.png"));
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
-	private static ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	private static ImageIcon backButtonBasicImage = new ImageIcon(
+			Main.class.getResource("../images/backButtonEntered.png"));
 
 	private static Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.jpg")).getImage();
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
@@ -74,30 +77,29 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 	private boolean isTimerRun = false;
 	private static boolean isMainScreen = false;
-	private boolean isGameScreen =false;
+	private boolean isGameScreen = false;
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
 
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
-	Frame_sell  sellFrame;
+	Frame_sell sellFrame;
 	static JLabel gameExplain;
 	JLabel name;
 	static JLabel menuLabel;
 	static JLabel beverageLabel;
-	Choice sandwichName,selectTime; 
-	 
-	//ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
+	Choice sandwichName, selectTime;
 
-	private Image sandwichCase;	
+	// ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
+
+	private Image sandwichCase;
 
 	Random random = new Random();
 	long missionTime = 0;
 	int missionNumber;
-	
+
 	static TimerTask timerTask;
 	Timer timer;
-
 
 	public TycoonGame() {
 		setUndecorated(true);// ����� �⺻ ���� �޴��ٰ������
@@ -119,7 +121,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 		////////////////////////////////////////////////////////////////////////////////////////
 		gameExplain = new JLabel("물건 구매 후 6000원을  벌기");
-		gameExplain.setBounds(40,150,500,500);
+		gameExplain.setBounds(40, 150, 500, 500);
 		gameExplain.setVisible(true);
 		gameExplain.setFont(new Font(gameExplain.getFont().getName(), Font.PLAIN, 30));
 		gameExplain.setForeground(Color.black);
@@ -266,8 +268,6 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				gameStart(nowSelected, "buy");
-
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
 
@@ -297,14 +297,14 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				gameStart(nowSelected, "sell");
-				isSellMain= true;
+				isSellMain = true;
 				sellFrame = new Frame_sell();
-				
+
 				isTimerRun = true;
 				delayTime = 40000;
 				timer = new Timer();
 				timer.schedule(timerTaskMaker(), delayTime);
-				
+
 				System.out.println("판매상점  입장");
 			}
 		});
@@ -330,19 +330,18 @@ public class TycoonGame extends JFrame implements ItemListener {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				backMain();
-				
+
 				// 타이머가 실행되고 있을 경우
-				if(isTimerRun == true) {
-					timer.cancel();		
-				}
-				else {
-					
+				if (isTimerRun == true) {
+					timer.cancel();
+				} else {
+
 				}
 
-        if(isSellMain==true) {
-					sellFrame.dispose();;
-				}
-        else {
+				if (isSellMain == true) {
+					sellFrame.dispose();
+					;
+				} else {
 					System.out.println("background 화면전환");
 				}
 			}
@@ -446,24 +445,24 @@ public class TycoonGame extends JFrame implements ItemListener {
 		gameExplain.setVisible(false);
 
 	}
-	
+
 	public TimerTask timerTaskMaker() {
-		
+
 		TimerTask timerTask = new TimerTask() {
 
 			@Override
 			public void run() {
-				System.out.println("TimerTask 생성");		
+				System.out.println("TimerTask 생성");
 				delayTime = (random.nextInt(2) * 10000) + 20000; // 20초 ~ 30초에 한번 미션 창 생성
-		        timer.schedule(timerTaskMaker(), delayTime);
-		        
+				timer.schedule(timerTaskMaker(), delayTime);
+
 				missionNumber = random.nextInt(3);
 				missionFrame = new Frame_mission(missionNumber);
 				System.out.println("미션" + missionNumber + " 생성");
 			}
-			
+
 		};
 		return timerTask;
-		
+
 	}
 }
