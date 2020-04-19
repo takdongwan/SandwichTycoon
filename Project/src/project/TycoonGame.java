@@ -12,7 +12,6 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -47,12 +46,12 @@ public class TycoonGame extends JFrame implements ItemListener {
 			Main.class.getResource("../images/rightButtonEntered.png"));
 	private ImageIcon buyButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/buyButtonEntered.png"));
 	private ImageIcon sellButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/sellButtonEntered.png"));
-	private ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
-	private ImageIcon buyButtonBasicImage = new ImageIcon(Main.class.getResource("../images/buyButtonBasic.png"));
+	private static ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
+	private static ImageIcon buyButtonBasicImage = new ImageIcon(Main.class.getResource("../images/buyButtonBasic.png"));
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
-	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	private static ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
-	private Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.jpg")).getImage();
+	private static Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.jpg")).getImage();
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
 
 	// private JLabel gameExplain = new JLabel(new
@@ -68,26 +67,29 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private JButton quitButton = new JButton(quitButtonBasicImage);
 //	private JButton leftButton= new JButton(leftButtonBasicImage);
 	// private JButton rightButton= new JButton(rightButtonBasicImage);
-	private JButton buyButton = new JButton(buyButtonBasicImage);
-	private JButton sellButton = new JButton(sellButtonBasicImage);
-	private JButton backButton = new JButton(backButtonBasicImage);
+	private static JButton buyButton = new JButton(buyButtonBasicImage);
+	private static JButton sellButton = new JButton(sellButtonBasicImage);
+	private static JButton backButton = new JButton(backButtonBasicImage);
 	private int mouseX, mouseY;
 
 	private boolean isTimerRun = false;
-	private boolean isMainScreen = false;
+	private static boolean isMainScreen = false;
 	private boolean isGameScreen =false;
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
 
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
-  Frame_sell  sellFrame;
-	JLabel gameExplain,name,menuLabel,beverageLabel;
+	Frame_sell  sellFrame;
+	static JLabel gameExplain;
+	JLabel name;
+	static JLabel menuLabel;
+	static JLabel beverageLabel;
 	Choice sandwichName,selectTime; 
 	 
 	//ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 
-  private Image sandwichCase;
+	private Image sandwichCase;	
 
 	Random random = new Random();
 	long missionTime = 0;
@@ -116,7 +118,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		 */
 
 		////////////////////////////////////////////////////////////////////////////////////////
-    gameExplain = new JLabel("물건 구매 후 6000원을  벌기");
+		gameExplain = new JLabel("물건 구매 후 6000원을  벌기");
 		gameExplain.setBounds(40,150,500,500);
 		gameExplain.setVisible(true);
 		gameExplain.setFont(new Font(gameExplain.getFont().getName(), Font.PLAIN, 30));
@@ -137,12 +139,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		beverageLabel.setForeground(Color.black);
 		add(beverageLabel);
 
-<<<<<<< HEAD
-		
-		exitButton.setBounds(1245, 0,30, 30);//종료버튼  위치설정 
-=======
 		exitButton.setBounds(1245, 0, 30, 30);
->>>>>>> branch 'master' of https://github.com/takdongwan/sandwichTycoon.git
 		exitButton.setContentAreaFilled(false);
 		exitButton.setFocusPainted(false);
 		exitButton.addMouseListener(new MouseAdapter() {
@@ -185,10 +182,6 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
-=======
-				//// �Ʒ��� ���ӽ����̺�Ʈ ������ /////
->>>>>>> branch 'master' of https://github.com/takdongwan/sandwichTycoon.git
 				enterMain();
 			}
 		});
@@ -425,7 +418,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 	}
 
-	public void backMain() {
+	public static void backMain() {
 		isMainScreen = true;
 
 		beverageLabel.setVisible(true);

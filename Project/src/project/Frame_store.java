@@ -43,7 +43,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	static int amountOfSandwich = 0;
 	static int amountOfHotdog = 0;
 	static int amountOfCoke = 0;
-
+	
 	private ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
 	private ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
 	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
@@ -57,14 +57,15 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 	public void setJFrame() {
 		setTitle("재료상점");
-		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
+		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setLayout(null);
 		getContentPane().setLayout(null);
-		;
+		setUndecorated(true); // 임의로 상점 창을 종료할 수 없도록 undecorated 설정
 		setVisible(true);
+		
 	}
 
 	public void setJPanel() {
@@ -242,6 +243,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
 
 					dispose();
+					
+					TycoonGame.backMain();
 
 				}
 
