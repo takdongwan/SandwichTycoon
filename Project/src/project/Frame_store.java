@@ -214,6 +214,47 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	}
 
 	@Override
+	public void mouseEntered(MouseEvent e) {
+		buySandwich.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buyHotdog.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buyCoke.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buy.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		init.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+		backButton.setIcon(backButtonEnteredImage);
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		buySandwich.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		buyHotdog.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		buyCoke.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		buy.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		init.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+		backButton.setIcon(backButtonBasicImage);
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// MouseListener implements시 무조건 포함해야하는 부분
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// MouseListener implements시 무조건 포함해야하는 부분
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// MouseListener implements시 무조건 포함해야하는 부분
+	}
+	
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 샌드위치 버튼 클릭시
 		if (e.getSource().equals(buySandwich)) {
@@ -361,46 +402,4 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 			System.out.println("예외 발생");
 		}
 	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		buySandwich.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		buyHotdog.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		buyCoke.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		buy.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		init.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-		backButton.setIcon(backButtonEnteredImage);
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		buySandwich.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		buyHotdog.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		buyCoke.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		buy.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		init.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-		backButton.setIcon(backButtonBasicImage);
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// MouseListener implements시 무조건 포함해야하는 부분
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// MouseListener implements시 무조건 포함해야하는 부분
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// MouseListener implements시 무조건 포함해야하는 부분
-	}
-
 }

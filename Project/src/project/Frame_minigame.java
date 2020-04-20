@@ -2,6 +2,8 @@ package project;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,11 +12,16 @@ import javax.swing.SwingConstants;
 public class Frame_minigame extends JFrame {
 
 	JPanel minigamePanel;
-	
+
 	JLabel minigameInfo;
 	JLabel explanation;
 	
+	JButton backButton;
 	
+	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	
+
 	public Frame_minigame() {
 		setJFrame();
 		setJPanel();
@@ -59,6 +66,13 @@ public class Frame_minigame extends JFrame {
 	}
 
 	public void setJButton() {
-
+		// 되돌아가기 버튼
+		backButton = new JButton(backButtonBasicImage);
+		backButton.setBounds(20, 30, 60, 60); // x좌표, y좌표, 너비, 높이
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.addMouseListener(this);
+		backButton.addActionListener(this);
+		storePanel.add(backButton);
 	}
 }

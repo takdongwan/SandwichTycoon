@@ -2,6 +2,7 @@ package project;
 
 import java.awt.Color;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,18 +11,19 @@ import javax.swing.SwingConstants;
 public class Frame_trade extends JFrame {
 
 	JPanel tradePanel;
-	
+
 	JLabel tradeInfo;
 	JLabel explanation;
 	
-	
+	JButton backButton;
+
 	public Frame_trade() {
 		setJFrame();
 		setJPanel();
 		setJLabel();
 		setJButton();
 	}
-	
+
 	public void setJFrame() {
 		setTitle("흥정하기");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
@@ -33,7 +35,7 @@ public class Frame_trade extends JFrame {
 		setUndecorated(true); // 임의로 흥정하기 창을 종료할 수 없도록 undecorated 설정
 		setVisible(true);
 	}
-	
+
 	public void setJPanel() {
 		tradePanel = new JPanel();
 		tradePanel.setLayout(null);
@@ -41,7 +43,7 @@ public class Frame_trade extends JFrame {
 		tradePanel.setBackground(new Color(255, 230, 0));
 		getContentPane().add(tradePanel);
 	}
-	
+
 	public void setJLabel() {
 		tradeInfo = new JLabel("흥정하기");
 		tradeInfo.setVerticalAlignment(SwingConstants.TOP);
@@ -57,8 +59,15 @@ public class Frame_trade extends JFrame {
 		explanation.setBounds(0, 70, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		tradePanel.add(explanation);
 	}
-	
+
 	public void setJButton() {
-		
+		// 되돌아가기 버튼
+		backButton = new JButton(backButtonBasicImage);
+		backButton.setBounds(20, 30, 60, 60); // x좌표, y좌표, 너비, 높이
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.addMouseListener(this);
+		backButton.addActionListener(this);
+		storePanel.add(backButton);
 	}
 }
