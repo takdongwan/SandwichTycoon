@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,21 +41,21 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	Frame_trade tradeFrame;
 	Frame_minigame minigameFrame;
 
-	int totalAmount;
+	static int totalAmount;
 	int imageWidth = 128;
-	int sandwichPrice = 100;
-	int hotdogPrice = 100;
-	int cokePrice = 50;
+	static int sandwichPrice = 100;
+	static int hotdogPrice = 100;
+	static int cokePrice = 50;
 
 	static int amountOfSandwich = 0;
 	static int amountOfHotdog = 0;
 	static int amountOfCoke = 0;
 
-	private ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
-	private ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
-	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
-	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
-	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	static ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
+	static ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
+	static ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
+	ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
 	public Frame_store() {
 		setJFrame();
@@ -63,6 +65,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	}
 
 	public void setJFrame() {
+		
 		setTitle("재료상점");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -75,6 +78,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	}
 
 	public void setJPanel() {
+		
 		storePanel = new JPanel();
 		storePanel.setLayout(null);
 		storePanel.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
@@ -83,6 +87,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	}
 
 	public void setJLabel() {
+		
 		storeInfo = new JLabel("재료상점");
 		storeInfo.setVerticalAlignment(SwingConstants.TOP);
 		storeInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -220,6 +225,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buyCoke.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buy.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		init.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		trade.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		minigame.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		backButton.setIcon(backButtonEnteredImage);
@@ -233,6 +240,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		buyCoke.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		buy.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		init.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		trade.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		minigame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 		backButton.setIcon(backButtonBasicImage);
@@ -382,18 +391,24 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 			totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
 			totalAmountInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
 
+			// 창 종료
 			dispose();
+			// 게임 창 메인으로 변경
 			TycoonGame.backMain();
 		}
 
 		// 흥정하기 버튼 클릭시
 		else if (e.getSource().equals(trade)) {
+			
+			// 흥정하기 프레임 띄우기
 			tradeFrame = new Frame_trade();
 
 		}
 
 		// 미니게임 버튼 클릭시
 		else if (e.getSource().equals(minigame)) {
+			
+			// 미니게임 프레임 띄우기
 			minigameFrame = new Frame_minigame();
 			
 		}

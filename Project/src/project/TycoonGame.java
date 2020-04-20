@@ -268,6 +268,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+
 				storeFrame = new Frame_store();
 				storeFrame.setVisible(true);
 

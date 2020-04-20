@@ -1,6 +1,11 @@
 package project;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Frame_minigame extends JFrame {
+public class Frame_minigame extends JFrame implements ActionListener, MouseListener {
 
 	JPanel minigamePanel;
 
@@ -23,6 +28,7 @@ public class Frame_minigame extends JFrame {
 	
 
 	public Frame_minigame() {
+		
 		setJFrame();
 		setJPanel();
 		setJLabel();
@@ -30,6 +36,7 @@ public class Frame_minigame extends JFrame {
 	}
 
 	public void setJFrame() {
+		
 		setTitle("미니게임");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
@@ -42,6 +49,7 @@ public class Frame_minigame extends JFrame {
 	}
 
 	public void setJPanel() {
+		
 		minigamePanel = new JPanel();
 		minigamePanel.setLayout(null);
 		minigamePanel.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
@@ -50,6 +58,7 @@ public class Frame_minigame extends JFrame {
 	}
 
 	public void setJLabel() {
+		
 		minigameInfo = new JLabel("미니게임");
 		minigameInfo.setVerticalAlignment(SwingConstants.TOP);
 		minigameInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,6 +82,50 @@ public class Frame_minigame extends JFrame {
 		backButton.setFocusPainted(false);
 		backButton.addMouseListener(this);
 		backButton.addActionListener(this);
-		storePanel.add(backButton);
+		minigamePanel.add(backButton);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		backButton.setIcon(backButtonEnteredImage);
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		backButton.setIcon(backButtonBasicImage);
+
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(backButton)) {
+			
+			dispose();
+		}
+		
+		else {
+			System.out.println("예외 발생");
+		}		
 	}
 }
