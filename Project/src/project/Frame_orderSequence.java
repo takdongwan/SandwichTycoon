@@ -178,7 +178,7 @@ public class Frame_orderSequence extends JFrame {
 						e1.printStackTrace();
 					}
 				}
-				
+				//
 			}
 		});
 		 
