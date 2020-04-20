@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 
 public class Frame_store extends JFrame implements ActionListener, MouseListener {
 
-	JFrame storeFrame;
 	JPanel storePanel;
 
 	JLabel storeInfo;
@@ -36,6 +35,9 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	JButton backButton;
 	JButton trade;
 	JButton minigame;
+	
+	Frame_trade tradeFrame;
+	Frame_minigame minigameFrame;
 
 	int totalAmount;
 	int imageWidth = 128;
@@ -70,7 +72,6 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		getContentPane().setLayout(null);
 		setUndecorated(true); // 임의로 상점 창을 종료할 수 없도록 undecorated 설정
 		setVisible(true);
-
 	}
 
 	public void setJPanel() {
@@ -204,7 +205,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 되돌아가기 버튼
 		backButton = new JButton(backButtonBasicImage);
-		backButton.setBounds(20, 30, 60, 60);
+		backButton.setBounds(20, 30, 60, 60); // x좌표, y좌표, 너비, 높이
 		backButton.setContentAreaFilled(false);
 		backButton.setFocusPainted(false);
 		backButton.addMouseListener(this);
@@ -342,6 +343,18 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 			dispose();
 			TycoonGame.backMain();
+		}
+
+		// 흥정하기 버튼 클릭시
+		else if (e.getSource().equals(trade)) {
+			tradeFrame = new Frame_trade();
+
+		}
+
+		// 미니게임 버튼 클릭시
+		else if (e.getSource().equals(minigame)) {
+			minigameFrame = new Frame_minigame();
+			
 		}
 
 		else {
