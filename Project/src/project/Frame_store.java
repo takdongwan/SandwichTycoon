@@ -23,11 +23,11 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 	JLabel storeInfo;
 	JLabel explanation;
-	JLabel amountOfSandwichInfo;
-	JLabel amountOfHotdogInfo;
-	JLabel amountOfCokeInfo;
-	JLabel currentMoneyInfo;
-	JLabel totalPriceInfo;
+	static JLabel amountOfSandwichInfo;
+	static JLabel amountOfHotdogInfo;
+	static JLabel amountOfCokeInfo;
+	static JLabel currentMoneyInfo;
+	static JLabel totalPriceInfo;
 
 	JButton buySandwich;
 	JButton buyHotdog;
@@ -329,7 +329,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우
 				else {
 					// 구매 실패 팝업창
-					JOptionPane.showMessageDialog(null, "<html>보유 금액이 부족합니다.<br>다시 선택해주세요.</html>", "구매 실패",
+					JOptionPane.showMessageDialog(null, "<html>보유 금액이 부족합니다.<br>재료를 다시 선택해주세요.</html>", "구매 실패",
 							JOptionPane.ERROR_MESSAGE);
 
 					// 선택 초기화
@@ -401,8 +401,33 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 			// 선택한 재료가 1개 이상일 경우
 			if (amountOfSandwich + amountOfHotdog + amountOfCoke > 0) {
-				// 흥정하기 프레임 띄우기
-				tradeFrame = new Frame_trade();
+				
+				// 플레이어의 현재 보유 금액이 총 가격보다 많을 경우
+				if (Player.currentMoney >= totalAmount) {
+					
+					// 흥정하기 프레임 띄우기
+					tradeFrame = new Frame_trade();
+				}
+
+				// 플레이어의 현재 보유 금액이 총 가격보다 적을 경우
+				else {
+					// 구매 실패 팝업창
+					JOptionPane.showMessageDialog(null, "<html>보유 금액이 부족합니다.<br>재료를 다시 선택해주세요.</html>", "흥정하기 실패",
+							JOptionPane.ERROR_MESSAGE);
+
+					// 선택 초기화
+					amountOfSandwich = 0;
+					amountOfHotdog = 0;
+					amountOfCoke = 0;
+					amountOfSandwichInfo.setText(Integer.toString(amountOfSandwich) + "개");
+					amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
+					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
+
+					totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog
+							+ cokePrice * amountOfCoke;
+					totalPriceInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+				}
+				
 			}
 
 			// 선택한 재료가 0개일 경우
