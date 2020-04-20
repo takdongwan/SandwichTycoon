@@ -41,7 +41,7 @@ public class Frame_order extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-			//	new Frame_foodOrder().show(); 									
+				new Frame_reservation().show(); 									
 				Frame_order.this.dispose();										
 			}
 		});

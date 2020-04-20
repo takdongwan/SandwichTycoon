@@ -409,6 +409,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 		beverageLabel.setVisible(false);
 		menuLabel.setVisible(false);
 		sellButton.setVisible(false);
+		leftButton.setVisible(false);
 		buyButton.setVisible(false);
 		background = new ImageIcon(Main.class.getResource("../images/mainBackground.png")).getImage();
 		backButton.setVisible(true);
