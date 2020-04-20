@@ -194,7 +194,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		backButton.setFocusPainted(false);
 		backButton.addMouseListener(this);
 		backButton.addActionListener(this);
-		add(backButton);
+		storePanel.add(backButton);
 	}
 
 	@Override
@@ -312,7 +312,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		}
 
 		// 되돌아가기 버튼 클릭시
-		else if (e.getSource().equals(backButtonBasicImage)) {
+		else if (e.getSource().equals(backButton)) {
 			
 			// 선택 초기화
 			amountOfSandwich = 0;
