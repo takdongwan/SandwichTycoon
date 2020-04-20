@@ -39,7 +39,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private ImageIcon quitButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/quitButtonEntered.png"));
 	private ImageIcon quitButtonBasicImage = new ImageIcon(Main.class.getResource("../images/quitButtonBasic.png"));
 
-	private ImageIcon leftButtonBasicImage = new ImageIcon(Main.class.getResource("../images/leftButtonBasic.png"));
+	private static ImageIcon leftButtonBasicImage = new ImageIcon(Main.class.getResource("../images/leftButtonBasic.png"));
 //	private ImageIcon rightButtonBasicImage = new ImageIcon(Main.class.getResource("../images/rightButtonBasic.png"));
 	private ImageIcon leftButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/leftButtonEntered.png"));
 	//private ImageIcon rightButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/rightButtonEntered.png"));
@@ -81,7 +81,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
 
-//	Frame_order orderFrame;
+	Frame_order orderFrame;
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
 	Frame_sell sellFrame;
@@ -229,8 +229,8 @@ public class TycoonGame extends JFrame implements ItemListener {
 		  
 		  @Override public void mousePressed(MouseEvent e) { 
 			  
-//				orderFrame = new Frame_order();
-//				orderFrame.Frame_order();
+				orderFrame = new Frame_order();
+				orderFrame.Frame_order();
 		  } 
 		  });
 		  add(leftButton);

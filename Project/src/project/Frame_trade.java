@@ -202,7 +202,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 	public void setMerchantPrice() {
 
 		random = new Random();
-		randomNumber = random.nextInt(9) * 10;
+		randomNumber = (random.nextInt(8) + 1) * 10;
 
 		merchantPrice = Frame_store.totalAmount - randomNumber;
 		System.out.println(merchantPrice);
@@ -290,6 +290,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 			else if (dealPrice > merchantPrice) {
 				tradeExplanation.setText("제시한 " + dealPrice + "골드는 상인이 원하는 금액보다 많습니다.");
 			}
+			dealPriceText.setText("");
 		}
 		// 되돌아가기 버튼 클릭시
 		else if (e.getSource().equals(backButton)) {
