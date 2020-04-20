@@ -34,6 +34,8 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	JButton buy;
 	JButton init;
 	JButton backButton;
+	JButton trade;
+	JButton minigame;
 
 	int totalAmount;
 	int imageWidth = 128;
@@ -51,7 +53,6 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
-	
 	public Frame_store() {
 		setJFrame();
 		setJPanel();
@@ -75,7 +76,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	public void setJPanel() {
 		storePanel = new JPanel();
 		storePanel.setLayout(null);
-		storePanel.setBounds(0, 0, Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
+		storePanel.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		storePanel.setBackground(new Color(255, 230, 0));
 		getContentPane().add(storePanel);
 	}
@@ -85,14 +86,14 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		storeInfo.setVerticalAlignment(SwingConstants.TOP);
 		storeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		storeInfo.setFont(storeInfo.getFont().deriveFont(20.0f)); // 폰트 사이즈 20
-		storeInfo.setBounds(0, 40, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
+		storeInfo.setBounds(0, 40, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		storePanel.add(storeInfo);
 
 		explanation = new JLabel("구매를 원하는 만큼 각 재료를 클릭해주세요!");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		explanation.setBounds(1, 70, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
+		explanation.setBounds(0, 70, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		storePanel.add(explanation);
 
 		// 샌드위치 개수 표시
@@ -100,7 +101,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		amountOfSandwichInfo.setVerticalAlignment(SwingConstants.TOP);
 		amountOfSandwichInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		amountOfSandwichInfo.setFont(amountOfSandwichInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		amountOfSandwichInfo.setBounds(106, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
+		amountOfSandwichInfo.setBounds(106 + 320, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(amountOfSandwichInfo);
 
 		// 핫도그 개수 표시
@@ -108,7 +109,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		amountOfHotdogInfo.setVerticalAlignment(SwingConstants.TOP);
 		amountOfHotdogInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		amountOfHotdogInfo.setFont(amountOfHotdogInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		amountOfHotdogInfo.setBounds(256, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
+		amountOfHotdogInfo.setBounds(256 + 320, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(amountOfHotdogInfo);
 
 		// 콜라 개수 표시
@@ -116,7 +117,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		amountOfCokeInfo.setVerticalAlignment(SwingConstants.TOP);
 		amountOfCokeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		amountOfCokeInfo.setFont(amountOfCokeInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		amountOfCokeInfo.setBounds(406, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
+		amountOfCokeInfo.setBounds(406 + 320, 360, imageWidth, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(amountOfCokeInfo);
 
 		// 플레이어 보유 골드 표시
@@ -124,7 +125,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		currentMoneyInfo.setVerticalAlignment(SwingConstants.TOP);
 		currentMoneyInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		currentMoneyInfo.setFont(currentMoneyInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 12
-		currentMoneyInfo.setBounds(0, 470, Main.SCREEN_WIDTH / 2, 20); // x좌표, y좌표, 너비, 높이
+		currentMoneyInfo.setBounds(0, 440, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(currentMoneyInfo);
 
 		// 선택한 재료의 총 가격 표시
@@ -132,14 +133,14 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		totalAmountInfo.setVerticalAlignment(SwingConstants.TOP);
 		totalAmountInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		totalAmountInfo.setFont(totalAmountInfo.getFont().deriveFont(16.0f)); // 폰트 사이즈 16
-		totalAmountInfo.setBounds(0, 490, Main.SCREEN_WIDTH / 2, 20); // x좌표, y좌표, 너비, 높이
+		totalAmountInfo.setBounds(0, 460, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
 		storePanel.add(totalAmountInfo);
 	}
 
 	public void setJButton() {
 		// 샌드위치 구매 버튼
 		buySandwich = new JButton("샌드위치 / " + sandwichPrice + "골드", sandwich_128);
-		buySandwich.setBounds(106, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+		buySandwich.setBounds(106 + 320, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buySandwich.setHorizontalTextPosition(SwingConstants.CENTER);
 		buySandwich.setVerticalTextPosition(SwingConstants.BOTTOM);
 		buySandwich.setBorderPainted(false); // 버튼 외곽선 제거
@@ -151,7 +152,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 핫도그 구매 버튼
 		buyHotdog = new JButton(" 핫도그 / " + hotdogPrice + "골드", hotdog_128);
-		buyHotdog.setBounds(256, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+		buyHotdog.setBounds(256 + 320, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyHotdog.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyHotdog.setVerticalTextPosition(SwingConstants.BOTTOM);
 		buyHotdog.setBorderPainted(false); // 버튼 외곽선 제거
@@ -163,7 +164,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 콜라 구매 버튼
 		buyCoke = new JButton(" 콜라 / " + cokePrice + "골드", coke_128);
-		buyCoke.setBounds(406, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
+		buyCoke.setBounds(406 + 320, 180, imageWidth, 160); // x좌표, y좌표, 너비, 높이
 		buyCoke.setHorizontalTextPosition(SwingConstants.CENTER);
 		buyCoke.setVerticalTextPosition(SwingConstants.BOTTOM);
 		buyCoke.setBorderPainted(false); // 버튼 외곽선 제거
@@ -175,21 +176,35 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 구매하기 버튼
 		buy = new JButton("구매하기");
-		buy.setBounds(115, 570, 200, 60); // x좌표, y좌표, 너비, 높이
+		buy.setBounds(115 + 320, 530, 200, 60); // x좌표, y좌표, 너비, 높이
 		buy.addMouseListener(this);
 		buy.addActionListener(this);
 		storePanel.add(buy);
 
 		// 구매수량 초기화 버튼
 		init = new JButton("초기화하기");
-		init.setBounds(325, 570, 200, 60); // x좌표, y좌표, 너비, 높이
+		init.setBounds(325 + 320, 530, 200, 60); // x좌표, y좌표, 너비, 높이
 		init.addMouseListener(this);
 		init.addActionListener(this);
 		storePanel.add(init);
 
+		// 흥정하기 버튼
+		trade = new JButton("흥정하기");
+		trade.setBounds(115 + 320, 590, 200, 60); // x좌표, y좌표, 너비, 높이
+		trade.addMouseListener(this);
+		trade.addActionListener(this);
+		storePanel.add(trade);
+
+		// 미니게임 버튼
+		minigame = new JButton("미니게임");
+		minigame.setBounds(325 + 320, 590, 200, 60); // x좌표, y좌표, 너비, 높이
+		minigame.addMouseListener(this);
+		minigame.addActionListener(this);
+		storePanel.add(minigame);
+
 		// 되돌아가기 버튼
 		backButton = new JButton(backButtonBasicImage);
-		backButton.setBounds(20, 50, 60, 60);
+		backButton.setBounds(20, 30, 60, 60);
 		backButton.setContentAreaFilled(false);
 		backButton.setFocusPainted(false);
 		backButton.addMouseListener(this);
@@ -294,7 +309,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 초기화하기 버튼 클릭시
 		else if (e.getSource().equals(init)) {
-			
+
 			// 선택 초기화
 			amountOfSandwich = 0;
 			amountOfHotdog = 0;
@@ -313,7 +328,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 		// 되돌아가기 버튼 클릭시
 		else if (e.getSource().equals(backButton)) {
-			
+
 			// 선택 초기화
 			amountOfSandwich = 0;
 			amountOfHotdog = 0;
