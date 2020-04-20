@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,17 +28,23 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 	JLabel amountOfCokeInfo;
 	JLabel currentMoneyInfo;
 	JLabel totalPriceInfo;
+	JLabel tradeExplanation;
 	JLabel merchant;
 
 	JButton buySandwich;
 	JButton buyHotdog;
 	JButton buyCoke;
-	JButton buy;
+	JButton deal;
 	JButton backButton;
 
-	JTextField dealPrice;
+	JTextField dealPriceText;
 
-	private ImageIcon merchant_128 = new ImageIcon(Main.class.getResource("../images/merchant_128.png"));
+	int dealPrice;
+	int merchantPrice;
+	int randomNumber;
+
+	Random random;
+
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
@@ -47,6 +54,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 		setJLabel();
 		setJButton();
 		setJTextField();
+		setMerchantPrice();
 	}
 
 	public void setJFrame() {
@@ -80,7 +88,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 		tradeInfo.setBounds(0, 40, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		tradePanel.add(tradeInfo);
 
-		explanation = new JLabel("흥정할 물품을 선택해주세요!");
+		explanation = new JLabel("상인에게 가격을 제시해서 저렴한 가격으로 재료를 구매하세요!");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
@@ -127,12 +135,13 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 		totalPriceInfo.setBounds(0, 430, Main.SCREEN_WIDTH, 20); // x좌표, y좌표, 너비, 높이
 		tradePanel.add(totalPriceInfo);
 
-		merchant = new JLabel(merchant_128);
-		merchant.setVerticalAlignment(SwingConstants.TOP);
-		merchant.setHorizontalAlignment(SwingConstants.CENTER);
-		merchant.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		merchant.setBounds(300, 200, 128, 128); // x좌표, y좌표, 너비, 높이
-		tradePanel.add(merchant);
+		tradeExplanation = new JLabel("[흥정 가능 범위: " + Integer.toString(Frame_store.totalAmount - 100) + " ~ "
+				+ Integer.toString(Frame_store.totalAmount) + "골드]");
+		tradeExplanation.setVerticalAlignment(SwingConstants.TOP);
+		tradeExplanation.setHorizontalAlignment(SwingConstants.CENTER);
+		tradeExplanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
+		tradeExplanation.setBounds(0, 500, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		tradePanel.add(tradeExplanation);
 	}
 
 	public void setJButton() {
@@ -166,12 +175,12 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 		buyCoke.setContentAreaFilled(false); // 버튼 칠 제거
 		tradePanel.add(buyCoke);
 
-		// 구매하기 버튼
-		buy = new JButton("구매하기");
-		buy.setBounds(540, 590, 200, 60); // x좌표, y좌표, 너비, 높이
-		buy.addMouseListener(this);
-		buy.addActionListener(this);
-		tradePanel.add(buy);
+		// 흥정하기 버튼
+		deal = new JButton("가격 제시하기");
+		deal.setBounds(540, 590, 200, 60); // x좌표, y좌표, 너비, 높이
+		deal.addMouseListener(this);
+		deal.addActionListener(this);
+		tradePanel.add(deal);
 
 		// 되돌아가기 버튼
 		backButton = new JButton(backButtonBasicImage);
@@ -182,16 +191,26 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 		backButton.addActionListener(this);
 		tradePanel.add(backButton);
 	}
-	
+
 	public void setJTextField() {
-		dealPrice = new JTextField();
-		dealPrice.addActionListener(this);
-		tradePanel.add(dealPrice);
+		// 가격 제시 텍스트필드
+		dealPriceText = new JTextField();
+		dealPriceText.setBounds(535, 520, 210, 40); // x좌표, y좌표, 너비, 높이
+		tradePanel.add(dealPriceText);
+	}
+
+	public void setMerchantPrice() {
+
+		random = new Random();
+		randomNumber = random.nextInt(9) * 10;
+
+		merchantPrice = Frame_store.totalAmount - randomNumber;
+		System.out.println(merchantPrice);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		buy.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		deal.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		backButton.setIcon(backButtonEnteredImage);
 
@@ -199,7 +218,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		buy.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		deal.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		backButton.setIcon(backButtonBasicImage);
 
@@ -225,23 +244,25 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// 구매하기 버튼 클릭시
-		if (e.getSource().equals(buy)) {
+		// 텍스트필드 값 입력
+		if (e.getSource().equals(deal)) {
+			// string -> integer 형변환
+			dealPrice = Integer.parseInt(dealPriceText.getText());
 
-			// 플레이어의 현재 보유 금액이 총 가격보다 많을 경우
-			if (Player.currentMoney >= Frame_store.totalAmount) {
+			// 제시 가격이 상인 가격과 동일할 시
+			if (dealPrice == merchantPrice) {
+				tradeExplanation.setText("흥정 성공!");
 
-				// 선택한 수량만큼 각 재료의 수량 +
 				Player.amountOfSandwich += Frame_store.amountOfSandwich;
 				Player.amountOfHotdog += Frame_store.amountOfHotdog;
 				Player.amountOfCoke += Frame_store.amountOfCoke;
 
-				// 선택한 수량의 총 가격만큼 플레이어의 보유금액 -
-				Player.currentMoney -= Frame_store.totalAmount;
+				// 선택한 수량의 제시 가격만큼 플레이어의 보유금액 -
+				Player.currentMoney -= dealPrice;
 
 				// 구매 성공 팝업창
-				JOptionPane.showMessageDialog(null, "<html>흥정한 가격으로 구매가 완료되었습니다.<br>OK 버튼을 누르면 흥정하기 창이 닫힙니다.</html>", "흥정 성공",
-						JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "<html>흥정한 가격으로 구매가 완료되었습니다.<br>OK 버튼을 누르면 흥정하기 창이 닫힙니다.</html>",
+						"흥정 성공", JOptionPane.INFORMATION_MESSAGE);
 
 				// 선택 초기화
 				Frame_store.amountOfSandwich = 0;
@@ -251,19 +272,25 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 				Frame_store.amountOfHotdogInfo.setText(Integer.toString(Frame_store.amountOfHotdog) + "개");
 				Frame_store.amountOfCokeInfo.setText(Integer.toString(Frame_store.amountOfCoke) + "개");
 
-				Frame_store.totalAmount = Frame_store.sandwichPrice * Frame_store.amountOfSandwich + Frame_store.hotdogPrice * Frame_store.amountOfHotdog + Frame_store.cokePrice * Frame_store.amountOfCoke;
+				Frame_store.totalAmount = Frame_store.sandwichPrice * Frame_store.amountOfSandwich
+						+ Frame_store.hotdogPrice * Frame_store.amountOfHotdog
+						+ Frame_store.cokePrice * Frame_store.amountOfCoke;
 				Frame_store.totalPriceInfo.setText("총 가격: " + Integer.toString(Frame_store.totalAmount) + "골드");
-				
+
 				Frame_store.currentMoneyInfo.setText("보유 골드: " + Integer.toString(Player.currentMoney) + "골드");
 
 				dispose();
 			}
+			// 제시 가격이 상인 가격보다 작을 시
+			else if (dealPrice < merchantPrice) {
+				tradeExplanation.setText("제시한 " + dealPrice + "골드는 상인이 원하는 금액보다 적습니다.");
+			}
 
-			else {
-				
+			// 제시 가격이 상인 가격보다 클 시
+			else if (dealPrice > merchantPrice) {
+				tradeExplanation.setText("제시한 " + dealPrice + "골드는 상인이 원하는 금액보다 많습니다.");
 			}
 		}
-
 		// 되돌아가기 버튼 클릭시
 		else if (e.getSource().equals(backButton)) {
 
