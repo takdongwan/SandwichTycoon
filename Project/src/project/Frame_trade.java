@@ -136,7 +136,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 		tradePanel.add(totalPriceInfo);
 
 		tradeExplanation = new JLabel("[흥정 가능 범위: " + Integer.toString(Frame_store.totalAmount - 100) + " ~ "
-				+ Integer.toString(Frame_store.totalAmount) + "골드]");
+				+ Integer.toString(Frame_store.totalAmount - 10) + "골드]");
 		tradeExplanation.setVerticalAlignment(SwingConstants.TOP);
 		tradeExplanation.setHorizontalAlignment(SwingConstants.CENTER);
 		tradeExplanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
@@ -202,7 +202,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 	public void setMerchantPrice() {
 
 		random = new Random();
-		randomNumber = (random.nextInt(8) + 1) * 10;
+		randomNumber = (random.nextInt(10)) * 10;
 
 		merchantPrice = Frame_store.totalAmount - randomNumber;
 		System.out.println(merchantPrice);
