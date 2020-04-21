@@ -229,7 +229,7 @@ public class Frame_sell extends JFrame  {
 					else 
 					{
 						if(btn[0].getIcon()  == hotdogBreadOnTheGrilImage ) {
-							Player.currentMoney -= 100;
+							Player.currentMoney -= 100;//잘못누르면 돈은 계속 차감 됨.
 						}
 						else if ( btn[0].getIcon() == completeHotdogImage) {
 							if(Player.currentMoney>=6000) {
@@ -237,20 +237,26 @@ public class Frame_sell extends JFrame  {
 										JOptionPane.INFORMATION_MESSAGE);
 								System.exit(0);
 							}
-							if((Frame_reservation.sandwichNum>0)&&(Frame_reservation.hotdogNum>0)&&(Frame_reservation.cokeNum>0)) {
+							
+							if((Frame_reservation.hotdogNum>0)) {
 								Frame_reservation.hotdogNum -=1;
 								Player.currentMoney +=80 ;
-							}else{
+							}else if((Frame_reservation.hotdogNum<=0)) {
 							Player.currentMoney += 100;
 							Player.amountOfHotdog -=1;
+							}else {
+								JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>핫도그를 먼저 파세요..</html>", "미션실패",
+										JOptionPane.INFORMATION_MESSAGE);
 							}
 						}else {
 							//
 						}//
 						
-						
+						reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+						reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 						totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 						sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
+						cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 						cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 						
 						btn[0].setIcon(grilImage);
@@ -259,6 +265,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 					}
 		});
@@ -279,22 +286,27 @@ public class Frame_sell extends JFrame  {
 				else 
 				{
 					if(btn[1].getIcon() == hotdogBreadOnTheGrilImage) {
-						Player.currentMoney -= 100;
-					}
-					else if ( btn[1].getIcon() == completeHotdogImage) {
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.hotdogNum>0)) {
+							Frame_reservation.hotdogNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.hotdogNum<=0)) {
 						Player.currentMoney += 100;
 						Player.amountOfHotdog -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>핫도그를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
-					
-					
-
+					}//
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
@@ -305,6 +317,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -328,19 +341,29 @@ public class Frame_sell extends JFrame  {
 						Player.currentMoney -= 100;
 					}
 					else if ( btn[2].getIcon() == completeHotdogImage) {
-						Player.currentMoney += 100;
-						Player.amountOfHotdog -=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.hotdogNum>0)) {
+							Frame_reservation.hotdogNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.hotdogNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfHotdog -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>핫도그를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
-
+					}//
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 			
           btn[2].setIcon(grilImage);
@@ -349,6 +372,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -367,24 +391,30 @@ public class Frame_sell extends JFrame  {
 				else 
 				{
 					if(btn[3].getIcon()  == breadOnTheGrilImage ) {
-						Player.currentMoney -= 100;
-					}
-					else if ( btn[3].getIcon() == completeSandwichImage) {
-						Player.currentMoney += 100;
-						Player.amountOfSandwich-=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.sandwichNum>0)) {
+							Frame_reservation.sandwichNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.sandwichNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfSandwich -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>샌드위치를를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
+					}//
 					
-					
-
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
-          sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
+					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 		
           btn[3].setIcon(grilImage);
@@ -393,6 +423,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -414,23 +445,29 @@ public class Frame_sell extends JFrame  {
 						Player.currentMoney -= 100;
 					}
 					else if ( btn[4].getIcon() == completeSandwichImage) {
-						if(Player.amountOfSandwich>0) {
-						Player.currentMoney += 100;
-						Player.amountOfSandwich-=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
-						}else if(Player.amountOfSandwich==0) {
-							JOptionPane.showMessageDialog(null, "<html>선택한 재료가 없습니다.<br>구매할 재료를 선택한 후 다시판매하세요 .</html>", "판매 실패", JOptionPane.ERROR_MESSAGE);
-							dispose (); 
+						
+						if((Frame_reservation.sandwichNum>0)) {
+							Frame_reservation.sandwichNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.sandwichNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfSandwich -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>샌드위치를를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
 						}
 					}else {
 						//
-					}
+					}//
 					
 					
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
           sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
@@ -441,6 +478,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -462,18 +500,28 @@ public class Frame_sell extends JFrame  {
 						Player.currentMoney -= 100;
 					}
 					else if ( btn[5].getIcon() == completeSandwichImage) {
-						Player.currentMoney += 100;
-						Player.amountOfSandwich-=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.sandwichNum>0)) {
+							Frame_reservation.sandwichNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.sandwichNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfSandwich -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>샌드위치를를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
+					}//
 					
-					
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
@@ -484,6 +532,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -505,17 +554,28 @@ public class Frame_sell extends JFrame  {
 						Player.currentMoney -= 100;
 					}
 					else if ( btn[6].getIcon() == completeSandwichImage) {
-						Player.currentMoney += 100;
-						Player.amountOfSandwich-=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.sandwichNum>0)) {
+							Frame_reservation.sandwichNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.sandwichNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfSandwich -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>샌드위치를를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
+					}//
 					
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
@@ -526,6 +586,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -547,17 +608,28 @@ public class Frame_sell extends JFrame  {
 						Player.currentMoney -= 100;
 					}
 					else if ( btn[7].getIcon() == completeSandwichImage) {
-						Player.currentMoney += 100;
-						Player.amountOfSandwich-=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.sandwichNum>0)) {
+							Frame_reservation.sandwichNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.sandwichNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfSandwich -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>샌드위치를를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
+					}//
 					
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
@@ -568,6 +640,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -589,17 +662,28 @@ public class Frame_sell extends JFrame  {
 						Player.currentMoney -= 50;
 					}
 					else if ( btn[8].getIcon() == completeCokeImage) {
-						Player.currentMoney += 50;
-						Player.amountOfCoke-=1;
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
+						
+						if((Frame_reservation.cokeNum>0)) {
+							Frame_reservation.cokeNum -=1;
+							Player.currentMoney +=80 ;
+						}else if((Frame_reservation.cokeNum<=0)) {
+						Player.currentMoney += 100;
+						Player.amountOfCoke -=1;
+						}else {
+							JOptionPane.showMessageDialog(null, "<html>미션실패 .<br>샌드위치를를 먼저 파세요..</html>", "미션실패",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}else {
 						//
-					}
+					}//
 					
+					reservationCokeAmountLabel.setText("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+					reservationSellListLabel.setText("예약)콜라 "+ Frame_reservation.cokeNum);
 					totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 					sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 					cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
@@ -610,6 +694,7 @@ public class Frame_sell extends JFrame  {
 				JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "재고 부족",
 						JOptionPane.INFORMATION_MESSAGE);
 				dispose();
+				TycoonGame.backMain();
 			}
 			}
 		});
@@ -643,8 +728,6 @@ public class Frame_sell extends JFrame  {
 		
 		reservationCokeAmountLabel= new JLabel("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
 		reservationSellListLabel= new JLabel("예약)콜라 "+ Frame_reservation.cokeNum);
-		
-		
 		panel[5].add(sellListLabel);
 		panel[4].add(totalAmountLabel);
 		panel[6].add(cokeAmountLabel);
