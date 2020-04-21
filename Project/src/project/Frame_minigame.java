@@ -205,6 +205,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 				// 제한시간이 0 이하일 경우 || 제한시간 내에 게임을 클리어한 경우
 				if (leftedTime < 0 || isClear == true) {
 					timer.stop();
+					moveBall.stop();
 
 					// 미니게임 종료 팝업창 생성
 					JOptionPane.showMessageDialog(null, "<html>골드 획득에 성공했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "[GAME CLEAR]",
@@ -277,6 +278,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 				// 게임을 클리어했을 경우
 				else if (isClear == true) {
 					moveBall.stop();
+					System.out.println(isClear + "------------");
 				}
 
 				checkCollision();
