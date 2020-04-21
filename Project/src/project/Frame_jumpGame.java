@@ -1,7 +1,9 @@
 package project;
 
 import java.awt.Color;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,9 +16,18 @@ public class Frame_jumpGame extends JFrame {
 	JLabel jumpGameInfo;
 	JLabel explanation;
 	JLabel scoreInfo;
+	JLabel cat;
 	
 	int score = 0;
 
+	ImageIcon catImage = new ImageIcon(new ImageIcon(getClass().getResource("../images/nyanCat.png")).getImage().getScaledInstance(450, 184, Image.SCALE_SMOOTH));
+
+	
+	public static void main(String[] args) {
+
+		new Frame_jumpGame();
+
+	}
 	
 	public Frame_jumpGame() {
 		setJFrame();
@@ -68,6 +79,12 @@ public class Frame_jumpGame extends JFrame {
 		scoreInfo.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		scoreInfo.setBounds(0, 650, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(scoreInfo);
+		
+		cat = new JLabel(catImage);
+		cat.setVerticalAlignment(SwingConstants.TOP);
+		cat.setHorizontalAlignment(SwingConstants.CENTER);
+		cat.setBounds(0, 650, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
+		jumpGamePanel.add(cat);
 		
 	}
 	

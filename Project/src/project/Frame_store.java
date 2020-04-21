@@ -56,6 +56,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
+	
 	public Frame_store() {
 		setJFrame();
 		setJPanel();
