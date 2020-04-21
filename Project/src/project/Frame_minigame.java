@@ -117,7 +117,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		ball = new JLabel(ball_64);
 		ball.setVerticalAlignment(SwingConstants.TOP);
 		ball.setHorizontalAlignment(SwingConstants.CENTER);
-		ball.setBounds(608, 200, 64, 64); // x좌표, y좌표, 너비, 높이
+		ball.setBounds(360, 300, 64, 64); // x좌표, y좌표, 너비, 높이
 		minigamePanel.add(ball);
 
 		slider = new JLabel(slider_128);
