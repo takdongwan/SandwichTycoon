@@ -134,8 +134,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			// 고양이 이미지가 좌측 끝에 위치할 경우
-			if (cat.getX() <= 0) {
-				cat.setLocation(cat.getX(), cat.getY());
+			if (cat.getX() <= -100) {
+				cat.setLocation(-100, cat.getY());
 			} 
 			else {
 				cat.setLocation(cat.getX() - catXspeed, cat.getY());
@@ -176,7 +176,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 		}
 
-		System.out.println(cat.getX());
 		repaint();
 			
 	}
