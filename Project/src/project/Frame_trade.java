@@ -202,7 +202,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 	public void setMerchantPrice() {
 
 		random = new Random();
-		randomNumber = (random.nextInt(10)) * 10;
+		randomNumber = (random.nextInt(9) + 1) * 10;
 
 		merchantPrice = Frame_store.totalAmount - randomNumber;
 		System.out.println(merchantPrice);
