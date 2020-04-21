@@ -154,10 +154,14 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 			for (int j = 0; j < moneyColumn; j++) {
 
 				moneyArray[i][j] = new JLabel(money_64);
-				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * i, 100 + 64 * j, 64, 64); // x좌표, y좌표, 너비, 높이
+				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
 				minigamePanel.add(moneyArray[i][j]);
 			}
 		}
+	}
+
+	public void checkCollision() {
+
 	}
 
 	public void timer() {
@@ -169,12 +173,12 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 			public void actionPerformed(ActionEvent e) {
 
 				if (isMinigame == true) {
-					// 제한시간이 0 이하일 경우
+					// 제한시간이 0 이하일 경우 || 제한시간 내에 게임을 클리어한 경우
 					if (leftedTime < 0  || isClear == true) {
 						timer.stop();
 
 						// 미니게임 종료 팝업창 생성
-						JOptionPane.showMessageDialog(null, "<html>GAME OVER 1<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
+						JOptionPane.showMessageDialog(null, "<html>GAME CLEAR!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
 								"미니게임 종료", JOptionPane.ERROR_MESSAGE);
 
 						// 미니게임 창 종료
@@ -199,7 +203,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 						timer.stop();
 
 						// 미니게임 종료 팝업창 생성
-						JOptionPane.showMessageDialog(null, "<html>GAME OVER 3<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
+						JOptionPane.showMessageDialog(null, "<html>GAME OVER<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
 								"미니게임 종료", JOptionPane.ERROR_MESSAGE);
 
 						// 미니게임 창 종료
@@ -243,7 +247,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 					else if (ball.getY() < 0) {
 						ballYspeed = -ballYspeed;
 					}
-					// 공이 아래쪽 화면 외 범위에 위치할 경우
+					// 공이 화면 밖으로 벗어난 경우
 					else if (ball.getY() > Main.SCREEN_HEIGHT) {
 						isAlive = false;
 						moveBall.stop();
@@ -268,10 +272,6 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 		});
 		moveBall.start();
-	}
-
-	public void checkCollision() {
-
 	}
 
 	@Override
