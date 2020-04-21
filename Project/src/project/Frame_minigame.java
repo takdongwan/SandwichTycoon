@@ -67,7 +67,6 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		setJLabel();
 		setJButton();
 		generateMoney();
-		checkCollision();
 
 		timer();
 		moveBall();
@@ -173,12 +172,11 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
 				ballRectangle = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
 				
+				
 				if (ballRectangle.intersects(moneyRectangle)) {
 					score += 100;
 					moneyArray[i][j].setLocation(-100, -100);
-					
-					System.out.println(moneyArray[i][j].getX());
-					
+										
 					if (score >= 3300) {
 						isClear = true;
 					}
@@ -297,6 +295,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 						}
 					}
+					checkCollision();
 					repaint();
 				} 
 				else if (isMinigame == false) {
