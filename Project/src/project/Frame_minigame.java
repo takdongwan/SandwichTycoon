@@ -156,7 +156,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 			for (int j = 0; j < moneyColumn; j++) {
 
 				moneyArray[i][j] = new JLabel(money_64);
-				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
+				moneyArray[i][j].setBounds(leftMargin + 48 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
 				minigamePanel.add(moneyArray[i][j]);
 			}
 		}
@@ -166,8 +166,25 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		for (int i = 0; i < moneyRow; i++) {
 			for (int j = 0; j < moneyColumn; j++) {
 
-				Rectangle2D money = new Rectangle(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
-				Rectangle2D ball = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+				Rectangle2D moneyRectangle = new Rectangle(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
+				Rectangle2D ballRectangle = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+				
+				if (ballRectangle.intersects(moneyRectangle)) {
+					score += 100;
+					minigamePanel.remove(moneyArray[i][j]);
+					
+					if (score >= 3300) {
+						isClear = true;
+					}
+					else {
+						
+					}
+				}
+				else {
+					
+				}
+				
+				
 				
 				moneyArray[i][j] = new JLabel(money_64);
 				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
