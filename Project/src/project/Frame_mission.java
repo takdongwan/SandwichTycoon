@@ -195,14 +195,14 @@ public class Frame_mission extends JFrame {
 		leftedTimeInfo = new JLabel("- 제한시간 -");
 		leftedTimeInfo.setVerticalAlignment(SwingConstants.TOP);
 		leftedTimeInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		leftedTimeInfo.setFont(situation.getFont().deriveFont(20.0f)); // 폰트 사이즈 12
+		leftedTimeInfo.setFont(leftedTimeInfo.getFont().deriveFont(20.0f)); // 폰트 사이즈 20
 		leftedTimeInfo.setBounds(0, 620, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
 		missionPanel.add(leftedTimeInfo);
 
 		explanation = new JLabel("- 플레이어가 해야할 미션 행동 설명 -");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
-		explanation.setFont(situation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
+		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		explanation.setBounds(0, 650, Main.SCREEN_WIDTH / 2, 30); // x좌표, y좌표, 너비, 높이
 		missionPanel.add(explanation);
 

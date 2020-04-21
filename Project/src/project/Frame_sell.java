@@ -259,7 +259,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 					}
 		});
@@ -306,7 +305,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 			}
 		});
@@ -351,7 +349,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 			}
 		});
@@ -396,7 +393,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 			}
 		});
@@ -429,7 +425,6 @@ public class Frame_sell extends JFrame  {
 						}else if(Player.amountOfSandwich==0) {
 							JOptionPane.showMessageDialog(null, "<html>선택한 재료가 없습니다.<br>구매할 재료를 선택한 후 다시판매하세요 .</html>", "판매 실패", JOptionPane.ERROR_MESSAGE);
 							dispose (); 
-							TycoonGame.backMain();
 						}
 					}else {
 						//
@@ -446,7 +441,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 			}
 		});
@@ -490,7 +484,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 			}
 		});
@@ -533,8 +526,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-				TycoonGame.backMain();
-					
 				}
 			}
 		});
@@ -577,7 +568,6 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					TycoonGame.backMain();
 				}
 			}
 		});
@@ -620,7 +610,6 @@ public class Frame_sell extends JFrame  {
 				JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "재고 부족",
 						JOptionPane.INFORMATION_MESSAGE);
 				dispose();
-				TycoonGame.backMain();
 			}
 			}
 		});
@@ -666,7 +655,7 @@ public class Frame_sell extends JFrame  {
 		contentPane.add(panel[6]);
 		contentPane.add(panel[7]);
 		contentPane.add(panel[8]);
-	
+		
 	}
 
 
