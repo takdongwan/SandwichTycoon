@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,35 +18,47 @@ import javax.swing.Timer;
 public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	JPanel jumpGamePanel;
-	
+
 	JLabel jumpGameInfo;
 	JLabel explanation;
 	JLabel scoreInfo;
 	JLabel cat;
-	
+	JLabel devilArray[];
+	JLabel bombArray[];
+	JLabel collisionArray[];
+
 	int score = 0;
 	int catXspeed = 20;
 	int catYspeed = 40;
-	
+	int obstacleNumber;
+	int obstacle_yPosition;
+
 	boolean isClear = false;
 	boolean isAlive = true;
-	
+
 	Timer catTimer;
+	Timer obstacleTimer;
+	Random random;
 
-	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage().getScaledInstance(296, 69, Image.SCALE_SMOOTH));
+	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
+	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
+	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
+	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage()
+			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
 
-	
 	public static void main(String[] args) {
 
 		new Frame_jumpGame();
 
 	}
-	
+
 	public Frame_jumpGame() {
 		setJFrame();
 		setJPanel();
 		setJLabel();
+
 		catTimer();
+		generateObstacle();
 	}
 
 	public void setJFrame() {
@@ -87,57 +100,104 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		explanation.setBounds(0, 70, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(explanation);
-		
+
 		scoreInfo = new JLabel("현재 점수: " + score);
 		scoreInfo.setVerticalAlignment(SwingConstants.TOP);
 		scoreInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreInfo.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		scoreInfo.setBounds(0, 650, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(scoreInfo);
-		
+
 		cat = new JLabel(catImage);
 		cat.setVerticalAlignment(SwingConstants.TOP);
 		cat.setHorizontalAlignment(SwingConstants.CENTER);
 		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
-		
+
 	}
-	
+
 	public void catTimer() {
 		catTimer = new Timer(25, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
+
+				if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
 					cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
-				}
-				else {
+				} else {
 					cat.setLocation(cat.getX(), cat.getY() + 1);
 				}
 			}
-			
+
 		});
 		catTimer.start();
 		repaint();
 
 	}
+	
+	public void obstacleTimer() {
+		obstacleTimer = new Timer(1000, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				generateObstacle();
+			}
+			
+		});
+
+	}
+
+	public void generateObstacle() {
+
+		devilArray = new JLabel[obstacleNumber];
+		bombArray = new JLabel[obstacleNumber];
+		collisionArray = new JLabel[obstacleNumber];
+
+		// obstacle - devil 생성
+		for (obstacleNumber = 0; obstacleNumber < devilArray.length; obstacleNumber++) {
+
+			obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+
+			devilArray[obstacleNumber] = new JLabel(devil_64);
+			devilArray[obstacleNumber].setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+			jumpGamePanel.add(devilArray[obstacleNumber]);
+		}
+		
+		// obstacle - bomb 생성
+		for (obstacleNumber = 0; obstacleNumber < bombArray.length; obstacleNumber++) {
+
+			obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+
+			bombArray[obstacleNumber] = new JLabel(bomb_64);
+			bombArray[obstacleNumber].setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+			jumpGamePanel.add(bombArray[obstacleNumber]);
+		}
+		
+		// obstacle - collision 생성
+		for (obstacleNumber = 0; obstacleNumber < collisionArray.length; obstacleNumber++) {
+
+			obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+
+			collisionArray[obstacleNumber] = new JLabel(collision_64);
+			collisionArray[obstacleNumber].setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+			jumpGamePanel.add(collisionArray[obstacleNumber]);
+		}
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			// 고양이 이미지가 좌측 끝에 위치할 경우
 			if (cat.getX() <= -100) {
 				cat.setLocation(-100, cat.getY());
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX() - catXspeed, cat.getY());
 			}
 		}
@@ -146,28 +206,25 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 우측 끝에 위치할 경우
 			if (cat.getX() >= Main.SCREEN_WIDTH - cat.getWidth()) {
 				cat.setLocation(cat.getX(), cat.getY());
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX() + catXspeed, cat.getY());
 			}
 		}
-		
+
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			// 고양이 이미지가 위쪽 끝에 위치할 경우
 			if (cat.getY() <= 0) {
 				cat.setLocation(cat.getX(), 0);
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX(), cat.getY() - catYspeed);
 			}
 		}
-		
+
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			// 고양이 이미지가 아래쪽 끝에 위치할 경우
 			if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
 				cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX(), cat.getY() + catYspeed);
 			}
 		}
@@ -177,13 +234,13 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		}
 
 		repaint();
-			
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
