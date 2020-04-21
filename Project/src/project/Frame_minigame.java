@@ -207,7 +207,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 					timer.stop();
 
 					// 미니게임 종료 팝업창 생성
-					JOptionPane.showMessageDialog(null, "<html>[GAME CLEAR]<br>골드 획득에 성공했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "미니게임 종료",
+					JOptionPane.showMessageDialog(null, "<html>골드 획득에 성공했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "[GAME CLEAR]",
 							JOptionPane.ERROR_MESSAGE);
 					
 					Player.currentMoney += score;
@@ -221,7 +221,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 					timer.stop();
 
 					// 미니게임 종료 팝업창 생성
-					JOptionPane.showMessageDialog(null, "<html>[GAME OVER]<br>골드 획득에 실패했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "미니게임 종료",
+					JOptionPane.showMessageDialog(null, "<html>골드 획득에 실패했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "[GAME OVER]",
 							JOptionPane.ERROR_MESSAGE);
 
 					// 미니게임 창 종료
