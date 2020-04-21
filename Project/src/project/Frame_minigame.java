@@ -27,6 +27,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	JLabel explanation;
 	JLabel ball;
 	JLabel slider;
+	JLabel money;
 	JLabel leftedTimeInfo;
 	JLabel scoreInfo;
 
@@ -42,10 +43,13 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	int ballYspeed = 5;	
 	int leftMargin = 240;
 	int rightMargin = 1040;
+	int moneyRow = 3;
+	int moneyColumn = 11;
 	boolean isMinigameOver = false;
 
 	private ImageIcon ball_64 = new ImageIcon(Main.class.getResource("../images/ball_64.png"));
 	private ImageIcon slider_128 = new ImageIcon(Main.class.getResource("../images/slider_128.png"));
+	private ImageIcon money_64 = new ImageIcon(Main.class.getResource("../images/money_64.png"));
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
@@ -55,6 +59,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		setJPanel();
 		setJLabel();
 		setJButton();
+		generateMoney();
 		
 		timeTimer();
 		moveBall();
@@ -110,7 +115,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		slider = new JLabel(slider_128);
 		slider.setVerticalAlignment(SwingConstants.TOP);
 		slider.setHorizontalAlignment(SwingConstants.CENTER);
-		slider.setBounds(576, 500, 128, 128); // x좌표, y좌표, 너비, 높이
+		slider.setBounds(576, 540, 128, 128); // x좌표, y좌표, 너비, 높이
 		minigamePanel.add(slider);
 
 		leftedTimeInfo = new JLabel("- 제한시간 -");
@@ -137,6 +142,17 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		backButton.addMouseListener(this);
 		backButton.addActionListener(this);
 		minigamePanel.add(backButton);
+	}
+	
+	public void generateMoney() {
+		
+		for(int i = 0; i <= moneyColumn; i++) {
+			for (int j = 0; j <= moneyRow; j++) {
+				money = new JLabel(money_64);
+				money.setBounds(leftMargin + 16 + 64 * i, 100 + 64 * j, 64, 64); // x좌표, y좌표, 너비, 높이
+				minigamePanel.add(money);
+			}
+		}
 	}
 
 	public void timeTimer() {
@@ -211,8 +227,9 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 				else if (ball.getY() > Main.SCREEN_HEIGHT){
 					isMinigameOver = true;
 				}
-				
-				else if (ball.getY() == 500) {
+				// 공과 슬라이더의 y좌표가 동일할 경우
+				else if (ball.getY() == 540) {
+					// 공과 슬라이더가 충돌했을 경우
 					if ((ball.getX() >= slider.getX()) && (ball.getX() <= slider.getX() + slider.getWidth())) {
 						ballYspeed = -ballYspeed;
 					}
