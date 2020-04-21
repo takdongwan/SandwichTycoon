@@ -40,19 +40,19 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private ImageIcon quitButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/quitButtonEntered.png"));
 	private ImageIcon quitButtonBasicImage = new ImageIcon(Main.class.getResource("../images/quitButtonBasic.png"));
 
-	private ImageIcon leftButtonBasicImage = new ImageIcon(Main.class.getResource("../images/leftButtonBasic.png"));
+	private static ImageIcon leftButtonBasicImage = new ImageIcon(Main.class.getResource("../images/leftButtonBasic.png"));
 //	private ImageIcon rightButtonBasicImage = new ImageIcon(Main.class.getResource("../images/rightButtonBasic.png"));
 	private ImageIcon leftButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/leftButtonEntered.png"));
 	//private ImageIcon rightButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/rightButtonEntered.png"));
 	
 	private ImageIcon buyButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/buyButtonEntered.png"));
 	private ImageIcon sellButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/sellButtonEntered.png"));
-	private ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
-	private ImageIcon buyButtonBasicImage = new ImageIcon(Main.class.getResource("../images/buyButtonBasic.png"));
+	private static ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
+	private static ImageIcon buyButtonBasicImage = new ImageIcon(Main.class.getResource("../images/buyButtonBasic.png"));
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
-	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	private static ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
-	private Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.png")).getImage();
+	private static Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.png")).getImage();
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
 
 	// private JLabel gameExplain = new JLabel(new
@@ -66,15 +66,15 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private JButton exitButton = new JButton(exitButtonBasicImage);
 	private JButton startButton = new JButton(startButtonBasicImage);
 	private JButton quitButton = new JButton(quitButtonBasicImage);
-	private JButton leftButton= new JButton(leftButtonBasicImage);
+	private static JButton leftButton= new JButton(leftButtonBasicImage);
 	// private JButton rightButton= new JButton(rightButtonBasicImage);
-	private JButton buyButton = new JButton(buyButtonBasicImage);
-	private JButton sellButton = new JButton(sellButtonBasicImage);
-	private JButton backButton = new JButton(backButtonBasicImage);
+	private static JButton buyButton = new JButton(buyButtonBasicImage);
+	private static JButton sellButton = new JButton(sellButtonBasicImage);
+	private static JButton backButton = new JButton(backButtonBasicImage);
 	private int mouseX, mouseY;
 
 	private boolean isTimerRun = false;
-	private boolean isMainScreen = false;
+	private static boolean isMainScreen = false;
 	private boolean isGameScreen =false;
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
@@ -83,7 +83,10 @@ public class TycoonGame extends JFrame implements ItemListener {
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
   Frame_sell  sellFrame;
-	JLabel gameExplain,name,menuLabel,beverageLabel;
+	static JLabel gameExplain;
+	JLabel name;
+	static JLabel menuLabel;
+	static JLabel beverageLabel;
 	Choice sandwichName,selectTime; 
 	 
 	//ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
@@ -426,7 +429,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 	}
 
-	public void backMain() {
+	public static void backMain() {
 		isMainScreen = true;
 
 		beverageLabel.setVisible(true);

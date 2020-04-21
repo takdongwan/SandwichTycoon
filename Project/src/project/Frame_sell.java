@@ -52,6 +52,10 @@ public class Frame_sell extends JFrame  {
 	JLabel cokeAmountLabel;
 	JLabel hotdogAmountLabel;
 	
+	JLabel reservationSellListLabel;//예약주문목록
+	JLabel reservationCokeAmountLabel;//예약 된 콜라
+	
+	
 	
 
 	public Frame_sell(){
@@ -66,10 +70,10 @@ public class Frame_sell extends JFrame  {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		contentPane = getContentPane();
-		contentPane.setLayout(new GridLayout(6,1));//nxn으로 레이아웃생성
-		panel = new JPanel[9];
+		contentPane.setLayout(new GridLayout(6,2));//nxn으로 레이아웃생성
+		panel = new JPanel[15];
 		
-		for(int i = 0 ; i < 9 ; i++)
+		for(int i = 0 ; i < 14 ; i++)
 		{
 			panel[i] = new  JPanel();
 			panel[i].setLayout(new FlowLayout());
@@ -197,7 +201,7 @@ public class Frame_sell extends JFrame  {
 		}
 		
 		
-		btn = new JButton[9];
+		btn = new JButton[15];
 		for ( int i = 0; i < 8; i++)
 			btn[i] = new JButton("",grilImage);
 
@@ -233,8 +237,13 @@ public class Frame_sell extends JFrame  {
 										JOptionPane.INFORMATION_MESSAGE);
 								System.exit(0);
 							}
+							if((Frame_reservation.sandwichNum>0)&&(Frame_reservation.hotdogNum>0)&&(Frame_reservation.cokeNum>0)) {
+								Frame_reservation.hotdogNum -=1;
+								Player.currentMoney +=80 ;
+							}else{
 							Player.currentMoney += 100;
 							Player.amountOfHotdog -=1;
+							}
 						}else {
 							//
 						}//
@@ -243,13 +252,14 @@ public class Frame_sell extends JFrame  {
 						totalAmountLabel.setText("보유금액 :" +Integer.toString(Player.currentMoney));
 						sellListLabel.setText("샌드위치 갯수 :" +Integer.toString(Player.amountOfSandwich)+" 핫도그갯수 : "+Integer.toString(Player.amountOfHotdog));
 						cokeAmountLabel.setText("콜라 갯수 :" +Integer.toString(Player.amountOfCoke));
-			
+						
 						btn[0].setIcon(grilImage);
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 					}
 		});
@@ -296,6 +306,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -340,6 +351,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -384,6 +396,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -416,6 +429,7 @@ public class Frame_sell extends JFrame  {
 						}else if(Player.amountOfSandwich==0) {
 							JOptionPane.showMessageDialog(null, "<html>선택한 재료가 없습니다.<br>구매할 재료를 선택한 후 다시판매하세요 .</html>", "판매 실패", JOptionPane.ERROR_MESSAGE);
 							dispose (); 
+							TycoonGame.backMain();
 						}
 					}else {
 						//
@@ -432,6 +446,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -475,6 +490,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -517,6 +533,8 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+				TycoonGame.backMain();
+					
 				}
 			}
 		});
@@ -559,6 +577,7 @@ public class Frame_sell extends JFrame  {
 					JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "미션실패",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+					TycoonGame.backMain();
 				}
 			}
 		});
@@ -601,6 +620,7 @@ public class Frame_sell extends JFrame  {
 				JOptionPane.showMessageDialog(null, "<html>재고가 부족합니다..<br>재고를 구매하고 오세요.</html>", "재고 부족",
 						JOptionPane.INFORMATION_MESSAGE);
 				dispose();
+				TycoonGame.backMain();
 			}
 			}
 		});
@@ -621,8 +641,9 @@ public class Frame_sell extends JFrame  {
 		
 		
 	
-		for(int k = 0 ; k < 9 ; k++)   
+		for(int k = 0 ; k < 9 ; k++) {  
 			contentPane.add(btn[k]);
+		}
 	
 		setSize(Main.SCREEN_WIDTH / 2, Main.SCREEN_HEIGHT);
 		setVisible(true);
@@ -631,13 +652,21 @@ public class Frame_sell extends JFrame  {
 		sellListLabel= new JLabel("샌드위치 갯수 : "+ Player.amountOfSandwich+" 핫도그갯수 : "+ Player.amountOfHotdog );
 		cokeAmountLabel= new JLabel("콜라 갯수 "+ Player.amountOfCoke);
 		
+		reservationCokeAmountLabel= new JLabel("예약)샌드위치 : "+ Frame_reservation.sandwichNum+" 예약)핫도그 : "+  Frame_reservation.hotdogNum );
+		reservationSellListLabel= new JLabel("예약)콜라 "+ Frame_reservation.cokeNum);
+		
+		
 		panel[5].add(sellListLabel);
 		panel[4].add(totalAmountLabel);
 		panel[6].add(cokeAmountLabel);
+		panel[7].add(reservationCokeAmountLabel);
+		panel[8].add(reservationSellListLabel);
 		contentPane.add(panel[4]);
 		contentPane.add(panel[5]);
 		contentPane.add(panel[6]);
-		
+		contentPane.add(panel[7]);
+		contentPane.add(panel[8]);
+	
 	}
 
 

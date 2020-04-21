@@ -22,10 +22,10 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 
 	JLabel storeInfo;
 	JLabel explanation;
-	JLabel amountOfSandwichInfo;
-	JLabel amountOfHotdogInfo;
-	JLabel amountOfCokeInfo;
-	JLabel currentMoneyInfo;
+	static JLabel amountOfSandwichInfo;
+	static JLabel amountOfHotdogInfo;
+	static JLabel amountOfCokeInfo;
+	static JLabel currentMoneyInfo;
 	JLabel totalAmountInfo;
 
 	JButton buySandwich;
@@ -34,19 +34,20 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 	JButton buy;
 	JButton init;
 
-	int totalAmount;
+	static int totalAmount;
 	int imageWidth = 128;
-	int sandwichPrice = 100;
-	int hotdogPrice = 100;
-	int cokePrice = 50;
+	static int sandwichPrice = 100;
+	static int hotdogPrice = 100;
+	static int cokePrice = 50;
 
 	static int amountOfSandwich = 0;
 	static int amountOfHotdog = 0;
 	static int amountOfCoke = 0;
 
-	private ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
-	private ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
-	private ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
+	static ImageIcon sandwich_128 = new ImageIcon(Main.class.getResource("../images/sandwich_128.png"));
+	static ImageIcon coke_128 = new ImageIcon(Main.class.getResource("../images/coke_128.png"));
+	static ImageIcon hotdog_128 = new ImageIcon(Main.class.getResource("../images/hotdog_128.png"));
+	public static Object totalPriceInfo;
 
 	public Frame_store() {
 		setJFrame();

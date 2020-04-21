@@ -37,16 +37,16 @@ public class Frame_orderSequence extends JFrame {
 	
 	//Frame_reservation에서 주문정보를  파라미터로 넘겨줌, reservationFrame은 Frame_reservation이다. 나중에 주문이 끝나면 두프레임다 종료 시키기위함이다. 
 	public Frame_orderSequence(final String productName,int people,final int productPrice,final int productNum,final String time, final JFrame reservationFrame) {
-		setSize(800,700);
-		setTitle("sandwich");
+		setSize(500,400);
+		setTitle("주문 순서 ");
 		member = people;
 		panel = new JPanel(null);
 		
-		storeName = new JLabel("sandwichTycoon");//가게이름 
+		storeName = new JLabel("주문 순서"); 
 		storeName.setBackground(Color.white);
 		storeName.setOpaque(true);												
 		
-		prev = new JButton("PREV");
+		prev = new JButton("PREV  ");
 		next = new JButton("NEXT");
 		ticket = new ArrayList<String>();// ticket.txt에서 가져온 정보를 저장하고 주문이 완료되면 지금 주문된 정보를 add할 것임
 		sequenceNumber = new JPanel(new GridLayout(7, 7));	 		// 주문순서정보를 panel로 했는데 gridlayout으로 잡고 7x7 좌석을 만듬				
@@ -57,7 +57,7 @@ public class Frame_orderSequence extends JFrame {
 		sequenceNumber.setBackground(Color.white);
 		sequenceNumber.setOpaque(true);// 이속성을 true로 해주면 background color가 적용됨
 		
-		for(int i=0;i<7;i++) 						//주문정보 초기화를 위한 반복문						
+		for(int i=0;i<7;i++) {						//주문정보 초기화를 위한 반복문						
 			for(int j=0;j<7;j++) {
 				final int k =i*7+j;											
 				sequenceNumbers[k] = new JLabel(Integer.toString(k+1)); 	//라벨 하나씩 주문번호로 초기화해줌			
@@ -106,6 +106,7 @@ public class Frame_orderSequence extends JFrame {
 				});
 				sequenceNumber.add(sequenceNumbers[k]);// 위와같이 초기화한sequenceNumber 라벨을 하나씩 gridlayout으로 세팅한 panel에 add함									
 			}
+		}	
 		
 		try {
 			FileReader fileReader = new FileReader("ticket.txt");	//ticket.txt 를 읽어드림							
@@ -163,7 +164,7 @@ public class Frame_orderSequence extends JFrame {
 							sequenceNumbers+=(i+1)+",";
 					}
 					sequenceNumbers = sequenceNumbers.substring(0, sequenceNumbers.length()-1);									// sequenceNumbers의 마지막 문자가 ","이기때문에 그것을 없애주기위함
-					new MessageBox(new JFrame("") ,"error5 : "+productName,"error7 : "+productNum, etc,"error8: "+sequenceNumbers, false,Frame_orderSequence.this); // 가공한 정보를 msgbox로 띄움
+					new MessageBox(new JFrame("") ,"productName: "+productName,"OrderNumber : "+productNum, etc,"_ "+sequenceNumbers, false,Frame_orderSequence.this); // 가공한 정보를 msgbox로 띄움
 					msg +=sequenceNumbers+"\t"+time;
 					ticket.add(msg);																// 리스트에 역시 추가함
 					try {
