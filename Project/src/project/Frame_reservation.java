@@ -92,10 +92,8 @@ public class Frame_reservation extends JFrame implements ItemListener, ActionLis
 		salesLisetName.setBounds(210,163,150,30);//구매하고자 하는 물건 목록 
 		time.setBounds(130,200,70,30);//sale time 
 		selectTime.setBounds(210,203,150,30);//시간 Choice 박스
-		adult.setBounds(400, 160, 70, 30);// Adult
-		adultTicket.setBounds(480,163,70,30);// adult choice box
-		//child.setBounds(400, 200, 70, 30);//child
-		//childTicket.setBounds(480,203,70,30);// childe choic box 
+		adult.setBounds(130, 240, 70, 30);// Adult
+		adultTicket.setBounds(210,243,70,30);// adult choice box
 		next.setBounds(210, 500, 140, 30);
 		home.setBounds(410,500,140,30);
 		
