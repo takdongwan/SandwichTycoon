@@ -2,12 +2,14 @@ package project;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -161,7 +163,17 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	}
 
 	public void checkCollision() {
+		for (int i = 0; i < moneyRow; i++) {
+			for (int j = 0; j < moneyColumn; j++) {
 
+				Rectangle2D money = new Rectangle(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
+				Rectangle2D ball = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+				
+				moneyArray[i][j] = new JLabel(money_64);
+				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
+				minigamePanel.add(moneyArray[i][j]);
+			}
+		}
 	}
 
 	public void timer() {
