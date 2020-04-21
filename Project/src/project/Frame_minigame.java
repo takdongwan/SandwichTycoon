@@ -168,9 +168,9 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		for (int i = 0; i < moneyRow; i++) {
 			for (int j = 0; j < moneyColumn; j++) {
 
-				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX(), moneyArray[i][j].getY(),
-						moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
-				ballRectangle = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX() + 20, moneyArray[i][j].getY() + 20,
+						moneyArray[i][j].getWidth() - 20, moneyArray[i][j].getHeight() - 20);
+				ballRectangle = new Rectangle2D.Double(ball.getX() + 20, ball.getY() + 20, ball.getWidth() - 20, ball.getHeight() - 20);
 
 				if (ballRectangle.intersects(moneyRectangle)) {
 					score += 100;
