@@ -50,6 +50,9 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	boolean isClear = false;
 	boolean isAlive = true;
 	boolean isMinigame = true;
+	
+	Rectangle2D moneyRectangle;
+	Rectangle2D ballRectangle;
 
 	private ImageIcon ball_64 = new ImageIcon(Main.class.getResource("../images/ball_64.png"));
 	private ImageIcon slider_128 = new ImageIcon(Main.class.getResource("../images/slider_128.png"));
@@ -64,6 +67,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		setJLabel();
 		setJButton();
 		generateMoney();
+		checkCollision();
 
 		timer();
 		moveBall();
@@ -166,12 +170,14 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		for (int i = 0; i < moneyRow; i++) {
 			for (int j = 0; j < moneyColumn; j++) {
 
-				Rectangle2D moneyRectangle = new Rectangle(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
-				Rectangle2D ballRectangle = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
+				ballRectangle = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
 				
 				if (ballRectangle.intersects(moneyRectangle)) {
 					score += 100;
-					minigamePanel.remove(moneyArray[i][j]);
+					moneyArray[i][j].setLocation(-100, -100);
+					
+					System.out.println(moneyArray[i][j].getX());
 					
 					if (score >= 3300) {
 						isClear = true;
@@ -183,12 +189,11 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 				else {
 					
 				}
+				repaint();
 				
-				
-				
-				moneyArray[i][j] = new JLabel(money_64);
-				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
-				minigamePanel.add(moneyArray[i][j]);
+//				moneyArray[i][j] = new JLabel(money_64);
+//				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
+//				minigamePanel.add(moneyArray[i][j]);
 			}
 		}
 	}
@@ -285,7 +290,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 					else if (ball.getY() == 540) {
 						
 						// 공과 슬라이더가 충돌했을 경우
-						if ((ball.getX() >= slider.getX()) && (ball.getX() <= slider.getX() + slider.getWidth())) {
+						if ((slider.getX() <= ball.getX() + 32) && (ball.getX() +32 <= slider.getX() + slider.getWidth())) {
 							ballYspeed = -ballYspeed;
 						} 
 						else {
