@@ -2,8 +2,11 @@ package project;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,8 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
-public class Frame_minigame extends JFrame implements ActionListener, MouseListener {
+public class Frame_minigame extends JFrame implements ActionListener, MouseListener, KeyListener {
 
 	JPanel minigamePanel;
 
@@ -22,6 +26,18 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	JLabel explanation;
 	
 	JButton backButton;
+	
+	Timer timer;
+	
+	int delay = 10;
+	int playerX = 310;
+	int ballX = 120;
+	int ballY = 350;
+	int ballXdir = -1;
+	int ballYdir = -2;
+	int score = 0;
+	boolean play = false;
+	
 	
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
@@ -33,6 +49,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		setJPanel();
 		setJLabel();
 		setJButton();
+		setTimer();
 	}
 
 	public void setJFrame() {
@@ -54,6 +71,8 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		minigamePanel.setLayout(null);
 		minigamePanel.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		minigamePanel.setBackground(new Color(255, 230, 0));
+		minigamePanel.addKeyListener(this);
+		minigamePanel.setFocusable(true);
 		getContentPane().add(minigamePanel);
 	}
 
@@ -83,6 +102,32 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		backButton.addMouseListener(this);
 		backButton.addActionListener(this);
 		minigamePanel.add(backButton);
+	}
+	
+	public void setTimer() {
+		timer = new Timer(delay, this);
+		timer.start();
+		repaint();
+	}
+	
+	public void paint(Graphics g) {
+		//background
+		g.setColor(new Color(255, 230, 0));
+		g.fillRect(0, 0, 692, 592);
+		
+		// paddle
+		g.setColor(Color.green);
+		g.fillRect(playerX, 550, 100, 8);
+		
+		// ball
+		g.setColor(Color.black);
+		g.fillOval(ballX, ballY, 20, 20);
+		
+		// string
+		g.drawString("키보드의 좌우 방향키를 이용해 모든 벽돌을 부수세요!", 200, 600);
+		
+		g.dispose();
+		
 	}
 
 	@Override
@@ -125,7 +170,46 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		}
 		
 		else {
-			System.out.println("예외 발생");
-		}		
+	//		System.out.println("actionPerformed - 예외 발생");
+		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			if(playerX >= 600) {
+				playerX = 600;
+			}
+			else {
+				play = true;
+				playerX += 20;			}
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			if(playerX < 10) {
+				playerX = 10;
+			}
+			else {
+				play = true;
+				playerX -= 20;
+			}
+		}
+		else {
+			
+		}
+		System.out.println(playerX);
+		repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
