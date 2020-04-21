@@ -2,14 +2,19 @@ package project;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
-public class Frame_jumpGame extends JFrame {
+public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	JPanel jumpGamePanel;
 	
@@ -19,8 +24,11 @@ public class Frame_jumpGame extends JFrame {
 	JLabel cat;
 	
 	int score = 0;
+	int catYspeed = 50;
+	
+	Timer catTimer;
 
-	ImageIcon catImage = new ImageIcon(new ImageIcon(getClass().getResource("../images/nyanCat.png")).getImage().getScaledInstance(450, 184, Image.SCALE_SMOOTH));
+	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage().getScaledInstance(296, 69, Image.SCALE_SMOOTH));
 
 	
 	public static void main(String[] args) {
@@ -33,6 +41,7 @@ public class Frame_jumpGame extends JFrame {
 		setJFrame();
 		setJPanel();
 		setJLabel();
+		catTimer();
 	}
 
 	public void setJFrame() {
@@ -54,12 +63,14 @@ public class Frame_jumpGame extends JFrame {
 		jumpGamePanel.setLayout(null);
 		jumpGamePanel.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		jumpGamePanel.setBackground(new Color(255, 230, 0));
+		jumpGamePanel.setFocusable(true);
+		jumpGamePanel.addKeyListener(this);
 		getContentPane().add(jumpGamePanel);
 	}
 
 	public void setJLabel() {
 
-		jumpGameInfo = new JLabel("jumpGame");
+		jumpGameInfo = new JLabel("장애물 피하기");
 		jumpGameInfo.setVerticalAlignment(SwingConstants.TOP);
 		jumpGameInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		jumpGameInfo.setFont(jumpGameInfo.getFont().deriveFont(20.0f)); // 폰트 사이즈 20
@@ -83,8 +94,42 @@ public class Frame_jumpGame extends JFrame {
 		cat = new JLabel(catImage);
 		cat.setVerticalAlignment(SwingConstants.TOP);
 		cat.setHorizontalAlignment(SwingConstants.CENTER);
-		cat.setBounds(0, 650, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
+		cat.setBounds(200, 650, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
+		
+	}
+	
+	public void catTimer() {
+		catTimer = new Timer(25, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cat.setLocation(cat.getX(), cat.getY() + 1);
+			}
+			
+		});
+		catTimer.start();
+		repaint();
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			cat.setLocation(cat.getX(), cat.getY() - catYspeed);
+			System.out.println(cat.getY());
+		}		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
