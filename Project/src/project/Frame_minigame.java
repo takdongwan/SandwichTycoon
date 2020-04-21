@@ -49,8 +49,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 	boolean isClear = false;
 	boolean isAlive = true;
-	boolean isMinigame = true;
-	
+
 	Rectangle2D moneyRectangle;
 	Rectangle2D ballRectangle;
 
@@ -125,14 +124,14 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		slider.setBounds(576, 540, 128, 128); // x좌표, y좌표, 너비, 높이
 		minigamePanel.add(slider);
 
-		leftedTimeInfo = new JLabel("- 제한시간 -");
+		leftedTimeInfo = new JLabel(limitTime + "초");
 		leftedTimeInfo.setVerticalAlignment(SwingConstants.TOP);
 		leftedTimeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		leftedTimeInfo.setFont(leftedTimeInfo.getFont().deriveFont(20.0f)); // 폰트 사이즈 20
 		leftedTimeInfo.setBounds(0, 620, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		minigamePanel.add(leftedTimeInfo);
 
-		scoreInfo = new JLabel("- 현재 점수 -");
+		scoreInfo = new JLabel("획득 골드: " + score);
 		scoreInfo.setVerticalAlignment(SwingConstants.TOP);
 		scoreInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreInfo.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
@@ -169,30 +168,28 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		for (int i = 0; i < moneyRow; i++) {
 			for (int j = 0; j < moneyColumn; j++) {
 
-				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX(), moneyArray[i][j].getY(), moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
+				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX(), moneyArray[i][j].getY(),
+						moneyArray[i][j].getWidth(), moneyArray[i][j].getHeight());
 				ballRectangle = new Rectangle2D.Double(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
-				
-				
+
 				if (ballRectangle.intersects(moneyRectangle)) {
 					score += 100;
+					scoreInfo.setText("획득 골드: " + score);
 					moneyArray[i][j].setLocation(-100, -100);
-										
+
+					ballYspeed = -ballYspeed;
+					
 					if (score >= 3300) {
 						isClear = true;
-						System.out.println(isClear);
-					}
+					} 
 					else {
-						
+
 					}
-				}
-				else {
-					
+				} else {
+
 				}
 				repaint();
-				
-//				moneyArray[i][j] = new JLabel(money_64);
-//				moneyArray[i][j].setBounds(leftMargin + 16 + 64 * j, 100 + 64 * i, 64, 64); // x좌표, y좌표, 너비, 높이
-//				minigamePanel.add(moneyArray[i][j]);
+
 			}
 		}
 	}
@@ -205,53 +202,35 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (isMinigame == true) {
-					// 제한시간이 0 이하일 경우 || 제한시간 내에 게임을 클리어한 경우
-					if (leftedTime < 0 || isClear == true) {
-						timer.stop();
-
-						// 미니게임 종료 팝업창 생성
-						JOptionPane.showMessageDialog(null, "<html>GAME CLEAR!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
-								"미니게임 종료", JOptionPane.ERROR_MESSAGE);
-
-						// 미니게임 창 종료
-						dispose();
-						Player.currentMoney += score;
-					}
-
-//					// 시간 내에 게임을 완료했을 경우
-//					else if (isClear == true) {
-//						timer.stop();
-//
-//						// 미니게임 종료 팝업창 생성
-//						JOptionPane.showMessageDialog(null, "<html>GAME OVER 2<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
-//								"미니게임 종료", JOptionPane.ERROR_MESSAGE);
-//
-//						// 미니게임 창 종료
-//						dispose();
-//						Player.currentMoney += score;
-//					}
-					
-					else if (isAlive == false) {
-						timer.stop();
-
-						// 미니게임 종료 팝업창 생성
-						JOptionPane.showMessageDialog(null, "<html>GAME OVER<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>",
-								"미니게임 종료", JOptionPane.ERROR_MESSAGE);
-
-						// 미니게임 창 종료
-						dispose();
-						Player.currentMoney += score;
-					}
-
-					else {
-						leftedTimeInfo.setText(leftedTime + "초");
-						leftedTime--;
-					}
-				} 
-				else if (isMinigame == false) {
+				// 제한시간이 0 이하일 경우 || 제한시간 내에 게임을 클리어한 경우
+				if (leftedTime < 0 || isClear == true) {
 					timer.stop();
-					leftedTime = limitTime;
+
+					// 미니게임 종료 팝업창 생성
+					JOptionPane.showMessageDialog(null, "<html>[GAME CLEAR]<br>골드 획득에 성공했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "미니게임 종료",
+							JOptionPane.ERROR_MESSAGE);
+					
+					Player.currentMoney += score;
+					Frame_store.currentMoneyInfo.setText("보유 골드: " + Player.currentMoney + "골드");
+					
+					// 미니게임 창 종료
+					dispose();
+				}
+
+				else if (isAlive == false) {
+					timer.stop();
+
+					// 미니게임 종료 팝업창 생성
+					JOptionPane.showMessageDialog(null, "<html>[GAME OVER]<br>골드 획득에 실패했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "미니게임 종료",
+							JOptionPane.ERROR_MESSAGE);
+
+					// 미니게임 창 종료
+					dispose();
+				}
+
+				else {
+					leftedTimeInfo.setText(leftedTime + "초");
+					leftedTime--;
 				}
 			}
 
@@ -265,55 +244,44 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (isMinigame == true) {
-					ball.setLocation(ball.getX() + ballXspeed, ball.getY() + ballYspeed);
+				ball.setLocation(ball.getX() + ballXspeed, ball.getY() + ballYspeed);
 
-					// 공이 좌측 끝 마진에 위치할 경우
-					if (ball.getX() < leftMargin) {
-						ballXspeed = -ballXspeed;
-					}
-					// 공이 우측 끝 마진에 위치할 경우
-					else if (ball.getX() > rightMargin - ball.getWidth()) {
-						ballXspeed = -ballXspeed;
-					}
-					// 공이 위쪽 끝 마진에 위치할 경우
-					else if (ball.getY() < 0) {
-						ballYspeed = -ballYspeed;
-					}
-					// 공이 화면 밖으로 벗어난 경우
-					else if (ball.getY() > Main.SCREEN_HEIGHT) {
-						isAlive = false;
-						moveBall.stop();
-					}
-					// 공과 슬라이더의 y좌표가 동일할 경우
-					else if (ball.getY() == 540) {
-						
-						// 공과 슬라이더가 충돌했을 경우
-						if ((slider.getX() <= ball.getX() + 32) && (ball.getX() +32 <= slider.getX() + slider.getWidth())) {
-							ballYspeed = -ballYspeed;
-						} 
-						else {
-
-						}
-					}
-					// 게임을 클리어했을 경우
-					else if (isClear == true) {
-						moveBall.stop();
-						System.out.println("moveBall 멈춤");
-						System.out.println(isClear);
-					}
-					
-					checkCollision();
-					repaint();
-				} 
-				else if (isMinigame == false) {
+				// 공이 좌측 끝 마진에 위치할 경우
+				if (ball.getX() < leftMargin) {
+					ballXspeed = -ballXspeed;
+				}
+				// 공이 우측 끝 마진에 위치할 경우
+				else if (ball.getX() > rightMargin - ball.getWidth()) {
+					ballXspeed = -ballXspeed;
+				}
+				// 공이 위쪽 끝 마진에 위치할 경우
+				else if (ball.getY() < 0) {
+					ballYspeed = -ballYspeed;
+				}
+				// 공이 화면 밖으로 벗어난 경우
+				else if (ball.getY() > Main.SCREEN_HEIGHT) {
+					isAlive = false;
 					moveBall.stop();
-					System.out.println("moveBall 멈춤");
 				}
-				
-				else {
-					
+				// 공과 슬라이더의 y좌표가 동일할 경우
+				else if (ball.getY() == 540) {
+
+					// 공과 슬라이더가 충돌했을 경우
+					if ((slider.getX() <= ball.getX() + 32)
+							&& (ball.getX() + 32 <= slider.getX() + slider.getWidth())) {
+						ballYspeed = -ballYspeed;
+					} else {
+
+					}
 				}
+				// 게임을 클리어했을 경우
+				else if (isClear == true) {
+					moveBall.stop();
+				}
+
+				checkCollision();
+				repaint();
+
 			}
 		});
 		moveBall.start();
@@ -355,8 +323,11 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(backButton)) {
 
-			isMinigame = false;
+			timer.stop();
+			moveBall.stop();
 			score = 0;
+			leftedTime = limitTime;
+
 			dispose();
 		}
 
