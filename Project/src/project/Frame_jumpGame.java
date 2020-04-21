@@ -24,7 +24,11 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel cat;
 	
 	int score = 0;
-	int catYspeed = 50;
+	int catXspeed = 20;
+	int catYspeed = 40;
+	
+	boolean isClear = false;
+	boolean isAlive = true;
 	
 	Timer catTimer;
 
@@ -77,7 +81,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		jumpGameInfo.setBounds(0, 40, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(jumpGameInfo);
 
-		explanation = new JLabel("스페이바를 눌러서 다가오는 장애물을 피하세요!");
+		explanation = new JLabel("키보드의 방향키를 이용해서 다가오는 장애물들을 피하세요!");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
@@ -94,7 +98,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		cat = new JLabel(catImage);
 		cat.setVerticalAlignment(SwingConstants.TOP);
 		cat.setHorizontalAlignment(SwingConstants.CENTER);
-		cat.setBounds(200, 650, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
+		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
 		
 	}
@@ -104,7 +108,13 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cat.setLocation(cat.getX(), cat.getY() + 1);
+				
+				if(cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
+					cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
+				}
+				else {
+					cat.setLocation(cat.getX(), cat.getY() + 1);
+				}
 			}
 			
 		});
@@ -121,10 +131,54 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			cat.setLocation(cat.getX(), cat.getY() - catYspeed);
-			System.out.println(cat.getY());
-		}		
+		
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			// 고양이 이미지가 좌측 끝에 위치할 경우
+			if (cat.getX() <= 0) {
+				cat.setLocation(cat.getX(), cat.getY());
+			} 
+			else {
+				cat.setLocation(cat.getX() - catXspeed, cat.getY());
+			}
+		}
+
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			// 고양이 이미지가 우측 끝에 위치할 경우
+			if (cat.getX() >= Main.SCREEN_WIDTH - cat.getWidth()) {
+				cat.setLocation(cat.getX(), cat.getY());
+			} 
+			else {
+				cat.setLocation(cat.getX() + catXspeed, cat.getY());
+			}
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			// 고양이 이미지가 위쪽 끝에 위치할 경우
+			if (cat.getY() <= 0) {
+				cat.setLocation(cat.getX(), 0);
+			} 
+			else {
+				cat.setLocation(cat.getX(), cat.getY() - catYspeed);
+			}
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			// 고양이 이미지가 아래쪽 끝에 위치할 경우
+			if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
+				cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
+			} 
+			else {
+				cat.setLocation(cat.getX(), cat.getY() + catYspeed);
+			}
+		}
+
+		else {
+
+		}
+
+		System.out.println(cat.getX());
+		repaint();
+			
 	}
 
 	@Override
