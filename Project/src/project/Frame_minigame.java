@@ -179,6 +179,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 										
 					if (score >= 3300) {
 						isClear = true;
+						System.out.println(isClear);
 					}
 					else {
 						
@@ -206,7 +207,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 				if (isMinigame == true) {
 					// 제한시간이 0 이하일 경우 || 제한시간 내에 게임을 클리어한 경우
-					if (leftedTime < 0  || isClear == true) {
+					if (leftedTime < 0 || isClear == true) {
 						timer.stop();
 
 						// 미니게임 종료 팝업창 생성
@@ -295,14 +296,25 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 						}
 					}
+					// 게임을 클리어했을 경우
+					else if (isClear == true) {
+						moveBall.stop();
+						System.out.println("moveBall 멈춤");
+						System.out.println(isClear);
+					}
+					
 					checkCollision();
 					repaint();
 				} 
 				else if (isMinigame == false) {
 					moveBall.stop();
+					System.out.println("moveBall 멈춤");
+				}
+				
+				else {
+					
 				}
 			}
-
 		});
 		moveBall.start();
 	}
@@ -344,6 +356,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 		if (e.getSource().equals(backButton)) {
 
 			isMinigame = false;
+			score = 0;
 			dispose();
 		}
 
