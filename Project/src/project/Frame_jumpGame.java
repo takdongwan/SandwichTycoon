@@ -71,7 +71,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		setJLabel();
 
 		moveCat();
-		generateObstacles();
+		generateObstacle();
 
 	}
 
@@ -216,7 +216,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		repaint();
 	}
 
-	public void generateObstacles() {
+	public void generateObstacle() {
 
 		devilArrayList = new ArrayList<JLabel>();
 		bombArrayList = new ArrayList<JLabel>();
