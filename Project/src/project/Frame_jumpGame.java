@@ -67,8 +67,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		setJPanel();
 		setJLabel();
 
-		catTimer();
-		
+		moveCat();
 		generateObstacles();
 	}
 
@@ -127,15 +126,18 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	}
 
-	public void catTimer() {
+	public void moveCat() {
 		catTimer = new Timer(25, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				// cat이 화면 하단에 위치할 경우
 				if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
 					cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
-				} else {
+				} 
+				// 그 외의 경우 y위치를 계속해서 +1 --- 서서히 떨어지는 움직임 구현
+				else {
 					cat.setLocation(cat.getX(), cat.getY() + 1);
 				}
 			}
@@ -153,14 +155,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-//				if (devilArray[obstacleNumber].getX() > -64) {
-//					devilArray[obstacleNumber].setLocation(devilArray[obstacleNumber].getX() - obstacleXspeed, devilArray[obstacleNumber].getY());
-//				}
-//				else {
-//		//			devilArray[].remove(obstacleNumber);
-//				}
+				// obstacleDevil이 null이 아닐 경우
 				if (obstacleDevil != null) {
-					if (obstacleDevil.getX() > -64) {
+					// x좌표가 -64보다 클 경우 계속 -x 방향으로 이동
+					if (obstacleDevil.getX() >= -64) {
 						obstacleDevil.setLocation(obstacleDevil.getX() - 1, obstacleDevil.getY());
 						System.out.println("moveObstacles - obstacleDevil");
 					}
@@ -168,8 +166,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 						
 					}
 				}
+				// obstacleBomb이 null이 아닐 경우
 				else if (obstacleBomb != null) {
-					if (obstacleBomb.getX() > -64) {
+					// x좌표가 -64보다 클 경우 계속 -x 방향으로 이동
+					if (obstacleBomb.getX() >= -64) {
 						obstacleBomb.setLocation(obstacleBomb.getX() - 2, obstacleBomb.getY());
 						System.out.println("moveObstacles - obstacleBomb");
 
@@ -178,9 +178,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 						
 					}
 				}
-				
+				// obstacleCollision이 null이 아닐 경우
 				else if (obstacleCollision != null) {
-					if (obstacleCollision.getX() > -64) {
+					// x좌표가 -64보다 클 경우 계속 -x 방향으로 이동
+					if (obstacleCollision.getX() >= -64) {
 						obstacleCollision.setLocation(obstacleCollision.getX() - 3, obstacleCollision.getY());
 						System.out.println("moveObstacles - obstacleCollision");
 
@@ -189,9 +190,11 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 						
 					}
 				}
+				// 장애물들이 null인 경우
 				else {
 					
 				}
+				
 				repaint();
 			}
 
@@ -211,14 +214,18 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				// 랜덤한 장애물을 생성하기 위해 랜덤난수 생성
 				random = new Random();
 				randomObstacle = random.nextInt(3);
 				
+				// 랜덤난수가 0인 경우
 				if (randomObstacle == 0) {
 					
+					// 랜덤한 y위치 지정
 					random = new Random();
 					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
+					// 장애물 obstacleDevil 생성
 					obstacleDevil = new JLabel(devil_64);
 					obstacleDevil.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleDevil);
@@ -227,11 +234,14 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					System.out.println("devil 생성됨");
 					
 				}
+				// 랜덤난수가 1인 경우
 				else if (randomObstacle == 1) {
 					
+					// 랜덤한 y위치 지정
 					random = new Random();
 					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
+					// 장애물 obstacleBomb 생성
 					obstacleBomb = new JLabel(bomb_64);
 					obstacleBomb.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleBomb);
@@ -240,11 +250,14 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					System.out.println("bomb 생성됨");
 
 				}
+				// 랜덤난수가 2인 경우
 				else if (randomObstacle == 2) {
 					
+					// 랜덤한 y위치 지정
 					random = new Random();
 					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
+					// 장애물 obstacleCollision 생성
 					obstacleCollision = new JLabel(collision_64);
 					obstacleCollision.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleCollision);
@@ -273,7 +286,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 좌측 끝에 위치할 경우
 			if (cat.getX() <= -100) {
 				cat.setLocation(-100, cat.getY());
-			} else {
+			} 
+			else {
 				cat.setLocation(cat.getX() - catXspeed, cat.getY());
 			}
 		}
@@ -282,7 +296,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 우측 끝에 위치할 경우
 			if (cat.getX() >= Main.SCREEN_WIDTH - cat.getWidth()) {
 				cat.setLocation(cat.getX(), cat.getY());
-			} else {
+			}
+			else {
 				cat.setLocation(cat.getX() + catXspeed, cat.getY());
 			}
 		}
@@ -291,7 +306,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 위쪽 끝에 위치할 경우
 			if (cat.getY() <= 0) {
 				cat.setLocation(cat.getX(), 0);
-			} else {
+			} 
+			else {
 				cat.setLocation(cat.getX(), cat.getY() - catYspeed);
 			}
 		}
@@ -300,7 +316,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 아래쪽 끝에 위치할 경우
 			if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
 				cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
-			} else {
+			} 
+			else {
 				cat.setLocation(cat.getX(), cat.getY() + catYspeed);
 			}
 		}
