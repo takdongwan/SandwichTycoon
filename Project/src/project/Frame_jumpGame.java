@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -31,7 +32,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel obstacleCollision;
 
 	int score = 0;
-	int delayTime;
 	int randomObstacle;
 	int catXspeed = 20;
 	int catYspeed = 40;
@@ -46,16 +46,17 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	Timer obstacleMover;
 	Timer obstacleGenerator;
 	Random random;
-	
-	ArrayList<JLabel> obstacleArrayList;
-	
+
+	ArrayList<JLabel> devilArrayList;
+	ArrayList<JLabel> bombArrayList;
+	ArrayList<JLabel> collisionArrayList;
+
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
 	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage()
 			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
 
-	
 	public static void main(String[] args) {
 
 		new Frame_jumpGame();
@@ -69,6 +70,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 		moveCat();
 		generateObstacles();
+
 	}
 
 	public void setJFrame() {
@@ -135,7 +137,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				// cat이 화면 하단에 위치할 경우
 				if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
 					cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
-				} 
+				}
 				// 그 외의 경우 y위치를 계속해서 +1 --- 서서히 떨어지는 움직임 구현
 				else {
 					cat.setLocation(cat.getX(), cat.getY() + 1);
@@ -148,121 +150,118 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	}
 
-	public void moveObstacles() {
-		
-		obstacleMover = new Timer(25, new ActionListener() {
+	public void moveObstacle() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		Iterator<JLabel> devilIterator = devilArrayList.iterator();
+		Iterator<JLabel> bombIterator = bombArrayList.iterator();
+		Iterator<JLabel> collisionIterator = collisionArrayList.iterator();
 
-				// obstacleDevil이 null이 아닐 경우
-				if (obstacleDevil != null) {
-					// x좌표가 -64보다 클 경우 계속 -x 방향으로 이동
-					if (obstacleDevil.getX() >= -64) {
-						obstacleDevil.setLocation(obstacleDevil.getX() - 1, obstacleDevil.getY());
-						System.out.println("moveObstacles - obstacleDevil");
-					}
-					else {
-						
-					}
-				}
-				// obstacleBomb이 null이 아닐 경우
-				else if (obstacleBomb != null) {
-					// x좌표가 -64보다 클 경우 계속 -x 방향으로 이동
-					if (obstacleBomb.getX() >= -64) {
-						obstacleBomb.setLocation(obstacleBomb.getX() - 2, obstacleBomb.getY());
-						System.out.println("moveObstacles - obstacleBomb");
+		while (devilIterator.hasNext()) {
 
-					}
-					else {
-						
-					}
-				}
-				// obstacleCollision이 null이 아닐 경우
-				else if (obstacleCollision != null) {
-					// x좌표가 -64보다 클 경우 계속 -x 방향으로 이동
-					if (obstacleCollision.getX() >= -64) {
-						obstacleCollision.setLocation(obstacleCollision.getX() - 3, obstacleCollision.getY());
-						System.out.println("moveObstacles - obstacleCollision");
+			JLabel devilPosition = devilIterator.next();
+			devilPosition.setLocation(devilPosition.getX() - 100, devilPosition.getY());
 
-					}
-					else {
-						
-					}
-				}
-				// 장애물들이 null인 경우
-				else {
-					
-				}
-				
-				repaint();
+			if (devilPosition.getX() < -64) {
+				devilIterator.remove();
 			}
+			else {
+				
+			}
+		}
+		
+		while (bombIterator.hasNext()) {
 
-		});
-		obstacleMover.start();
+			JLabel bombPosition = bombIterator.next();
+			bombPosition.setLocation(bombPosition.getX() - 200, bombPosition.getY());
 
+			if (bombPosition.getX() < -64) {
+				bombIterator.remove();
+			}
+			else {
+				
+			}
+		}
+		
+		while (collisionIterator.hasNext()) {
+
+			JLabel collisionPosition = collisionIterator.next();
+			collisionPosition.setLocation(collisionPosition.getX() - 300, collisionPosition.getY());
+
+			if (collisionPosition.getX() < -64) {
+				collisionIterator.remove();
+			}
+			else {
+				
+			}
+		}
+
+		repaint();
 	}
 
 	public void generateObstacles() {
 
-		obstacleArrayList = new ArrayList<JLabel>();
-		
-		random = new Random();
-		delayTime = random.nextInt(6);
-		obstacleGenerator = new Timer(1000 * delayTime, new ActionListener() {
+		devilArrayList = new ArrayList<JLabel>();
+		bombArrayList = new ArrayList<JLabel>();
+		collisionArrayList = new ArrayList<JLabel>();
+
+		// 2초에 한 번 장애물 생성
+		obstacleGenerator = new Timer(2000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// 랜덤한 장애물을 생성하기 위해 랜덤난수 생성
 				random = new Random();
 				randomObstacle = random.nextInt(3);
-				
+
 				// 랜덤난수가 0인 경우
 				if (randomObstacle == 0) {
-					
+
 					// 랜덤한 y위치 지정
 					random = new Random();
 					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
 					// 장애물 obstacleDevil 생성
 					obstacleDevil = new JLabel(devil_64);
-					obstacleDevil.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					obstacleDevil.setBounds(Main.SCREEN_WIDTH, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleDevil);
-					
-					moveObstacles();
+					devilArrayList.add(obstacleDevil);
+					moveObstacle();
+
 					System.out.println("devil 생성됨");
-					
+
 				}
 				// 랜덤난수가 1인 경우
 				else if (randomObstacle == 1) {
-					
+
 					// 랜덤한 y위치 지정
 					random = new Random();
 					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
 					// 장애물 obstacleBomb 생성
 					obstacleBomb = new JLabel(bomb_64);
-					obstacleBomb.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					obstacleBomb.setBounds(Main.SCREEN_WIDTH, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleBomb);
-					
-					moveObstacles();
+					bombArrayList.add(obstacleBomb);
+					moveObstacle();
+
 					System.out.println("bomb 생성됨");
 
 				}
 				// 랜덤난수가 2인 경우
 				else if (randomObstacle == 2) {
-					
+
 					// 랜덤한 y위치 지정
 					random = new Random();
 					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
 					// 장애물 obstacleCollision 생성
 					obstacleCollision = new JLabel(collision_64);
-					obstacleCollision.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					obstacleCollision.setBounds(Main.SCREEN_WIDTH, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleCollision);
-					
-					moveObstacles();
+					collisionArrayList.add(obstacleCollision);
+					moveObstacle();
+
 					System.out.println("collision 생성됨");
 
 				}
@@ -286,8 +285,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 좌측 끝에 위치할 경우
 			if (cat.getX() <= -100) {
 				cat.setLocation(-100, cat.getY());
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX() - catXspeed, cat.getY());
 			}
 		}
@@ -296,8 +294,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 우측 끝에 위치할 경우
 			if (cat.getX() >= Main.SCREEN_WIDTH - cat.getWidth()) {
 				cat.setLocation(cat.getX(), cat.getY());
-			}
-			else {
+			} else {
 				cat.setLocation(cat.getX() + catXspeed, cat.getY());
 			}
 		}
@@ -306,8 +303,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 위쪽 끝에 위치할 경우
 			if (cat.getY() <= 0) {
 				cat.setLocation(cat.getX(), 0);
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX(), cat.getY() - catYspeed);
 			}
 		}
@@ -316,8 +312,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 고양이 이미지가 아래쪽 끝에 위치할 경우
 			if (cat.getY() >= Main.SCREEN_HEIGHT - cat.getHeight()) {
 				cat.setLocation(cat.getX(), Main.SCREEN_HEIGHT - cat.getHeight());
-			} 
-			else {
+			} else {
 				cat.setLocation(cat.getX(), cat.getY() + catYspeed);
 			}
 		}
