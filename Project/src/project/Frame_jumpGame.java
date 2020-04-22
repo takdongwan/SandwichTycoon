@@ -138,7 +138,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		jumpGameInfo.setForeground(Color.white);
 		jumpGamePanel.add(jumpGameInfo);
 
-		explanation = new JLabel("키보드의 방향키를 이용해서 다가오는 장애물들을 피하세요!");
+		explanation = new JLabel("키보드의 방향키를 이용해서 다가오는 장애물들을 피하고, 돈을 먹어 점수를 획득하세요!");
 		explanation.setVerticalAlignment(SwingConstants.TOP);
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
