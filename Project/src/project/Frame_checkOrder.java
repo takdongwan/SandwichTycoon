@@ -74,11 +74,11 @@ public class Frame_checkOrder extends JFrame{
 					String name = st.nextToken("\t ");
 					String num = st.nextToken("\t ");
 					if(num.equals(numText.getText().toString())) {
-						String price = st.nextToken("\t ");
-						String seats = st.nextToken("\t ");
+						String price = st.nextToken("\t ");//가격
+						String sequenceNumbers = st.nextToken("\t ");//주문순서
 						String time = st.nextToken("\t");
 						String etc = "Time : "+time+"   PRICE : "+price;
-						new MessageBox(new JFrame("") ,"sandwich name: "+name," productNumber  : "+num, etc," sell  : "+seats, false,null);
+						new MessageBox(new JFrame("") ,"Sell List: "+ name," productNumber  : "+num, etc," sell  : "+sequenceNumbers, false,null);
 						numError =true;
 					}
 				}

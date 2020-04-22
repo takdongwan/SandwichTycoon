@@ -46,13 +46,15 @@ public class TycoonGame extends JFrame implements ItemListener {
 	
 	private ImageIcon buyButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/buyButtonEntered.png"));
 	private ImageIcon sellButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/sellButtonEntered.png"));
-	private static ImageIcon sellButtonBasicImage = new ImageIcon(
-			Main.class.getResource("../images/sellButtonBasic.png"));
-	private static ImageIcon buyButtonBasicImage = new ImageIcon(
-			Main.class.getResource("../images/buyButtonBasic.png"));
+
+	private static ImageIcon sellButtonBasicImage = new ImageIcon(Main.class.getResource("../images/sellButtonBasic.png"));
+	private static ImageIcon buyButtonBasicImage = new ImageIcon(Main.class.getResource("../images/buyButtonBasic.png"));
+
+
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
-	private static ImageIcon backButtonBasicImage = new ImageIcon(
-			Main.class.getResource("../images/backButtonEntered.png"));
+
+	private static ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+
 
 	private static Image background = new ImageIcon(Main.class.getResource("../images/introbackGround.png")).getImage();
 	private JLabel menuBar = new JLabel(new ImageIcon(Main.class.getResource("../images/menuBar.png")));
@@ -77,19 +79,20 @@ public class TycoonGame extends JFrame implements ItemListener {
 
 	private boolean isTimerRun = false;
 	private static boolean isMainScreen = false;
-	private boolean isGameScreen = false;
+	private boolean isGameScreen =false;
 	private boolean isSellMain = false;
 	private int nowSelected = 0;
 
 	Frame_order orderFrame;
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
-	Frame_sell sellFrame;
+
+  Frame_sell  sellFrame;
 	static JLabel gameExplain;
 	JLabel name;
 	static JLabel menuLabel;
 	static JLabel beverageLabel;
-	Choice sandwichName, selectTime;
+	Choice sandwichName,selectTime; 
 
 	// ArrayList<SandwichMenu> sandwichList = new ArrayList<SandwichMenu>() ;
 
