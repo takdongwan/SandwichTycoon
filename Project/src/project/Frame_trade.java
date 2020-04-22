@@ -203,9 +203,11 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 
 	public void setMerchantPrice() {
 
+		// 10 ~ 100까지의 랜덤난수 설정
 		random = new Random();
-		randomNumber = (random.nextInt(9) + 1) * 10;
+		randomNumber = (random.nextInt(10) + 1) * 10;
 
+		// 흥정가 = 원래 가격 - 랜덤난수
 		merchantPrice = Frame_store.totalAmount - randomNumber;
 		System.out.println(merchantPrice);
 	}
