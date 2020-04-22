@@ -131,6 +131,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	}
 
 	public void moveCat() {
+		
 		catTimer = new Timer(25, new ActionListener() {
 
 			@Override
@@ -162,53 +163,49 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		while (devilIterator.hasNext()) {
 
 			JLabel devilPosition = devilIterator.next();
-			devilPosition.setLocation(devilPosition.getX() - 1, devilPosition.getY());
 
 			if (devilPosition.getX() < -64) {
 				devilIterator.remove();
 			}
 			else {
-				
+				devilPosition.setLocation(devilPosition.getX() - 1, devilPosition.getY());
 			}
 		}
 		
 		while (bombIterator.hasNext()) {
 
 			JLabel bombPosition = bombIterator.next();
-			bombPosition.setLocation(bombPosition.getX() - 2, bombPosition.getY());
 
 			if (bombPosition.getX() < -64) {
 				bombIterator.remove();
 			}
 			else {
-				
+				bombPosition.setLocation(bombPosition.getX() - 2, bombPosition.getY());
 			}
 		}
 		
 		while (collisionIterator.hasNext()) {
 
 			JLabel collisionPosition = collisionIterator.next();
-			collisionPosition.setLocation(collisionPosition.getX() - 3, collisionPosition.getY());
 
 			if (collisionPosition.getX() < -64) {
 				collisionIterator.remove();
 			}
 			else {
-				
+				collisionPosition.setLocation(collisionPosition.getX() - 3, collisionPosition.getY());
 			}
 		}
 		
 		while (emptyIterator.hasNext()) {
 
 			JLabel emptyPosition = emptyIterator.next();
-			emptyPosition.setLocation(emptyPosition.getX(), emptyPosition.getY());
 
 			if (emptyPosition.getX() == Main.SCREEN_WIDTH) {
 				emptyIterator.remove();
 				System.out.println("emptyIterator 제거됨");
 			}
 			else {
-				
+				emptyPosition.setLocation(emptyPosition.getX(), emptyPosition.getY());
 			}
 		}
 		
