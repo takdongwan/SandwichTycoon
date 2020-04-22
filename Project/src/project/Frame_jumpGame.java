@@ -26,6 +26,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel explanation;
 	JLabel scoreInfo;
 	JLabel cat;
+	JLabel life;
 
 	JLabel obstacleDevil;
 	JLabel obstacleBomb;
@@ -58,6 +59,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	ArrayList<JLabel> collisionArrayList;
 	ArrayList<JLabel> emptyArrayList;
 
+	private ImageIcon life_positive_64 = new ImageIcon(Main.class.getResource("../images/life_positive_64.png"));
+	private ImageIcon life_negative_64 = new ImageIcon(Main.class.getResource("../images/life_negative_64.png"));
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
@@ -132,6 +135,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		cat.setHorizontalAlignment(SwingConstants.CENTER);
 		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
+		
+	//	life = new JLabel()
 
 	}
 
