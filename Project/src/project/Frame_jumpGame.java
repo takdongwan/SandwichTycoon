@@ -78,11 +78,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
-	public static void main(String[] args) {
-
-		new Frame_jumpGame();
-
-	}
+	
+//	public static void main(String[] args) {
+//
+//		new Frame_jumpGame();
+//
+//	}
 
 	public Frame_jumpGame() {
 		setJFrame();
@@ -135,7 +136,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		explanation.setBounds(0, 70, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(explanation);
 
-		scoreInfo = new JLabel("현재 점수: " + score);
+		scoreInfo = new JLabel("SCORE: " + score);
 		scoreInfo.setVerticalAlignment(SwingConstants.TOP);
 		scoreInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreInfo.setFont(scoreInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
@@ -439,8 +440,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 			// devilArrayList의 obstacleRect 생성
 			for (int i = 0; i < moneyArrayList.size(); i++) {
 				moneyRect = new Rectangle(moneyArrayList.get(i).getX() + 10, moneyArrayList.get(i).getY() + 10,
-						moneyArrayList.get(i).getWidth() - 20, moneyArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비,
-																										// 높이
+						moneyArrayList.get(i).getWidth() - 20, moneyArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비, 높이
 
 				// catRect과 obstacleRect이 충돌했을 경우
 				if (catRect.intersects(moneyRect)) {
@@ -465,6 +465,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	}
 
 	public void gameSystem() {
+		
 		if (life <= 0) {
 
 			catTimer.stop();
@@ -474,6 +475,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 			// 미니게임 종료 팝업창 생성
 			JOptionPane.showMessageDialog(null, "<html>GAME OVER!<br>OK 버튼을 누르면 메인 화면으로 돌아갑니다.</html>", "[GAME OVER]",
 					JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+
 		} else {
 
 		}
@@ -539,6 +542,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		// 되돌아가기 버튼 클릭했을 경우
 		if (e.getSource().equals(backButton)) {
 
@@ -546,13 +550,14 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 			obstacleGenerator.stop();
 			score = 0;
 			life = 3;
-
 			dispose();
+
 		}
 
 		else {
 
 		}
+
 	}
 
 	@Override
