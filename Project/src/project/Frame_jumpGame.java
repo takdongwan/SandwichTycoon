@@ -7,18 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-public class Frame_jumpGame extends JFrame implements KeyListener {
+public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener, ActionListener {
 
 	JPanel jumpGamePanel;
 
@@ -32,6 +35,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel obstacleBomb;
 	JLabel obstacleCollision;
 	JLabel obstacleEmpty;
+
+	JButton backButton;
 
 	int score = 0;
 	int life = 3;
@@ -59,14 +64,16 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	ArrayList<JLabel> bombArrayList;
 	ArrayList<JLabel> collisionArrayList;
 	ArrayList<JLabel> emptyArrayList;
-	
+
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
 	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage()
 			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
+	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
+	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
-	
+
 	public static void main(String[] args) {
 
 		new Frame_jumpGame();
@@ -77,6 +84,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		setJFrame();
 		setJPanel();
 		setJLabel();
+		setJButton();
 
 		moveCat();
 		generateObstacle();
@@ -135,7 +143,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		cat.setHorizontalAlignment(SwingConstants.CENTER);
 		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
-		
+
 		lifeInfo = new JLabel("LIFE: " + life);
 		lifeInfo.setVerticalAlignment(SwingConstants.TOP);
 		lifeInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,6 +151,18 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		lifeInfo.setBounds(0, 630, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(lifeInfo);
 
+	}
+
+	public void setJButton() {
+
+		// 되돌아가기 버튼
+		backButton = new JButton(backButtonBasicImage);
+		backButton.setBounds(20, 30, 60, 60); // x좌표, y좌표, 너비, 높이
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.addMouseListener(this);
+		backButton.addActionListener(this);
+		jumpGamePanel.add(backButton);
 	}
 
 	public void moveCat() {
@@ -313,7 +333,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	public void checkCollision() {
 
-		catRect = new Rectangle(cat.getX() + 230, cat.getY(), cat.getWidth() - 230, cat.getHeight()); // x좌표, y좌표, 너비, 높이
+		catRect = new Rectangle(cat.getX() + 230, cat.getY(), cat.getWidth() - 230, cat.getHeight()); // x좌표, y좌표, 너비,
+																										// 높이
 
 		// ArrayList가 null이 아닐 경우
 		if ((devilArrayList != null) || (bombArrayList != null) || (collisionArrayList != null)) {
@@ -335,8 +356,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					devilArrayList.get(i).setLocation(-100, -100);
 					devilArrayList.remove(i);
 					System.out.println("devilArrayList 충돌함");
-				} 
-				else {
+				} else {
 				}
 			}
 
@@ -357,8 +377,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					bombArrayList.remove(i);
 					System.out.println("bombArrayList 충돌함");
 
-				} 
-				else {
+				} else {
 				}
 			}
 
@@ -374,18 +393,17 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					// life 1 차감
 					life -= 1;
 					lifeInfo.setText("LIFE: " + life);
-					
+
 					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
 					collisionArrayList.get(i).setLocation(-100, -100);
 					collisionArrayList.remove(i);
 					System.out.println("collisionArrayList 충돌함");
 
-				} 
-				else {
+				} else {
 				}
 			}
-		} 
-		
+		}
+
 		else {
 		}
 	}
@@ -446,6 +464,42 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
