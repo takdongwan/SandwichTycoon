@@ -37,7 +37,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	int catYspeed = 40;
 	int obstacleNumber;
 	int obstacle_yPosition;
-	int obstacleXspeed = 30;
+	int obstacleXspeed;
 
 	boolean isClear = false;
 	boolean isAlive = true;
@@ -148,7 +148,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 	public void moveObstacles() {
 		
-		obstacleMover = new Timer(1000, new ActionListener() {
+		obstacleMover = new Timer(25, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -159,9 +159,44 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 //				else {
 //		//			devilArray[].remove(obstacleNumber);
 //				}
+				if (obstacleDevil != null) {
+					if (obstacleDevil.getX() > -64) {
+						obstacleDevil.setLocation(obstacleDevil.getX() - 1, obstacleDevil.getY());
+						System.out.println("moveObstacles - obstacleDevil");
+					}
+					else {
+						
+					}
+				}
+				else if (obstacleBomb != null) {
+					if (obstacleBomb.getX() > -64) {
+						obstacleBomb.setLocation(obstacleBomb.getX() - 2, obstacleBomb.getY());
+						System.out.println("moveObstacles - obstacleBomb");
+
+					}
+					else {
+						
+					}
+				}
+				
+				else if (obstacleCollision != null) {
+					if (obstacleCollision.getX() > -64) {
+						obstacleCollision.setLocation(obstacleCollision.getX() - 3, obstacleCollision.getY());
+						System.out.println("moveObstacles - obstacleCollision");
+
+					}
+					else {
+						
+					}
+				}
+				else {
+					
+				}
+				repaint();
 			}
 
 		});
+		obstacleMover.start();
 
 	}
 
@@ -171,7 +206,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		
 		random = new Random();
 		delayTime = random.nextInt(6);
-		obstacleGenerator = new Timer(1500 * delayTime, new ActionListener() {
+		obstacleGenerator = new Timer(1000 * delayTime, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -188,7 +223,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					obstacleDevil.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleDevil);
 					
-					obstacleArrayList.add(obstacleDevil);
+					moveObstacles();
 					System.out.println("devil 생성됨");
 					
 				}
@@ -201,7 +236,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					obstacleBomb.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleBomb);
 					
-					obstacleArrayList.add(obstacleBomb);
+					moveObstacles();
 					System.out.println("bomb 생성됨");
 
 				}
@@ -214,7 +249,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					obstacleCollision.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
 					jumpGamePanel.add(obstacleCollision);
 					
-					obstacleArrayList.add(obstacleCollision);
+					moveObstacles();
 					System.out.println("collision 생성됨");
 
 				}
