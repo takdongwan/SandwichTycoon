@@ -187,7 +187,7 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 		storePanel.add(buy);
 
 		// 구매수량 초기화 버튼
-		init = new JButton("초기화하기");
+		init = new JButton("재료선택 초기화하기");
 		init.setBounds(325 + 320, 530, 200, 60); // x좌표, y좌표, 너비, 높이
 		init.addMouseListener(this);
 		init.addActionListener(this);
