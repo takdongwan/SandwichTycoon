@@ -154,6 +154,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 		moneyArray = new JLabel[moneyRow][moneyColumn];
 
+		// 3행 11열로 JLabel 배열 초기화
 		for (int i = 0; i < moneyRow; i++) {
 			for (int j = 0; j < moneyColumn; j++) {
 
@@ -165,20 +166,28 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 	}
 
 	public void checkCollision() {
+		
 		for (int i = 0; i < moneyRow; i++) {
 			for (int j = 0; j < moneyColumn; j++) {
 
+				// 충돌체크를 위한 Rectangle2D 객체 생성
 				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX() + 20, moneyArray[i][j].getY() + 20,
 						moneyArray[i][j].getWidth() - 20, moneyArray[i][j].getHeight() - 20);
 				ballRectangle = new Rectangle2D.Double(ball.getX() + 20, ball.getY() + 20, ball.getWidth() - 20, ball.getHeight() - 20);
 
+				// 공과 돈 이미지가 충돌했을 경우
 				if (ballRectangle.intersects(moneyRectangle)) {
+					
 					score += 100;
 					scoreInfo.setText("획득 골드: " + score);
+					
+					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
 					moneyArray[i][j].setLocation(-100, -100);
 
+					// 돈에 충돌했으므로 y축 이동 반전
 					ballYspeed = -ballYspeed;
 					
+					// 스코어 3300 이상 달성시 게임 클리어
 					if (score >= 3300) {
 						isClear = true;
 					} 
@@ -318,6 +327,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// 되돌아가기 버튼 클릭했을 경우
 		if (e.getSource().equals(backButton)) {
 
 			timer.stop();
