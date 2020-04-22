@@ -160,10 +160,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		Iterator<JLabel> collisionIterator = collisionArrayList.iterator();
 		Iterator<JLabel> emptyIterator = emptyArrayList.iterator();
 
+		// devilArrayList 움직임 구현
 		while (devilIterator.hasNext()) {
 
 			JLabel devilPosition = devilIterator.next();
-
+			
+			// 장애물이 화면 외 범위로 이동을 완료했을 경우
 			if (devilPosition.getX() < -64) {
 				devilIterator.remove();
 			}
@@ -171,11 +173,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				devilPosition.setLocation(devilPosition.getX() - 1, devilPosition.getY());
 			}
 		}
-		
+		// bombArrayList 움직임 구현
 		while (bombIterator.hasNext()) {
 
 			JLabel bombPosition = bombIterator.next();
 
+			// 장애물이 화면 외 범위로 이동을 완료했을 경우
 			if (bombPosition.getX() < -64) {
 				bombIterator.remove();
 			}
@@ -183,11 +186,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				bombPosition.setLocation(bombPosition.getX() - 2, bombPosition.getY());
 			}
 		}
-		
+		// collisionArrayList 움직임 구현
 		while (collisionIterator.hasNext()) {
 
 			JLabel collisionPosition = collisionIterator.next();
 
+			// 장애물이 화면 외 범위로 이동을 완료했을 경우
 			if (collisionPosition.getX() < -64) {
 				collisionIterator.remove();
 			}
@@ -195,11 +199,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				collisionPosition.setLocation(collisionPosition.getX() - 3, collisionPosition.getY());
 			}
 		}
-		
+		// 연속적인 화면 움직임을 위한 emptyArrayList
 		while (emptyIterator.hasNext()) {
 
 			JLabel emptyPosition = emptyIterator.next();
 
+			// 생성과 동시에 제거됨
 			if (emptyPosition.getX() == Main.SCREEN_WIDTH) {
 				emptyIterator.remove();
 				System.out.println("emptyIterator 제거됨");
@@ -227,7 +232,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			public void actionPerformed(ActionEvent e) {
 
 				
-				// 랜덤한 장애물을 생성하기 위해 랜덤난수 생성
+				// 랜덤한 타이밍에 랜덤한 장애물을 생성하기 위해 랜덤난수 생성
 				random = new Random();
 				randomObstacle = random.nextInt(200);
 
@@ -279,6 +284,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					System.out.println("collision 생성됨");
 
 				}
+				// 랜덤난수가 0, 1, 2가 아닐 경우 빈 JLabel 객체 생성
 				else {
 					obstacleEmpty = new JLabel("");
 					obstacleEmpty.setBounds(Main.SCREEN_WIDTH, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
