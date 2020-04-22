@@ -135,6 +135,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		jumpGameInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		jumpGameInfo.setFont(jumpGameInfo.getFont().deriveFont(20.0f)); // 폰트 사이즈 20
 		jumpGameInfo.setBounds(0, 40, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		jumpGameInfo.setForeground(Color.white);
 		jumpGamePanel.add(jumpGameInfo);
 
 		explanation = new JLabel("키보드의 방향키를 이용해서 다가오는 장애물들을 피하세요!");
@@ -142,6 +143,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		explanation.setHorizontalAlignment(SwingConstants.CENTER);
 		explanation.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		explanation.setBounds(0, 70, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		explanation.setForeground(Color.white);
 		jumpGamePanel.add(explanation);
 
 		scoreInfo = new JLabel("SCORE: " + score);
@@ -149,12 +151,14 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		scoreInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreInfo.setFont(scoreInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		scoreInfo.setBounds(0, 650, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		scoreInfo.setForeground(Color.white);
 		jumpGamePanel.add(scoreInfo);
 
 		cat = new JLabel(catImage);
 		cat.setVerticalAlignment(SwingConstants.TOP);
 		cat.setHorizontalAlignment(SwingConstants.CENTER);
 		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
+		cat.setForeground(Color.white);
 		jumpGamePanel.add(cat);
 
 		lifeInfo = new JLabel("LIFE: " + life);
@@ -162,6 +166,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		lifeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lifeInfo.setFont(lifeInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		lifeInfo.setBounds(0, 630, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		lifeInfo.setForeground(Color.white);
 		jumpGamePanel.add(lifeInfo);
 	
 	}
