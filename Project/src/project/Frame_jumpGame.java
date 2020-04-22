@@ -26,6 +26,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel explanation;
 	JLabel scoreInfo;
 	JLabel cat;
+	JLabel lifeInfo;
 	JLabel life;
 
 	JLabel obstacleDevil;
@@ -59,8 +60,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	ArrayList<JLabel> collisionArrayList;
 	ArrayList<JLabel> emptyArrayList;
 
-	private ImageIcon life_positive_64 = new ImageIcon(Main.class.getResource("../images/life_positive_64.png"));
-	private ImageIcon life_negative_64 = new ImageIcon(Main.class.getResource("../images/life_negative_64.png"));
+	private ImageIcon life_positive_32 = new ImageIcon(Main.class.getResource("../images/life_positive_32.png"));
+	private ImageIcon life_negative_32 = new ImageIcon(Main.class.getResource("../images/life_negative_32.png"));
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
@@ -126,7 +127,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		scoreInfo = new JLabel("현재 점수: " + score);
 		scoreInfo.setVerticalAlignment(SwingConstants.TOP);
 		scoreInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		scoreInfo.setFont(explanation.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
+		scoreInfo.setFont(scoreInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		scoreInfo.setBounds(0, 650, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(scoreInfo);
 
@@ -136,7 +137,16 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
 		
-	//	life = new JLabel()
+		lifeInfo = new JLabel("LIFE: ");
+		lifeInfo.setVerticalAlignment(SwingConstants.TOP);
+		lifeInfo.setHorizontalAlignment(SwingConstants.LEFT);
+		lifeInfo.setFont(lifeInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
+		lifeInfo.setBounds(100, 100, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		jumpGamePanel.add(lifeInfo);
+		
+		life = new JLabel(life_positive_32);
+		life.setBounds(130, 100, life_positive_32.getIconWidth(), life_positive_32.getIconHeight());
+		jumpGamePanel.add(life);
 
 	}
 
@@ -336,8 +346,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				bombRect = new Rectangle(bombArrayList.get(i).getX() + 10, bombArrayList.get(i).getY() + 10,
 						bombArrayList.get(i).getWidth() - 20, bombArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비,
 																										// 높이
-
-				System.out.println(bombRect.x);
 				// catRect과 obstacleRect이 충돌했을 경우
 				if (catRect.intersects(bombRect)) {
 
