@@ -95,7 +95,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 		moveCat();
 		generateObstacle();
-	//	setBackground();
 
 	}
 
@@ -123,6 +122,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		jumpGamePanel.addKeyListener(this);
 		getContentPane().add(jumpGamePanel);
 
+		// 배경 이미지 JLabel
 		background = new JLabel(backgroundImage);
 		background.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		getContentPane().add(background);
@@ -183,12 +183,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		jumpGamePanel.add(backButton);
 	}
 	
-//	public void setBackground() {
-//		background = new JLabel(backgroundImage);
-//		background.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
-//		jumpGamePanel.add(background);
-//	}
-
 	public void moveCat() {
 
 		catTimer = new Timer(25, new ActionListener() {
@@ -295,7 +289,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		collisionArrayList = new ArrayList<JLabel>();
 		emptyArrayList = new ArrayList<JLabel>();
 
-		// 2초에 한 번 장애물 생성
 		obstacleGenerator = new Timer(25, new ActionListener() {
 
 			@Override
@@ -387,8 +380,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	public void checkCollision() {
 
-		catRect = new Rectangle(cat.getX() + 230, cat.getY(), cat.getWidth() - 230, cat.getHeight()); // x좌표, y좌표, 너비,
-																										// 높이
+		catRect = new Rectangle(cat.getX() + 230, cat.getY(), cat.getWidth() - 230, cat.getHeight()); // x좌표, y좌표, 너비, 높이
 
 		// ArrayList가 null이 아닐 경우
 		if ((devilArrayList != null) || (bombArrayList != null) || (collisionArrayList != null)) {
@@ -396,8 +388,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 			// devilArrayList의 obstacleRect 생성
 			for (int i = 0; i < devilArrayList.size(); i++) {
 				devilRect = new Rectangle(devilArrayList.get(i).getX() + 10, devilArrayList.get(i).getY() + 10,
-						devilArrayList.get(i).getWidth() - 20, devilArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비,
-																										// 높이
+						devilArrayList.get(i).getWidth() - 20, devilArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비, 높이
 
 				// catRect과 obstacleRect이 충돌했을 경우
 				if (catRect.intersects(devilRect)) {
@@ -480,10 +471,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		else {
 		}
 
-		gameSystem();
+		checkGameOver();
 	}
 
-	public void gameSystem() {
+	public void checkGameOver() {
 		
 		if (life <= 0) {
 
@@ -503,7 +494,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -555,7 +545,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
