@@ -1,6 +1,7 @@
 package project;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -51,7 +53,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	boolean isAlive = true;
 
 	Timer catTimer;
-	Timer obstacleMover;
 	Timer obstacleGenerator;
 	Random random;
 
@@ -72,7 +73,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
-
 
 	public static void main(String[] args) {
 
@@ -406,6 +406,24 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 		else {
 		}
+		
+		gameSystem();
+	}
+	
+	public void gameSystem() {
+		if (life <= 0) {
+			
+			catTimer.stop();
+			obstacleGenerator.stop();
+			score = 0;
+			life = 3;
+			// 미니게임 종료 팝업창 생성
+			JOptionPane.showMessageDialog(null, "<html>GAME OVER!<br>OK 버튼을 누르면 메인 화면으로 돌아갑니다.</html>", "[GAME OVER]",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			
+		}
 	}
 
 	@Override
@@ -468,38 +486,46 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+		// 되돌아가기 버튼 클릭했을 경우
+		if (e.getSource().equals(backButton)) {
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+			catTimer.stop();
+			obstacleGenerator.stop();
+			score = 0;
+			life = 3;
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+			dispose();
+		}
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		else {
+
+		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		backButton.setIcon(backButtonEnteredImage);
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		backButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		backButton.setIcon(backButtonBasicImage);
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 	}
 
 }

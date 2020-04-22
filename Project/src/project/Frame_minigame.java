@@ -218,7 +218,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 					// 미니게임 종료 팝업창 생성
 					JOptionPane.showMessageDialog(null, "<html>골드 획득에 성공했습니다!<br>OK 버튼을 누르면 상점으로 돌아갑니다.</html>", "[GAME CLEAR]",
-							JOptionPane.ERROR_MESSAGE);
+							JOptionPane.INFORMATION_MESSAGE);
 					
 					Player.currentMoney += score;
 					Frame_store.currentMoneyInfo.setText("보유 골드: " + Player.currentMoney + "골드");
