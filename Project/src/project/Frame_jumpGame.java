@@ -27,7 +27,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel scoreInfo;
 	JLabel cat;
 	JLabel lifeInfo;
-	JLabel life;
 
 	JLabel obstacleDevil;
 	JLabel obstacleBomb;
@@ -35,6 +34,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel obstacleEmpty;
 
 	int score = 0;
+	int life = 3;
 	int randomObstacle;
 	int catXspeed = 20;
 	int catYspeed = 40;
@@ -59,15 +59,14 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	ArrayList<JLabel> bombArrayList;
 	ArrayList<JLabel> collisionArrayList;
 	ArrayList<JLabel> emptyArrayList;
-
-	private ImageIcon life_positive_32 = new ImageIcon(Main.class.getResource("../images/life_positive_32.png"));
-	private ImageIcon life_negative_32 = new ImageIcon(Main.class.getResource("../images/life_negative_32.png"));
+	
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
 	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage()
 			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
 
+	
 	public static void main(String[] args) {
 
 		new Frame_jumpGame();
@@ -137,16 +136,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		cat.setBounds(200, 300, catImage.getIconWidth(), catImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(cat);
 		
-		lifeInfo = new JLabel("LIFE: ");
+		lifeInfo = new JLabel("LIFE: " + life);
 		lifeInfo.setVerticalAlignment(SwingConstants.TOP);
-		lifeInfo.setHorizontalAlignment(SwingConstants.LEFT);
+		lifeInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lifeInfo.setFont(lifeInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
-		lifeInfo.setBounds(100, 100, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
+		lifeInfo.setBounds(0, 630, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(lifeInfo);
-		
-		life = new JLabel(life_positive_32);
-		life.setBounds(130, 100, life_positive_32.getIconWidth(), life_positive_32.getIconHeight());
-		jumpGamePanel.add(life);
 
 	}
 
@@ -332,6 +327,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				// catRect과 obstacleRect이 충돌했을 경우
 				if (catRect.intersects(devilRect)) {
 
+					// life 1 차감
+					life -= 1;
+					lifeInfo.setText("LIFE: " + life);
+
 					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
 					devilArrayList.get(i).setLocation(-100, -100);
 					devilArrayList.remove(i);
@@ -348,6 +347,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 																										// 높이
 				// catRect과 obstacleRect이 충돌했을 경우
 				if (catRect.intersects(bombRect)) {
+
+					// life 1 차감
+					life -= 1;
+					lifeInfo.setText("LIFE: " + life);
 
 					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
 					bombArrayList.get(i).setLocation(-100, -100);
@@ -368,6 +371,10 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 				// catRect과 obstacleRect이 충돌했을 경우
 				if (catRect.intersects(collisionRect)) {
 
+					// life 1 차감
+					life -= 1;
+					lifeInfo.setText("LIFE: " + life);
+					
 					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
 					collisionArrayList.get(i).setLocation(-100, -100);
 					collisionArrayList.remove(i);
