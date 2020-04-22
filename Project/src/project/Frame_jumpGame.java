@@ -33,6 +33,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	JLabel cat;
 	JLabel lifeInfo;
 
+	JLabel obstacleMoney;
 	JLabel obstacleDevil;
 	JLabel obstacleBomb;
 	JLabel obstacleCollision;
@@ -44,7 +45,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	int life = 3;
 	int randomObstacle;
 	int catXspeed = 20;
-	int catYspeed = 40;
+	int catYspeed = 20;
 	int obstacleNumber;
 	int obstacle_yPosition;
 	int obstacleXspeed;
@@ -57,15 +58,18 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	Random random;
 
 	Rectangle catRect;
+	Rectangle moneyRect;
 	Rectangle devilRect;
 	Rectangle bombRect;
 	Rectangle collisionRect;
 
+	ArrayList<JLabel> moneyArrayList;
 	ArrayList<JLabel> devilArrayList;
 	ArrayList<JLabel> bombArrayList;
 	ArrayList<JLabel> collisionArrayList;
 	ArrayList<JLabel> emptyArrayList;
 
+	private ImageIcon money_64 = new ImageIcon(Main.class.getResource("../images/moneyWithWing_64.png"));
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
@@ -195,6 +199,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		Iterator<JLabel> devilIterator = devilArrayList.iterator();
 		Iterator<JLabel> bombIterator = bombArrayList.iterator();
 		Iterator<JLabel> collisionIterator = collisionArrayList.iterator();
+		Iterator<JLabel> moneyIterator = moneyArrayList.iterator();
 		Iterator<JLabel> emptyIterator = emptyArrayList.iterator();
 
 		// devilArrayList 움직임 구현
@@ -233,6 +238,18 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 				collisionPosition.setLocation(collisionPosition.getX() - 3, collisionPosition.getY());
 			}
 		}
+		// moneyArrayList 움직임 구현
+		while (moneyIterator.hasNext()) {
+
+			JLabel moneyPosition = moneyIterator.next();
+
+			// 장애물이 화면 외 범위로 이동을 완료했을 경우
+			if (moneyPosition.getX() < -64) {
+				moneyIterator.remove();
+			} else {
+				moneyPosition.setLocation(moneyPosition.getX() - 4, moneyPosition.getY());
+			}
+		}
 		// 연속적인 화면 움직임을 위한 emptyArrayList
 		while (emptyIterator.hasNext()) {
 
@@ -252,6 +269,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	public void generateObstacle() {
 
+		moneyArrayList = new ArrayList<JLabel>();
 		devilArrayList = new ArrayList<JLabel>();
 		bombArrayList = new ArrayList<JLabel>();
 		collisionArrayList = new ArrayList<JLabel>();
@@ -315,7 +333,23 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 					System.out.println("collision 생성됨");
 
 				}
-				// 랜덤난수가 0, 1, 2가 아닐 경우 빈 JLabel 객체 생성
+				// 랜덤난수가 3인 경우 - obstacleMoney 생성
+				else if (randomObstacle == 3) {
+
+					// 랜덤한 y위치 지정
+					random = new Random();
+					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+
+					obstacleMoney = new JLabel(money_64);
+					obstacleMoney.setBounds(Main.SCREEN_WIDTH, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					jumpGamePanel.add(obstacleMoney);
+					moneyArrayList.add(obstacleMoney);
+					moveObstacle();
+
+					System.out.println("money 생성됨");
+
+				}
+				// 랜덤난수가 0, 1, 2, 3이 아닐 경우 빈 JLabel 객체 생성
 				else {
 					obstacleEmpty = new JLabel("");
 					obstacleEmpty.setBounds(Main.SCREEN_WIDTH, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
@@ -402,17 +436,37 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 				} else {
 				}
 			}
+			// devilArrayList의 obstacleRect 생성
+			for (int i = 0; i < moneyArrayList.size(); i++) {
+				moneyRect = new Rectangle(moneyArrayList.get(i).getX() + 10, moneyArrayList.get(i).getY() + 10,
+						moneyArrayList.get(i).getWidth() - 20, moneyArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비,
+																										// 높이
+
+				// catRect과 obstacleRect이 충돌했을 경우
+				if (catRect.intersects(moneyRect)) {
+
+					// life 1 차감
+					score += 100;
+					scoreInfo.setText("SCORE: " + score);
+
+					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
+					moneyArrayList.get(i).setLocation(-100, -100);
+					moneyArrayList.remove(i);
+					System.out.println("moneyArrayList 충돌함");
+				} else {
+				}
+			}
 		}
 
 		else {
 		}
-		
+
 		gameSystem();
 	}
-	
+
 	public void gameSystem() {
 		if (life <= 0) {
-			
+
 			catTimer.stop();
 			obstacleGenerator.stop();
 			score = 0;
@@ -420,9 +474,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 			// 미니게임 종료 팝업창 생성
 			JOptionPane.showMessageDialog(null, "<html>GAME OVER!<br>OK 버튼을 누르면 메인 화면으로 돌아갑니다.</html>", "[GAME OVER]",
 					JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
-			
+		} else {
+
 		}
 	}
 

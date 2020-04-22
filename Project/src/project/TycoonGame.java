@@ -70,6 +70,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	private JButton exitButton = new JButton(exitButtonBasicImage);
 	private JButton startButton = new JButton(startButtonBasicImage);
 	private JButton quitButton = new JButton(quitButtonBasicImage);
+	private JButton minigameButton = new JButton();
 	private static JButton leftButton= new JButton(leftButtonBasicImage);
 	// private JButton rightButton= new JButton(rightButtonBasicImage);
 	private static JButton buyButton = new JButton(buyButtonBasicImage);
@@ -87,7 +88,7 @@ public class TycoonGame extends JFrame implements ItemListener {
 	Frame_store storeFrame;
 	Frame_mission missionFrame;
 
-  Frame_sell  sellFrame;
+	Frame_sell  sellFrame;
 	static JLabel gameExplain;
 	JLabel name;
 	static JLabel menuLabel;
@@ -319,6 +320,29 @@ public class TycoonGame extends JFrame implements ItemListener {
 		});
 		add(sellButton);
 
+		minigameButton.setVisible(false);
+		minigameButton.setBounds(655, 580, 250, 67);
+		minigameButton.setContentAreaFilled(false);
+		minigameButton.setFocusPainted(false);
+		minigameButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				minigameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				minigameButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			
+			}
+		});
+		add(minigameButton);
+		
 		backButton.setVisible(false);
 		backButton.setBounds(20, 50, 60, 60);
 		backButton.setContentAreaFilled(false);
