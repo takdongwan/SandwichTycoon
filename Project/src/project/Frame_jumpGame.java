@@ -27,6 +27,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 	JPanel jumpGamePanel;
 
+	JLabel background;
 	JLabel jumpGameInfo;
 	JLabel explanation;
 	JLabel scoreInfo;
@@ -75,6 +76,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
 	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage()
 			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
+	private ImageIcon backgroundImage = new ImageIcon(Main.class.getResource("../images/minigameBackground.png"));
 	private ImageIcon backButtonEnteredImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 	private ImageIcon backButtonBasicImage = new ImageIcon(Main.class.getResource("../images/backButtonEntered.png"));
 
@@ -93,6 +95,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 
 		moveCat();
 		generateObstacle();
+	//	setBackground();
 
 	}
 
@@ -107,6 +110,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		getContentPane().setLayout(null);
 		setUndecorated(true); // 임의로 미니게임 창을 종료할 수 없도록 undecorated 설정
 		setVisible(true);
+		
 	}
 
 	public void setJPanel() {
@@ -114,14 +118,18 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		jumpGamePanel = new JPanel();
 		jumpGamePanel.setLayout(null);
 		jumpGamePanel.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-		jumpGamePanel.setBackground(new Color(255, 230, 0));
+		jumpGamePanel.setOpaque(false);
 		jumpGamePanel.setFocusable(true);
 		jumpGamePanel.addKeyListener(this);
 		getContentPane().add(jumpGamePanel);
+
+		background = new JLabel(backgroundImage);
+		background.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
+		getContentPane().add(background);
 	}
 
 	public void setJLabel() {
-
+		
 		jumpGameInfo = new JLabel("장애물 피하기");
 		jumpGameInfo.setVerticalAlignment(SwingConstants.TOP);
 		jumpGameInfo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -155,7 +163,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		lifeInfo.setFont(lifeInfo.getFont().deriveFont(12.0f)); // 폰트 사이즈 12
 		lifeInfo.setBounds(0, 630, Main.SCREEN_WIDTH, 30); // x좌표, y좌표, 너비, 높이
 		jumpGamePanel.add(lifeInfo);
-
+	
 	}
 
 	public void setJButton() {
@@ -169,6 +177,12 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 		backButton.addActionListener(this);
 		jumpGamePanel.add(backButton);
 	}
+	
+//	public void setBackground() {
+//		background = new JLabel(backgroundImage);
+//		background.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight()); // x좌표, y좌표, 너비, 높이
+//		jumpGamePanel.add(background);
+//	}
 
 	public void moveCat() {
 
