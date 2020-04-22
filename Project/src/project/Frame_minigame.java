@@ -275,12 +275,7 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 					}
 				}
-				// 게임을 클리어했을 경우
-				else if (isClear == true) {
-					moveBall.stop();
-					System.out.println(isClear + "------------");
-				}
-
+		
 				checkCollision();
 				repaint();
 

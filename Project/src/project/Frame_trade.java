@@ -277,7 +277,7 @@ public class Frame_trade extends JFrame implements ActionListener, MouseListener
 				Frame_store.totalAmount = Frame_store.sandwichPrice * Frame_store.amountOfSandwich
 						+ Frame_store.hotdogPrice * Frame_store.amountOfHotdog
 						+ Frame_store.cokePrice * Frame_store.amountOfCoke;
-				((AbstractButton) Frame_store.totalPriceInfo).setText("총 가격: " + Integer.toString(Frame_store.totalAmount) + "골드");
+				Frame_store.totalPriceInfo.setText("총 가격: " + Integer.toString(Frame_store.totalAmount) + "골드");
 
 				Frame_store.currentMoneyInfo.setText("보유 골드: " + Integer.toString(Player.currentMoney) + "골드");
 
