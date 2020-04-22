@@ -320,6 +320,9 @@ public class Frame_store extends JFrame implements ActionListener, MouseListener
 					amountOfHotdogInfo.setText(Integer.toString(amountOfHotdog) + "개");
 					amountOfCokeInfo.setText(Integer.toString(amountOfCoke) + "개");
 
+					totalAmount = sandwichPrice * amountOfSandwich + hotdogPrice * amountOfHotdog + cokePrice * amountOfCoke;
+					totalPriceInfo.setText("총 가격: " + Integer.toString(totalAmount) + "골드");
+					
 					dispose();
 
 					TycoonGame.backMain();

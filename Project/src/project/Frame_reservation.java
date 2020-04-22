@@ -203,11 +203,11 @@ public class Frame_reservation extends JFrame implements ItemListener, ActionLis
 			
 				//각각 예약받은 물건의 갯수들 
 				if(salesLisetName.getSelectedIndex()==0) {
-					sandwichNum= (buyerOrder*buyerPrice)/totalPrice;//샌드위치의 갯수
+					sandwichNum= buyerOrder;//샌드위치의 갯수
 				}else if(salesLisetName.getSelectedIndex()==1) {
-					hotdogNum=(buyerOrder*buyerPrice)/totalPrice;//핫도그의 갯수
+					hotdogNum=buyerOrder;//핫도그의 갯수
 				}else if(salesLisetName.getSelectedIndex()==2) {
-					 cokeNum= (buyerOrder*buyerPrice)/totalPrice;//콜라의 갯수
+					 cokeNum= buyerOrder;//콜라의 갯수
 				}else {
 					new MessageBox(new JFrame("") ,null,null ,"Wrong information.",null, false,null);
 				}

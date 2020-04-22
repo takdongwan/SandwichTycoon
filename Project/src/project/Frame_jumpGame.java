@@ -88,6 +88,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener, MouseListener
 //	}
 
 	public Frame_jumpGame() {
+		
 		setJFrame();
 		setJPanel();
 		setJLabel();

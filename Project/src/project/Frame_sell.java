@@ -384,13 +384,16 @@ public class Frame_sell extends JFrame  {
 					firstImageChangeTimer[3] = new Timer();
 					imageChangeTimer[3] = new Timer();
 					btn[3].setIcon(breadOnTheGrilImage);
-					firstImageChangeTimer[3].schedule(new firstImageChangeIndex3(), speed_time-3000);
-					imageChangeTimer[3].schedule(new imageChangeIndex3(), (speed_time-3000)*2);
-					System.out.println("error check 5");
+					firstImageChangeTimer[3].schedule(new firstImageChangeIndex3(), speed_time-5000);
+					imageChangeTimer[3].schedule(new imageChangeIndex3(), (speed_time-5000)*2);
+					System.out.println("error check6");
 				}
 				else 
 				{
-					if(btn[3].getIcon()  == breadOnTheGrilImage ) {
+					if(btn[3].getIcon() == breadOnTheGrilImage ) {
+						Player.currentMoney -= 100;
+					}
+					else if ( btn[3].getIcon() == completeSandwichImage) {
 						if(Player.currentMoney>=6000) {
 							JOptionPane.showMessageDialog(null, "<html>미션성공 .<br>게임을 종료합니다..</html>", "미션성공",
 									JOptionPane.INFORMATION_MESSAGE);
