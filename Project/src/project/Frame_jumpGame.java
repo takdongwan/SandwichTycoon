@@ -2,10 +2,12 @@ package project;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -23,29 +25,37 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	JLabel explanation;
 	JLabel scoreInfo;
 	JLabel cat;
-	JLabel devilArray[];
-	JLabel bombArray[];
-	JLabel collisionArray[];
+
+	JLabel obstacleDevil;
+	JLabel obstacleBomb;
+	JLabel obstacleCollision;
 
 	int score = 0;
+	int delayTime;
+	int randomObstacle;
 	int catXspeed = 20;
 	int catYspeed = 40;
 	int obstacleNumber;
 	int obstacle_yPosition;
+	int obstacleXspeed = 30;
 
 	boolean isClear = false;
 	boolean isAlive = true;
 
 	Timer catTimer;
-	Timer obstacleTimer;
+	Timer obstacleMover;
+	Timer obstacleGenerator;
 	Random random;
-
+	
+	ArrayList<JLabel> obstacleArrayList;
+	
 	private ImageIcon devil_64 = new ImageIcon(Main.class.getResource("../images/devil_64.png"));
 	private ImageIcon bomb_64 = new ImageIcon(Main.class.getResource("../images/bomb_64.png"));
 	private ImageIcon collision_64 = new ImageIcon(Main.class.getResource("../images/collision_64.png"));
 	ImageIcon catImage = new ImageIcon(new ImageIcon(Main.class.getResource("../images/nyanCat.png")).getImage()
 			.getScaledInstance(296, 69, Image.SCALE_SMOOTH));
 
+	
 	public static void main(String[] args) {
 
 		new Frame_jumpGame();
@@ -58,7 +68,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		setJLabel();
 
 		catTimer();
-		generateObstacle();
+		
+		generateObstacles();
 	}
 
 	public void setJFrame() {
@@ -134,54 +145,84 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		repaint();
 
 	}
-	
-	public void obstacleTimer() {
-		obstacleTimer = new Timer(1000, new ActionListener() {
+
+	public void moveObstacles() {
+		
+		obstacleMover = new Timer(1000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				generateObstacle();
+
+//				if (devilArray[obstacleNumber].getX() > -64) {
+//					devilArray[obstacleNumber].setLocation(devilArray[obstacleNumber].getX() - obstacleXspeed, devilArray[obstacleNumber].getY());
+//				}
+//				else {
+//		//			devilArray[].remove(obstacleNumber);
+//				}
 			}
-			
+
 		});
 
 	}
 
-	public void generateObstacle() {
+	public void generateObstacles() {
 
-		devilArray = new JLabel[obstacleNumber];
-		bombArray = new JLabel[obstacleNumber];
-		collisionArray = new JLabel[obstacleNumber];
-
-		// obstacle - devil 생성
-		for (obstacleNumber = 0; obstacleNumber < devilArray.length; obstacleNumber++) {
-
-			obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
-
-			devilArray[obstacleNumber] = new JLabel(devil_64);
-			devilArray[obstacleNumber].setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
-			jumpGamePanel.add(devilArray[obstacleNumber]);
-		}
+		obstacleArrayList = new ArrayList<JLabel>();
 		
-		// obstacle - bomb 생성
-		for (obstacleNumber = 0; obstacleNumber < bombArray.length; obstacleNumber++) {
+		random = new Random();
+		delayTime = random.nextInt(6);
+		obstacleGenerator = new Timer(1500 * delayTime, new ActionListener() {
 
-			obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				random = new Random();
+				randomObstacle = random.nextInt(3);
+				
+				if (randomObstacle == 0) {
+					
+					random = new Random();
+					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
-			bombArray[obstacleNumber] = new JLabel(bomb_64);
-			bombArray[obstacleNumber].setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
-			jumpGamePanel.add(bombArray[obstacleNumber]);
-		}
-		
-		// obstacle - collision 생성
-		for (obstacleNumber = 0; obstacleNumber < collisionArray.length; obstacleNumber++) {
+					obstacleDevil = new JLabel(devil_64);
+					obstacleDevil.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					jumpGamePanel.add(obstacleDevil);
+					
+					obstacleArrayList.add(obstacleDevil);
+					System.out.println("devil 생성됨");
+					
+				}
+				else if (randomObstacle == 1) {
+					
+					random = new Random();
+					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
 
-			obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+					obstacleBomb = new JLabel(bomb_64);
+					obstacleBomb.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					jumpGamePanel.add(obstacleBomb);
+					
+					obstacleArrayList.add(obstacleBomb);
+					System.out.println("bomb 생성됨");
 
-			collisionArray[obstacleNumber] = new JLabel(collision_64);
-			collisionArray[obstacleNumber].setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
-			jumpGamePanel.add(collisionArray[obstacleNumber]);
-		}
+				}
+				else if (randomObstacle == 2) {
+					
+					random = new Random();
+					obstacle_yPosition = random.nextInt(Main.SCREEN_HEIGHT - 64);
+
+					obstacleCollision = new JLabel(collision_64);
+					obstacleCollision.setBounds(100, obstacle_yPosition, 64, 64); // x좌표, y좌표, 너비, 높이
+					jumpGamePanel.add(obstacleCollision);
+					
+					obstacleArrayList.add(obstacleCollision);
+					System.out.println("collision 생성됨");
+
+				}
+				repaint();
+			}
+
+		});
+		obstacleGenerator.start();
 	}
 
 	@Override
