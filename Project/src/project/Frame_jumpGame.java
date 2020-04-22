@@ -2,7 +2,7 @@ package project;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.List;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -47,6 +47,11 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	Timer obstacleMover;
 	Timer obstacleGenerator;
 	Random random;
+
+	Rectangle catRect;
+	Rectangle devilRect;
+	Rectangle bombRect;
+	Rectangle collisionRect;
 
 	ArrayList<JLabel> devilArrayList;
 	ArrayList<JLabel> bombArrayList;
@@ -131,7 +136,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 	}
 
 	public void moveCat() {
-		
+
 		catTimer = new Timer(25, new ActionListener() {
 
 			@Override
@@ -149,6 +154,8 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 		});
 		catTimer.start();
+
+		checkCollision();
 		repaint();
 
 	}
@@ -164,12 +171,11 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		while (devilIterator.hasNext()) {
 
 			JLabel devilPosition = devilIterator.next();
-			
+
 			// 장애물이 화면 외 범위로 이동을 완료했을 경우
 			if (devilPosition.getX() < -64) {
 				devilIterator.remove();
-			}
-			else {
+			} else {
 				devilPosition.setLocation(devilPosition.getX() - 1, devilPosition.getY());
 			}
 		}
@@ -181,8 +187,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 장애물이 화면 외 범위로 이동을 완료했을 경우
 			if (bombPosition.getX() < -64) {
 				bombIterator.remove();
-			}
-			else {
+			} else {
 				bombPosition.setLocation(bombPosition.getX() - 2, bombPosition.getY());
 			}
 		}
@@ -194,8 +199,7 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 			// 장애물이 화면 외 범위로 이동을 완료했을 경우
 			if (collisionPosition.getX() < -64) {
 				collisionIterator.remove();
-			}
-			else {
+			} else {
 				collisionPosition.setLocation(collisionPosition.getX() - 3, collisionPosition.getY());
 			}
 		}
@@ -204,17 +208,15 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 
 			JLabel emptyPosition = emptyIterator.next();
 
-			// 생성과 동시에 제거됨
+			// 생성과 동시에 제거
 			if (emptyPosition.getX() == Main.SCREEN_WIDTH) {
 				emptyIterator.remove();
-				System.out.println("emptyIterator 제거됨");
-			}
-			else {
+			} else {
 				emptyPosition.setLocation(emptyPosition.getX(), emptyPosition.getY());
 			}
 		}
-		
 
+		checkCollision();
 		repaint();
 	}
 
@@ -224,14 +226,13 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		bombArrayList = new ArrayList<JLabel>();
 		collisionArrayList = new ArrayList<JLabel>();
 		emptyArrayList = new ArrayList<JLabel>();
-		
+
 		// 2초에 한 번 장애물 생성
 		obstacleGenerator = new Timer(25, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				
 				// 랜덤한 타이밍에 랜덤한 장애물을 생성하기 위해 랜덤난수 생성
 				random = new Random();
 				randomObstacle = random.nextInt(200);
@@ -292,14 +293,81 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 					emptyArrayList.add(obstacleEmpty);
 					moveObstacle();
 
-					System.out.println("empty 생성됨");
-
 				}
 				repaint();
 			}
 
 		});
 		obstacleGenerator.start();
+	}
+
+	public void checkCollision() {
+
+		catRect = new Rectangle(cat.getX() + 230, cat.getY(), cat.getWidth() - 230, cat.getHeight()); // x좌표, y좌표, 너비, 높이
+
+		// ArrayList가 null이 아닐 경우
+		if ((devilArrayList != null) || (bombArrayList != null) || (collisionArrayList != null)) {
+
+			// devilArrayList의 obstacleRect 생성
+			for (int i = 0; i < devilArrayList.size(); i++) {
+				devilRect = new Rectangle(devilArrayList.get(i).getX() + 10, devilArrayList.get(i).getY() + 10,
+						devilArrayList.get(i).getWidth() - 20, devilArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비,
+																										// 높이
+
+				// catRect과 obstacleRect이 충돌했을 경우
+				if (catRect.intersects(devilRect)) {
+
+					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
+					devilArrayList.get(i).setLocation(-100, -100);
+					devilArrayList.remove(i);
+					System.out.println("devilArrayList 충돌함");
+				} 
+				else {
+				}
+			}
+
+			// bombArrayList의 obstacleRect 생성
+			for (int i = 0; i < bombArrayList.size(); i++) {
+				bombRect = new Rectangle(bombArrayList.get(i).getX() + 10, bombArrayList.get(i).getY() + 10,
+						bombArrayList.get(i).getWidth() - 20, bombArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비,
+																										// 높이
+
+				System.out.println(bombRect.x);
+				// catRect과 obstacleRect이 충돌했을 경우
+				if (catRect.intersects(bombRect)) {
+
+					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
+					bombArrayList.get(i).setLocation(-100, -100);
+					bombArrayList.remove(i);
+					System.out.println("bombArrayList 충돌함");
+
+				} 
+				else {
+				}
+			}
+
+			// collisionArrayList의 obstacleRect 생성
+			for (int i = 0; i < collisionArrayList.size(); i++) {
+				collisionRect = new Rectangle(collisionArrayList.get(i).getX() + 10,
+						collisionArrayList.get(i).getY() + 10, collisionArrayList.get(i).getWidth() - 20,
+						collisionArrayList.get(i).getHeight() - 20); // x좌표, y좌표, 너비, 높이
+
+				// catRect과 obstacleRect이 충돌했을 경우
+				if (catRect.intersects(collisionRect)) {
+
+					// 이미 충돌했으므로 추가적인 충돌을 막기 위해 화면 외 범위로 위치 변경
+					collisionArrayList.get(i).setLocation(-100, -100);
+					collisionArrayList.remove(i);
+					System.out.println("collisionArrayList 충돌함");
+
+				} 
+				else {
+				}
+			}
+		} 
+		
+		else {
+		}
 	}
 
 	@Override
@@ -350,7 +418,6 @@ public class Frame_jumpGame extends JFrame implements KeyListener {
 		else {
 
 		}
-
 		repaint();
 
 	}

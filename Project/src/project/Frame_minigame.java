@@ -172,8 +172,8 @@ public class Frame_minigame extends JFrame implements ActionListener, MouseListe
 
 				// 충돌체크를 위한 Rectangle2D 객체 생성
 				moneyRectangle = new Rectangle2D.Double(moneyArray[i][j].getX() + 20, moneyArray[i][j].getY() + 20,
-						moneyArray[i][j].getWidth() - 20, moneyArray[i][j].getHeight() - 20);
-				ballRectangle = new Rectangle2D.Double(ball.getX() + 20, ball.getY() + 20, ball.getWidth() - 20, ball.getHeight() - 20);
+						moneyArray[i][j].getWidth() - 20, moneyArray[i][j].getHeight() - 20); // x좌표, y좌표, 너비, 높이
+				ballRectangle = new Rectangle2D.Double(ball.getX() + 20, ball.getY() + 20, ball.getWidth() - 20, ball.getHeight() - 20); // x좌표, y좌표, 너비, 높이
 
 				// 공과 돈 이미지가 충돌했을 경우
 				if (ballRectangle.intersects(moneyRectangle)) {
